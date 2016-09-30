@@ -1,10 +1,18 @@
 package com.rct.homework.lesson1.task01;
 
-
+/**
+ * Entering point in program. Function <code>main</code>
+ * prints arguments in reversed order
+ *
+ * @author Oleg Baslak
+ * @version 1.0
+ * @since 30-09-2016
+ */
 public class CommandLineParams {
 
     /**
-     * Prints <code>args</code> array in reverted order
+     * Prints <code>args</code> array in reversed order
+     *
      * @param args arguments array to revert
      */
     public static void main(String[] args) {
