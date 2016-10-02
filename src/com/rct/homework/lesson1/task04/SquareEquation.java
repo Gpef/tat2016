@@ -12,7 +12,7 @@ import com.rct.homework.lesson1.task04.exceptions.WrongParamsSizeException;
  */
 class SquareEquation {
 
-    // a, b, c params of ax2 + bx + c = 0
+    /* a, b, c params of ax2 + bx + c = 0 */
     private double paramA;
     private double paramB;
     private double paramC;
@@ -56,7 +56,7 @@ class SquareEquation {
         }
 
         double[] roots = new double[2];
-        if (discriminant == 0) {
+        if (Validator.isZero(discriminant)) {
             roots[0] = roots[1] = (-1 * this.paramB) / 2 * paramA;
         } else if (discriminant > 0) {
             roots[0] = (-1 * this.paramB + Math.sqrt(discriminant)) / 2 * paramA;

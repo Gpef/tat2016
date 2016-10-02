@@ -25,4 +25,14 @@ class Validator {
         return parsedCoefficients;
     }
 
+    /**
+     * Checks if {@code}double number on input == 0
+     *
+     * @param number number to check
+     * @return {@code true} if {@code number} is zero
+     * {@code false} otherwise
+     */
+    static boolean isZero(double number) {
+        return Double.isNaN(1. / number);
+    }
 }

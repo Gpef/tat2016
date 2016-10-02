@@ -12,9 +12,11 @@ import com.rct.homework.lesson1.task04.exceptions.WrongParamsSizeException;
  */
 public class Main {
 
+    /* Message constants */
     private static final String WRONG_INPUT_MESSAGE = "Three numbers in arguments were expected. Try again";
     private static final String EQUATION_SOLVED= "Roots of equation:";
     private static final String AND = "and";
+
     static final int NUMBER_OF_ARGUMENTS = 3;
 
     /**
