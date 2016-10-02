@@ -4,7 +4,7 @@ package com.rct.homework.lesson1.task03;
  * Performing calculating operations with numbers
  *
  * @author Oleg Baslak
- * @version 1.0
+ * @version 1.1
  * @since 30-09-2016
  */
 class Calculator {
@@ -20,7 +20,7 @@ class Calculator {
         System.out.println(number1 + " - " + number2 + " = " + subtract(number1, number2));
         System.out.println(number1 + " * " + number2 + " = " + multiply(number1, number2));
 
-        if (number2 == 0) {
+        if (isZero(number2)) {
             System.out.println("Can't divide by zero");
         } else {
             System.out.println(number1 + " / " + number2 + " = " + divide(number1, number2));
