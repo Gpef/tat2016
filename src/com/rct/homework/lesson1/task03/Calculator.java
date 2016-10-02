@@ -28,6 +28,20 @@ class Calculator {
     }
 
     /**
+     * Checks if number on ipnut == 0
+     *
+     * @param number number to check
+     * @return {@code true} if {@code number} is zero
+     * {@code false} otherwise
+     */
+    private static boolean isZero(double number) {
+        if (Double.isNaN(1. / number)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Performing adding number2 to number1
      *
      * @param number1 first summand
@@ -65,8 +79,8 @@ class Calculator {
      *
      * @param number1 dividend number
      * @param number2 divider number
-     * @return  {@code true} if the arguments are numbers;
-     *          {@code false} otherwise.
+     * @return {@code} true if the arguments are numbers;
+     * {@code} false otherwise.
      */
     private static double divide(double number1, double number2) {
         return number1 / number2;
