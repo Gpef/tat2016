@@ -10,7 +10,9 @@ package com.rct.homework.lesson1.task03;
 public class Main {
 
     /* Message constants */
-    public static final String WRONG_INPUT_MESSAGE = "Two numbers were expected. Try again";
+    private static final String WRONG_INPUT_MESSAGE = "Two numbers were expected. Try again";
+
+    private static final int NUMBER_OF_ARGUMENTS = 2;
 
     /**
      * Entrance to solution. Making arithmetic operations with numbers on input
@@ -18,7 +20,7 @@ public class Main {
      * @param args arguments from command line
      */
     public static void main(String[] args) {
-        if (args.length != 2) {
+        if (args.length != NUMBER_OF_ARGUMENTS) {
             System.out.println(WRONG_INPUT_MESSAGE);
 
             System.exit(1);

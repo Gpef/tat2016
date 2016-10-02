@@ -5,7 +5,7 @@ package com.rct.homework.lesson1.task01;
  * prints arguments in reversed order
  *
  * @author Oleg Baslak
- * @version 1.0
+ * @version 1.1
  * @since 30-09-2016
  */
 public class CommandLineParams {
@@ -17,7 +17,7 @@ public class CommandLineParams {
      */
     public static void main(String[] args) {
         for (int i = args.length - 1; i >= 0; i--) {
-            System.out.println("Аргумент " + i + " = " + args[i]);
+            System.out.println("Argument " + i + " = " + args[i]);
         }
     }
 }
