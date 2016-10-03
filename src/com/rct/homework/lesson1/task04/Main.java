@@ -1,6 +1,7 @@
 package com.rct.homework.lesson1.task04;
 
 import com.rct.homework.lesson1.task04.exceptions.ComplexRootsOnlyException;
+import com.rct.homework.lesson1.task04.exceptions.NoRootsException;
 import com.rct.homework.lesson1.task04.exceptions.WrongParamsSizeException;
 
 /**
@@ -34,7 +35,7 @@ class Main {
             SquareEquation squareEquation = new SquareEquation(Validator.parse(args));
             double[] roots = squareEquation.findRoots();
             System.out.println(EQUATION_SOLVED + " " + roots[0] + " " + AND + " " + roots[1]);
-        } catch (WrongParamsSizeException | ComplexRootsOnlyException e) {
+        } catch (WrongParamsSizeException | ComplexRootsOnlyException | NoRootsException e) {
             System.out.println(e.getMessage());
             System.exit(1);
         }

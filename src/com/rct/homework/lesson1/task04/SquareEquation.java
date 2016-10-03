@@ -1,6 +1,7 @@
 package com.rct.homework.lesson1.task04;
 
 import com.rct.homework.lesson1.task04.exceptions.ComplexRootsOnlyException;
+import com.rct.homework.lesson1.task04.exceptions.NoRootsException;
 import com.rct.homework.lesson1.task04.exceptions.WrongParamsSizeException;
 
 /**
@@ -49,20 +50,46 @@ class SquareEquation {
      * @return array with counted root
      * @throws ComplexRootsOnlyException if equation has complex only roots
      */
-    double[] findRoots() throws ComplexRootsOnlyException {
+    double[] findRoots() throws ComplexRootsOnlyException, NoRootsException {
+        double[] roots = new double[2];
+
+        /* eq. c = 0 */
+        if (Validator.isZero(paramA) && Validator.isZero(paramB)) {
+            throw new NoRootsException();
+        }
+
+        /* eq. bx = -c */
+        if (Validator.isZero(paramA) && !Validator.isZero(paramB)) {
+            double root = (-1 * paramC) / paramB;
+            return new double[]{root};
+        }
+
+        /* eq. ax2 = -c */
+        if (!Validator.isZero(paramA) && Validator.isZero(paramB)) {
+            if (paramC * paramA < 0) {
+                double root = Math.sqrt(-1 * (paramC / paramA));
+                return new double[]{root, -1 * root};
+            } else {
+                throw new ComplexRootsOnlyException();
+            }
+        }
+
+        /* eq. ax2 + bx = 0 */
+        if (Validator.isZero(paramC)) {
+            return new double[]{0, -1 * (paramB / paramA)};
+        }
+
+        /* eq. normal ax2 + bx + c = 0 */
         double discriminant = this.findDiscriminant();
         if (discriminant < 0) {
             throw new ComplexRootsOnlyException();
         }
-
-        double[] roots = new double[2];
         if (Validator.isZero(discriminant)) {
             roots[0] = roots[1] = (-1 * this.paramB) / 2 * paramA;
         } else if (discriminant > 0) {
             roots[0] = (-1 * this.paramB + Math.sqrt(discriminant)) / 2 * paramA;
             roots[1] = (-1 * this.paramB - Math.sqrt(discriminant)) / 2 * paramA;
         }
-
         return roots;
     }
 }
