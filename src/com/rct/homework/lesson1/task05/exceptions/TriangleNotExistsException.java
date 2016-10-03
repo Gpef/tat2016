@@ -7,7 +7,7 @@ package com.rct.homework.lesson1.task05.exceptions;
  * @version 1.0
  * @since 03-10-2016
  */
-class TriangleNotExistsException extends Exception {
+public class TriangleNotExistsException extends Exception {
 
     public TriangleNotExistsException() {
         super("Triangle with that sides doesn't exist");
