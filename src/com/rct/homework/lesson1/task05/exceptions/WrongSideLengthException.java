@@ -6,7 +6,7 @@ package com.rct.homework.lesson1.task05.exceptions;
  * @since 03-10-2016
  */
 public class WrongSideLengthException extends Exception {
-    public WrongSideLengthException(){
+    public WrongSideLengthException() {
         super("Side length can't be lower then or equals zero");
     }
 

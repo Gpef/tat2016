@@ -3,6 +3,8 @@ package com.rct.homework.lesson1.task05;
 import com.rct.homework.lesson1.task05.exceptions.TriangleNotExistsException;
 
 /**
+ * Checks triangle existing and type
+ *
  * @author Oleg Baslak
  * @version 1.0
  * @since 03-10-2016
@@ -29,11 +31,11 @@ class Triangle {
     }
 
     /**
-     * Check can triangle with {@code} sides exists or not
+     * Check if triangle with {@code sides} can exist
      *
      * @param sides sides of triangle to check
-     * @return {@code}true - if triangle can exist
-     * {@code}false - otherwise
+     * @return {@code true} - if triangle can exist
+     * {@code false} - otherwise
      */
     private boolean IsExists(double[] sides) {
         return ((sides[0] + sides[1] > sides[2]) &&
@@ -42,7 +44,7 @@ class Triangle {
     }
 
     /**
-     * Checks type of triangle and returns it's type as {@code} String
+     * Checks type of triangle and returns it's type as {@code String}
      *
      * @return type of triangle
      */
