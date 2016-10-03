@@ -10,7 +10,7 @@ import com.rct.homework.lesson1.task04.exceptions.WrongParamsSizeException;
  * @version 1.0
  * @since 30-09-2016
  */
-public class Main {
+class Main {
 
     /* Message constants */
     private static final String WRONG_INPUT_MESSAGE = "Three numbers in arguments were expected. Try again";
