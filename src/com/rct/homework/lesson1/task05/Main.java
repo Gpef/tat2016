@@ -26,9 +26,7 @@ class Main {
      *                                    don't exist
      */
     public static void main(String[] args) {
-
         System.out.println(INPUT_REQUSET);
-
         InputController inputController = new InputController();
         double[] sides = inputController.getInput(NUMBER_OF_ARGUMENTS);
 
