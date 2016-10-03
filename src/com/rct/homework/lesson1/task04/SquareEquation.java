@@ -8,7 +8,7 @@ import com.rct.homework.lesson1.task04.exceptions.WrongParamsSizeException;
  * Finds roots of equations
  *
  * @author Oleg Baslak
- * @version 1.0
+ * @version 1.1
  * @since 30-09-2016
  */
 class SquareEquation {
@@ -49,6 +49,8 @@ class SquareEquation {
      *
      * @return array with counted root
      * @throws ComplexRootsOnlyException if equation has complex only roots
+     * @throws NoRootsException          if only {@code c} param presented, so there no methods
+     *                                   to find roots
      */
     double[] findRoots() throws ComplexRootsOnlyException, NoRootsException {
         double[] roots = new double[2];
