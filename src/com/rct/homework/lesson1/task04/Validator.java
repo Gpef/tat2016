@@ -33,6 +33,6 @@ class Validator {
      * {@code false} otherwise
      */
     static boolean isZero(double number) {
-        return Double.isNaN(1. / number);
+        return Double.isInfinite(1. / number);
     }
 }
