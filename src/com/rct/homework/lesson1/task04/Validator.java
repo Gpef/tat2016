@@ -28,10 +28,8 @@ class Validator {
             }
         } catch (NumberFormatException e) {
             System.out.println(PARSE_ERROR);
-
             System.exit(1);
         }
-
         return parsedCoefficients;
     }
 
