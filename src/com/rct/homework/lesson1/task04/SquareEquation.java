@@ -1,7 +1,6 @@
 package com.rct.homework.lesson1.task04;
 
 import com.rct.homework.lesson1.task04.exceptions.ComplexRootsOnlyException;
-import com.rct.homework.lesson1.task04.exceptions.NoRootsException;
 import com.rct.homework.lesson1.task04.exceptions.NotQuadraticEquationException;
 import com.rct.homework.lesson1.task04.exceptions.WrongParamsSizeException;
 
@@ -50,19 +49,10 @@ class SquareEquation {
      *
      * @return array with counted root
      * @throws ComplexRootsOnlyException if equation has complex only roots
-     * @throws NoRootsException          if only {@code c} param presented, so there no methods
-     *                                   to find roots
      * @see Validator
      */
-    double[] findRoots() throws ComplexRootsOnlyException, NoRootsException {
+    double[] findRoots() throws ComplexRootsOnlyException {
         double[] roots = new double[2];
-
-        // eq. c = 0
-        if (Validator.isZero(paramA) && Validator.isZero(paramB)) {
-            throw new NoRootsException();
-        }
-
-        // eq. normal ax2 + bx + c = 0
         double discriminant = this.findDiscriminant();
         if (discriminant < 0) {
             throw new ComplexRootsOnlyException();
