@@ -22,17 +22,17 @@ class Main {
     static final int NUMBER_OF_ARGUMENTS = 3;
 
     /**
-     * Entrance point to the program. Creates {@code} SquareEquation object
+     * Entrance point to the program. Creates {@code SquareEquation} object
      * that solving equation with params from args
      *
      * @param args command line arguments
+     * @see SquareEquation
      */
     public static void main(String[] args) {
         if (args.length != NUMBER_OF_ARGUMENTS) {
             System.out.println(WRONG_INPUT_MESSAGE);
             System.exit(1);
         }
-
         try {
             SquareEquation squareEquation = new SquareEquation(Validator.parse(args));
             double[] roots = squareEquation.findRoots();
