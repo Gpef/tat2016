@@ -32,17 +32,11 @@ class Main {
         double[] sides = new double[0];
         try {
             sides = inputController.getInput(NUMBER_OF_ARGUMENTS);
-        } catch (WrongSidesNumberException e) {
+            Triangle triangle = new Triangle(sides);
+            System.out.println(triangle.getType());
+        } catch (WrongSidesNumberException | TriangleNotExistsException e) {
             System.out.println(e.getMessage());
             System.exit(1);
         }
-
-        try {
-            Triangle triangle = new Triangle(sides);
-            System.out.println(triangle.getType());
-        } catch (TriangleNotExistsException e) {
-            System.out.println(e.getMessage());
-        }
-
     }
 }
