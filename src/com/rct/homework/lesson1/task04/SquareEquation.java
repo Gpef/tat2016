@@ -41,7 +41,7 @@ class SquareEquation {
      * @return counted discriminant
      */
     private double findDiscriminant() {
-        return this.paramB * this.paramB - 4 * this.paramA * this.paramC;
+        return paramB * paramB - 4 * paramA * paramC;
     }
 
     /**
