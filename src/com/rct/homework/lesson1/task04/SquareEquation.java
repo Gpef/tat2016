@@ -8,7 +8,7 @@ import com.rct.homework.lesson1.task04.exceptions.WrongParamsSizeException;
  * Finds roots of equations
  *
  * @author Oleg Baslak
- * @version 1.1
+ * @version 1.2
  * @since 30-09-2016
  */
 class SquareEquation {
@@ -39,9 +39,7 @@ class SquareEquation {
      * @return counted discriminant
      */
     private double findDiscriminant() {
-        double d;
-        d = this.paramB * this.paramB - 4 * this.paramA * this.paramC;
-        return d;
+        return this.paramB * this.paramB - 4 * this.paramA * this.paramC;
     }
 
     /**
