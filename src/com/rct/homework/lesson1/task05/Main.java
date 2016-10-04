@@ -14,7 +14,7 @@ import com.rct.homework.lesson1.task05.exceptions.WrongSidesNumberException;
 class Main {
 
     /* String constants (messages, errors etc.) */
-    private static final String INPUT_REQUSET = "Input 3 sides of triangle:";
+    private static final String INPUT_REQUEST = "Input 3 sides of triangle:";
 
     private static final int NUMBER_OF_ARGUMENTS = 3;
 
@@ -25,7 +25,7 @@ class Main {
      * @param args command line arguments
      */
     public static void main(String[] args) {
-        System.out.println(INPUT_REQUSET);
+        System.out.println(INPUT_REQUEST);
         InputController inputController = new InputController();
         try {
             double[] sides = inputController.getInput(NUMBER_OF_ARGUMENTS);
