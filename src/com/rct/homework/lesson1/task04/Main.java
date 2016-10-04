@@ -15,7 +15,7 @@ class Main {
 
     /* Message constants */
     private static final String WRONG_INPUT_MESSAGE = "Three numbers in arguments were expected. Try again";
-    private static final String EQUATION_SOLVED = "Roots of equation:";
+    private static final String EQUATION_SOLVED = "Roots: %f and %f";
     private static final String AND = "and";
 
     static final int NUMBER_OF_ARGUMENTS = 3;
@@ -35,7 +35,7 @@ class Main {
         try {
             SquareEquation squareEquation = new SquareEquation(Validator.parse(args));
             double[] roots = squareEquation.findRoots();
-            System.out.println(EQUATION_SOLVED + " " + roots[0] + " " + AND + " " + roots[1]);
+            System.out.println(String.format(EQUATION_SOLVED, roots[0], roots[1]));
         } catch (WrongParamsSizeException | ComplexRootsOnlyException |
                 NotQuadraticEquationException e) {
             System.out.println(e.getMessage());
