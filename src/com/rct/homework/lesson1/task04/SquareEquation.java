@@ -2,6 +2,7 @@ package com.rct.homework.lesson1.task04;
 
 import com.rct.homework.lesson1.task04.exceptions.ComplexRootsOnlyException;
 import com.rct.homework.lesson1.task04.exceptions.NoRootsException;
+import com.rct.homework.lesson1.task04.exceptions.NotQuadraticEquationException;
 import com.rct.homework.lesson1.task04.exceptions.WrongParamsSizeException;
 
 /**
@@ -19,18 +20,20 @@ class SquareEquation {
     private double paramC;
 
     /**
-     * @param params array with params. Must contain {@code} Main.NUMBER_OF_ARGUMENTS
+     * @param params array with params. Must contain {@code Main.NUMBER_OF_ARGUMENTS}
      *               arguments
      * @throws WrongParamsSizeException when params array don't has 3 params
      */
-    SquareEquation(double[] params) throws WrongParamsSizeException {
+    SquareEquation(double[] params) throws WrongParamsSizeException, NotQuadraticEquationException {
         if (params.length != Main.NUMBER_OF_ARGUMENTS) {
             throw new WrongParamsSizeException();
-        } else {
-            paramA = params[0];
-            paramB = params[1];
-            paramC = params[2];
         }
+        if (Validator.isZero(params[0])) {
+            throw new NotQuadraticEquationException();
+        }
+        paramA = params[0];
+        paramB = params[1];
+        paramC = params[2];
     }
 
     /**
@@ -49,37 +52,17 @@ class SquareEquation {
      * @throws ComplexRootsOnlyException if equation has complex only roots
      * @throws NoRootsException          if only {@code c} param presented, so there no methods
      *                                   to find roots
+     * @see Validator
      */
     double[] findRoots() throws ComplexRootsOnlyException, NoRootsException {
         double[] roots = new double[2];
 
-        /* eq. c = 0 */
+        // eq. c = 0
         if (Validator.isZero(paramA) && Validator.isZero(paramB)) {
             throw new NoRootsException();
         }
 
-        /* eq. bx = -c */
-        if (Validator.isZero(paramA) && !Validator.isZero(paramB)) {
-            double root = (-1 * paramC) / paramB;
-            return new double[]{root};
-        }
-
-        /* eq. ax2 = -c */
-        if (!Validator.isZero(paramA) && Validator.isZero(paramB)) {
-            if (paramC * paramA < 0) {
-                double root = Math.sqrt(-1 * (paramC / paramA));
-                return new double[]{root, -1 * root};
-            } else {
-                throw new ComplexRootsOnlyException();
-            }
-        }
-
-        /* eq. ax2 + bx = 0 */
-        if (Validator.isZero(paramC)) {
-            return new double[]{0, -1 * (paramB / paramA)};
-        }
-
-        /* eq. normal ax2 + bx + c = 0 */
+        // eq. normal ax2 + bx + c = 0
         double discriminant = this.findDiscriminant();
         if (discriminant < 0) {
             throw new ComplexRootsOnlyException();
