@@ -2,6 +2,7 @@ package com.rct.homework.lesson1.task04;
 
 import com.rct.homework.lesson1.task04.exceptions.ComplexRootsOnlyException;
 import com.rct.homework.lesson1.task04.exceptions.NoRootsException;
+import com.rct.homework.lesson1.task04.exceptions.NotQuadraticEquationException;
 import com.rct.homework.lesson1.task04.exceptions.WrongParamsSizeException;
 
 /**
@@ -15,7 +16,7 @@ class Main {
 
     /* Message constants */
     private static final String WRONG_INPUT_MESSAGE = "Three numbers in arguments were expected. Try again";
-    private static final String EQUATION_SOLVED= "Roots of equation:";
+    private static final String EQUATION_SOLVED = "Roots of equation:";
     private static final String AND = "and";
 
     static final int NUMBER_OF_ARGUMENTS = 3;
@@ -23,6 +24,7 @@ class Main {
     /**
      * Entrance point to the program. Creates {@code} SquareEquation object
      * that solving equation with params from args
+     *
      * @param args command line arguments
      */
     public static void main(String[] args) {
@@ -35,7 +37,8 @@ class Main {
             SquareEquation squareEquation = new SquareEquation(Validator.parse(args));
             double[] roots = squareEquation.findRoots();
             System.out.println(EQUATION_SOLVED + " " + roots[0] + " " + AND + " " + roots[1]);
-        } catch (WrongParamsSizeException | ComplexRootsOnlyException | NoRootsException e) {
+        } catch (WrongParamsSizeException | ComplexRootsOnlyException |
+                NoRootsException | NotQuadraticEquationException e) {
             System.out.println(e.getMessage());
             System.exit(1);
         }
