@@ -40,6 +40,9 @@ class Main {
                 NotQuadraticEquationException e) {
             System.out.println(e.getMessage());
             System.exit(1);
+        } catch (NumberFormatException e) {
+            System.out.println(Validator.PARSE_ERROR);
+            System.exit(1);
         }
     }
 }

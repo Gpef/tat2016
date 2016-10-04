@@ -10,7 +10,7 @@ package com.rct.homework.lesson1.task04;
 
 class Validator {
 
-    private static final String PARSE_ERROR = "Can't parse command line argument to number.";
+    static final String PARSE_ERROR = "Can't parse command line argument to number.";
 
 
     /**
@@ -19,16 +19,12 @@ class Validator {
      *
      * @param args arguments from command line to parse
      * @return parsed coefficients
+     * @throws NumberFormatException if some arguments can't be parsed to number
      */
-    static double[] parse(String[] args) {
+    static double[] parse(String[] args) throws NumberFormatException{
         double[] parsedCoefficients = new double[Main.NUMBER_OF_ARGUMENTS];
-        try {
-            for (int i = 0; i < parsedCoefficients.length; i++) {
-                parsedCoefficients[i] = Double.parseDouble(args[i]);
-            }
-        } catch (NumberFormatException e) {
-            System.out.println(PARSE_ERROR);
-            System.exit(1);
+        for (int i = 0; i < parsedCoefficients.length; i++) {
+            parsedCoefficients[i] = Double.parseDouble(args[i]);
         }
         return parsedCoefficients;
     }
