@@ -1,6 +1,7 @@
 package com.rct.homework.lesson1.task05;
 
 import com.rct.homework.lesson1.task05.exceptions.TriangleNotExistsException;
+import com.rct.homework.lesson1.task05.exceptions.WrongSidesNumberException;
 
 /**
  * Entrance point to the app. Get sides of triangle from
@@ -28,7 +29,13 @@ class Main {
     public static void main(String[] args) {
         System.out.println(INPUT_REQUSET);
         InputController inputController = new InputController();
-        double[] sides = inputController.getInput(NUMBER_OF_ARGUMENTS);
+        double[] sides = new double[0];
+        try {
+            sides = inputController.getInput(NUMBER_OF_ARGUMENTS);
+        } catch (WrongSidesNumberException e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
 
         try {
             Triangle triangle = new Triangle(sides);

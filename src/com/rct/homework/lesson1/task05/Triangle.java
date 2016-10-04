@@ -6,7 +6,7 @@ import com.rct.homework.lesson1.task05.exceptions.TriangleNotExistsException;
  * Checks triangle existing and type
  *
  * @author Oleg Baslak
- * @version 1.0
+ * @version 1.2
  * @since 03-10-2016
  */
 class Triangle {
@@ -25,6 +25,11 @@ class Triangle {
             sideA = sides[0];
             sideB = sides[1];
             sideC = sides[2];
+            if (isSidesTooBig(sides)) {
+                sideA /= 1e200;
+                sideB /= 1e200;
+                sideC /= 1e200;
+            }
         } else {
             throw new TriangleNotExistsException();
         }
@@ -56,6 +61,18 @@ class Triangle {
             return ISOSCELES;
         }
         return COMMON;
+    }
+
+
+    /**
+     * Checks if length of sides are too big, so they
+     * need to be reduced (with dividing by 1e100 for example
+     *
+     * @return {@code true} if one or more sides are bigger then 1e200;
+     * {@code false} otherwise
+     */
+    private static boolean isSidesTooBig(double[] sides) {
+        return sides[0] > 1e200 || sides[1] > 1e200 || sides[2] > 1e200;
     }
 
 }
