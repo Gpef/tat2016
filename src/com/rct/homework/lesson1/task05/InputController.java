@@ -28,19 +28,17 @@ class InputController {
      * @return array with read arguments
      */
     double[] getInput(int paramsNumber) throws WrongSidesNumberException {
-        if (paramsNumber <= 0){
+        if (paramsNumber <= 0) {
             throw new WrongSidesNumberException();
         }
 
         double[] input = new double[paramsNumber];
         Scanner scanner = new Scanner(System.in);
-        String readString = "";
         double readNumber;
         int index = 0;
         while (index < paramsNumber) {
             try {
-                readString = scanner.next();
-                readNumber = Double.parseDouble(readString);
+                readNumber = scanner.nextDouble();
 
                 // Side can't be <= 0 or bigger then Double.MAX
                 if (readNumber < 0 || Validator.isZero(readNumber) ||
@@ -51,7 +49,7 @@ class InputController {
                 System.out.println("read side: " + readNumber);
                 index++;
             } catch (InputMismatchException | NumberFormatException e) {
-                System.out.println("'" + readString + "'" + " " + NAN_ERROR_MESSAGE + ". " + TRY_AGAIN_MESSAGE);
+                System.out.println("'" + scanner.next() + "'" + " " + NAN_ERROR_MESSAGE + ". " + TRY_AGAIN_MESSAGE);
             } catch (WrongSideLengthException e) {
                 System.out.println(e.getMessage() + ". " + TRY_AGAIN_MESSAGE);
             }

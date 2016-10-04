@@ -16,7 +16,6 @@ class Main {
     /* Message constants */
     private static final String WRONG_INPUT_MESSAGE = "Three numbers in arguments were expected. Try again";
     private static final String EQUATION_SOLVED = "Roots: %f and %f";
-    private static final String AND = "and";
 
     static final int NUMBER_OF_ARGUMENTS = 3;
 

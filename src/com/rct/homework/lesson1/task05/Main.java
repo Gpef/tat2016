@@ -14,24 +14,21 @@ import com.rct.homework.lesson1.task05.exceptions.WrongSidesNumberException;
 class Main {
 
     /* String constants (messages, errors etc.) */
-    static final String INPUT_REQUSET = "Input 3 sides of triangle:";
+    private static final String INPUT_REQUSET = "Input 3 sides of triangle:";
 
-    static final int NUMBER_OF_ARGUMENTS = 3;
+    private static final int NUMBER_OF_ARGUMENTS = 3;
 
 
     /**
      * Entrance point to the app
      *
      * @param args command line arguments
-     * @throws TriangleNotExistsException if triangle with inputted lengths
-     *                                    don't exist
      */
     public static void main(String[] args) {
         System.out.println(INPUT_REQUSET);
         InputController inputController = new InputController();
-        double[] sides = new double[0];
         try {
-            sides = inputController.getInput(NUMBER_OF_ARGUMENTS);
+            double[] sides = inputController.getInput(NUMBER_OF_ARGUMENTS);
             Triangle triangle = new Triangle(sides);
             System.out.println(triangle.getType());
         } catch (WrongSidesNumberException | TriangleNotExistsException e) {
