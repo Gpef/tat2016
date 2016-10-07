@@ -8,4 +8,9 @@ package com.rct.homework.lesson2.task07.validator;
  * @since 08.10.2016
  */
 public class WordsValidator extends Validator {
+
+    @Override
+    public boolean validate(String validateString) {
+        return false;
+    }
 }
