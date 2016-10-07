@@ -20,9 +20,9 @@ class InputController {
     private static final String TRY_AGAIN_MESSAGE = "Try again";
 
     /**
-     * Gets {@code} paramsNumber arguments from console input.
+     * Gets {@code paramsNumber} arguments from console input.
      * Ignores all NaN input and waiting for full array of arguments
-     * with size of {@code} paramsNumber. paramsNumber must be > 0
+     * with size of {@code paramsNumber}. paramsNumber must be > 0
      *
      * @param paramsNumber number of arguments to get
      * @return array with read arguments
