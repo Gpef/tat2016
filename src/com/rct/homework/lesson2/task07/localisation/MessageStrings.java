@@ -14,7 +14,7 @@ public abstract class MessageStrings {
 
     // Validators messages
     public static final String DICTIONARY_VALIDATOR_PASS = "> Strings contains words from dictionary ";
-    public static final String NO_NUMBER_VALIDATOR_PASS = "> String doesn't contain any numbers";
-    public static final String ONLY_NUMBER_VALIDATOR_PASS = "> String contains numbers only";
+    public static final String NO_DIGIT_VALIDATOR_PASS = "> String doesn't contain any digits";
+    public static final String ONLY_DIGITS_VALIDATOR_PASS = "> String contains digits only";
     public static final String WORDS_VALIDATOR_PASS = "> Strings has more that 5 words";
 }

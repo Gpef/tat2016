@@ -3,16 +3,16 @@ package com.rct.homework.lesson2.task07.validator;
 import com.rct.homework.lesson2.task07.localisation.MessageStrings;
 
 /**
- * Validating strings for containing no numbers.
+ * Validating strings for containing numbers only.
  *
  * @author Oleg Baslak
  * @version 1.0
  * @since 08.10.2016
  */
-public class NoNumberValidator extends Validator {
+public class OnlyDigitsValidator extends Validator {
 
-    //  regex means "no numbers in string"
-    private String symbolsToFind = "\\D*$";
+    //  regex means "only numbers in string"
+    private String symbolsToFind = "[\\d\\s]*$";
 
     @Override
     public boolean validate(String validateString) {
@@ -21,6 +21,6 @@ public class NoNumberValidator extends Validator {
 
     @Override
     public String getPassMessage() {
-        return MessageStrings.NO_NUMBER_VALIDATOR_PASS;
+        return MessageStrings.ONLY_DIGITS_VALIDATOR_PASS;
     }
 }

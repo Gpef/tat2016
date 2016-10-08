@@ -25,8 +25,7 @@ public class Main {
         System.out.println(MessageStrings.HELLO_MESSAGE);
         String stringToValidate = InputController.getInput();
         ArrayList<Validator> validators = initValidators();
-        for (Validator validator : validators
-                ) {
+        for (Validator validator : validators) {
             if (validator.validate(stringToValidate)) {
                 System.out.println(validator.getPassMessage());
             }
@@ -41,8 +40,8 @@ public class Main {
     private static ArrayList<Validator> initValidators() {
         ArrayList<Validator> validators = new ArrayList<>();
         validators.add(new DictionaryValidator());
-        validators.add(new NoNumberValidator());
-        validators.add(new OnlyNumberValidator());
+        validators.add(new NoDigitValidator());
+        validators.add(new OnlyDigitsValidator());
         validators.add(new WordsValidator());
         return validators;
     }
