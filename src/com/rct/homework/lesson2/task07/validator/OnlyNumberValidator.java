@@ -12,7 +12,7 @@ import com.rct.homework.lesson2.task07.localisation.MessageStrings;
 public class OnlyNumberValidator extends Validator {
 
     //  regex means "only numbers in string"
-    private String symbolsToFind = "\\d*$";
+    private String symbolsToFind = "[\\d\\s]*$";
 
     @Override
     public boolean validate(String validateString) {
