@@ -35,10 +35,7 @@ class Calculator {
      * {@code false} otherwise
      */
     private static boolean isZero(double number) {
-        if (Double.isNaN(1. / number)) {
-            return true;
-        }
-        return false;
+        return Double.isInfinite(1. / number);
     }
 
     /**

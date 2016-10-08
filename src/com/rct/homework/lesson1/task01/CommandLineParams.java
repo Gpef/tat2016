@@ -8,7 +8,7 @@ package com.rct.homework.lesson1.task01;
  * @version 1.1
  * @since 30-09-2016
  */
-public class CommandLineParams {
+class CommandLineParams {
 
     /**
      * Prints <code>args</code> array in reversed order

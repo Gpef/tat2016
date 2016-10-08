@@ -7,7 +7,7 @@ package com.rct.homework.lesson1.task02;
  * @version 1.0
  * @since 30-09-2016
  */
-public class HelloUser {
+class HelloUser {
 
     /**
      * Prints "Hello, %username%, where username taken from
