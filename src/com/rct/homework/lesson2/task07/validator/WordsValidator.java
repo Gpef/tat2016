@@ -14,7 +14,7 @@ public class WordsValidator extends Validator {
 
     @Override
     public boolean validate(String validateString) {
-        return Utils.splitSentantce(validateString).length > 5;
+        return Utils.splitSentantce(validateString).length>5;
     }
 
     @Override
