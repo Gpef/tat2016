@@ -12,7 +12,7 @@ public class InputController {
     /**
      * Gets string from console input
      *
-     * @return {@code string} from console
+     * @return <code>string</code> from console
      */
     public String getInput() {
         return null;

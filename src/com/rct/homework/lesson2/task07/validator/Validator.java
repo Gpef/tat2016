@@ -11,11 +11,11 @@ public abstract class Validator {
 
     /**
      * Validates string for containing something
-     * related to class that overrides this method
+     * related to the rule of class that overrides this method
      *
-     * @param validateString {@code string} to validate
-     * @return {@code true} if string contains something
-     * related to class extender
+     * @param validateString <code>string</code> to validate
+     * @return <code>true</code> if rule is respected,
+     * <code>false</code> otherwise
      */
     public abstract boolean validate(String validateString);
 }

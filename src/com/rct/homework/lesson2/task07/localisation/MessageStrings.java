@@ -10,4 +10,5 @@ package com.rct.homework.lesson2.task07.localisation;
  */
 public abstract class MessageStrings {
 
+    public static final String HELLOW_MESSAGE = "Input your string to validate: ";
 }
