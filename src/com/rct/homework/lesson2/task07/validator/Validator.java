@@ -20,7 +20,7 @@ public abstract class Validator {
     public abstract boolean validate(String validateString);
 
     /**
-     * Returns message, that string passed validation.
+     * Returns message, if string pass validation.
      *
      * @return pass message
      */

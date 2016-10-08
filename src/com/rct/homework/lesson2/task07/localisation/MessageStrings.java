@@ -1,7 +1,7 @@
 package com.rct.homework.lesson2.task07.localisation;
 
 /**
- * Abstract class containing constant strings
+ * Abstract class containing constant string messages
  * that are shown to a user.
  *
  * @author Oleg Baslak

@@ -36,8 +36,8 @@ public class DictionaryValidator extends Validator {
 
     @Override
     public boolean validate(String validateString) {
-        String[] splittedSentence = Utils.splitSentantce(validateString);
-        for (String word : splittedSentence) {
+        String[] splitSentence = Utils.splitSentantce(validateString);
+        for (String word : splitSentence) {
             if (dictionary.contains(word)) {
                 return true;
             }

@@ -11,7 +11,7 @@ import com.rct.homework.lesson2.task07.localisation.MessageStrings;
  */
 public class OnlyNumberValidator extends Validator {
 
-    //  regex means "ONLY NUMBERS IS STRING"
+    //  regex means "only numbers in string"
     private String symbolsToFind = "\\d*$";
 
     @Override
