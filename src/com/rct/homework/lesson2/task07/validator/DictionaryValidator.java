@@ -17,7 +17,7 @@ public class DictionaryValidator extends Validator {
     private HashSet<String> dictionary;
 
     public DictionaryValidator() {
-        initDictionary();
+        this.dictionary = initDictionary();
     }
 
     /**
@@ -38,9 +38,11 @@ public class DictionaryValidator extends Validator {
     public boolean validate(String validateString) {
         String[] splittedSentence = Utils.splitSentantce(validateString);
         for (String word : splittedSentence) {
-
+            if (dictionary.contains(word)) {
+                return true;
+            }
         }
-    return false;
+        return false;
     }
 
     @Override
