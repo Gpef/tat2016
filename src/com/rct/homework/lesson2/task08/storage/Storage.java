@@ -1,9 +1,10 @@
 package com.rct.homework.lesson2.task08.storage;
 
-import java.util.List;
+import java.math.BigInteger;
+import java.util.HashMap;
 
 /**
- * Storage for keeping products
+ * Storage for keeping and managing products.
  *
  * @author Oleg Baslak
  * @version 1.0
@@ -12,7 +13,10 @@ import java.util.List;
 public abstract class Storage {
 
     private static int size = 0;
-    private List<StorageEntry> productsOnStorage;
+    private HashMap<Product, BigInteger> productsAtStorage;
 
+    public void add(Product product, BigInteger amount){
+
+    }
 
 }
