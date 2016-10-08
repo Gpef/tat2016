@@ -1,7 +1,10 @@
 package com.rct.homework.lesson2.task07.validator;
 
+import com.rct.homework.lesson2.task07.Utils;
+import com.rct.homework.lesson2.task07.localisation.MessageStrings;
+
 /**
- * Validating strings for containing words at all
+ * Validating strings for containing more than 5 words.
  *
  * @author Oleg Baslak
  * @version 1.0
@@ -11,6 +14,11 @@ public class WordsValidator extends Validator {
 
     @Override
     public boolean validate(String validateString) {
-        return false;
+        return Utils.splitSentantce(validateString).length>5;
+    }
+
+    @Override
+    public String getPassMessage() {
+        return MessageStrings.WORDS_VALIDATOR_PASS;
     }
 }

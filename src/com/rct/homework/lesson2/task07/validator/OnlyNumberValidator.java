@@ -1,7 +1,9 @@
 package com.rct.homework.lesson2.task07.validator;
 
+import com.rct.homework.lesson2.task07.localisation.MessageStrings;
+
 /**
- * Validating strings for containing numbers
+ * Validating strings for containing numbers only.
  *
  * @author Oleg Baslak
  * @version 1.0
@@ -9,8 +11,15 @@ package com.rct.homework.lesson2.task07.validator;
  */
 public class OnlyNumberValidator extends Validator {
 
+    private String symbolsToFind = "\\d*$";
+
     @Override
     public boolean validate(String validateString) {
-        return false;
+        return validateString.matches(symbolsToFind);
+    }
+
+    @Override
+    public String getPassMessage() {
+        return MessageStrings.ONLY_NUMBER_VALIDATOR_PASS;
     }
 }

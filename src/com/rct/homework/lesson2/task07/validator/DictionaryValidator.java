@@ -1,9 +1,12 @@
 package com.rct.homework.lesson2.task07.validator;
 
+import com.rct.homework.lesson2.task07.Utils;
+import com.rct.homework.lesson2.task07.localisation.MessageStrings;
+
 import java.util.HashSet;
 
 /**
- * Validating strings for containing words from dictionary
+ * Validating strings for containing words from dictionary.
  *
  * @author Oleg Baslak
  * @version 1.0
@@ -13,11 +16,15 @@ public class DictionaryValidator extends Validator {
 
     private HashSet<String> dictionary;
 
-    @Override
-    public boolean validate(String validateString) {
-        return false;
+    public DictionaryValidator() {
+        initDictionary();
     }
 
+    /**
+     * Initialises words for dictionary.
+     *
+     * @return initialised dictionary
+     */
     private HashSet<String> initDictionary() {
         HashSet<String> dictionary = new HashSet<String>();
         dictionary.add("Oleg");
@@ -25,5 +32,19 @@ public class DictionaryValidator extends Validator {
         dictionary.add("Java");
         dictionary.add("Fire");
         return dictionary;
+    }
+
+    @Override
+    public boolean validate(String validateString) {
+        String[] splittedSentence = Utils.splitSentantce(validateString);
+        for (String word : splittedSentence) {
+
+        }
+    return false;
+    }
+
+    @Override
+    public String getPassMessage() {
+        return MessageStrings.DICTIONARY_VALIDATOR_PASS;
     }
 }
