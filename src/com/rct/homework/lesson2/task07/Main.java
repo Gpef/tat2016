@@ -23,9 +23,7 @@ public class Main {
      */
     public static void main(String[] args) {
         System.out.println(MessageStrings.HELLO_MESSAGE);
-        //String stringToValidate = InputController.getInput();
-        String stringToValidate = "O1leg a a Java Java a";
-        System.out.println(stringToValidate);
+        String stringToValidate = InputController.getInput();
         ArrayList<Validator> validators = initValidators();
         for (Validator validator : validators
                 ) {
