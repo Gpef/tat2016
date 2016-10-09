@@ -11,8 +11,9 @@ import com.rct.homework.lesson2.task07.localisation.MessageStrings;
  */
 public class OnlyDigitsValidator extends Validator {
 
-    //  regex means "only numbers in string"
-    private String symbolsToFind = "[\\d\\s]*$";
+    //  regex means "only numbers (with whitespaces) in string" ("212 12312 123 1" for example),
+    //  strings starts from digit following after space will match (" 2" for example)
+    private String symbolsToFind = "^(\\d|\\s\\d)[\\d\\s]*$";
 
     @Override
     public boolean validate(String validateString) {
