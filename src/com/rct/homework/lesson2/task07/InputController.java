@@ -1,5 +1,7 @@
 package com.rct.homework.lesson2.task07;
 
+import com.rct.homework.lesson2.task07.localisation.MessageStrings;
+
 import java.util.Scanner;
 
 /**
@@ -24,6 +26,9 @@ public abstract class InputController {
             output = scanner.nextLine();
             if (!output.equals("")) {
                 break;
+            }
+            else {
+                System.out.println(MessageStrings.TRY_AGAIN_MESSAGE);
             }
         }
         return output;

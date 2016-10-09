@@ -11,6 +11,7 @@ package com.rct.homework.lesson2.task07.localisation;
 public abstract class MessageStrings {
 
     public static final String HELLO_MESSAGE = "Input your string to validate: ";
+    public static final String TRY_AGAIN_MESSAGE = "Please enter not blank line to validate:";
 
     // Validators messages
     public static final String DICTIONARY_VALIDATOR_PASS = "> Strings contains words from dictionary ";
