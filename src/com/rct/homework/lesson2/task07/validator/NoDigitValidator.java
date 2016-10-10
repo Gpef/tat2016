@@ -12,7 +12,7 @@ import com.rct.homework.lesson2.task07.localisation.MessageStrings;
 public class NoDigitValidator extends Validator {
 
     //  regex means "no numbers in string"
-    private String symbolsToFind = "\\D*$";
+    private String symbolsToFind = "^\\D*$";
 
     @Override
     public boolean validate(String validateString) {
