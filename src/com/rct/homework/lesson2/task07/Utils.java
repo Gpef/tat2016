@@ -16,6 +16,6 @@ public abstract class Utils {
      * @return array of split words
      */
     public static String[] splitSentence(String sentence) {
-        return sentence.split("\\p{Punct}?[ \\t\\n\\r]+");
+        return sentence.split("(\\p{Punct})+|(\\s+)");
     }
 }
