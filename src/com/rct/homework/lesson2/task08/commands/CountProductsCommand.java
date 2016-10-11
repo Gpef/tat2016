@@ -1,6 +1,7 @@
 package com.rct.homework.lesson2.task08.commands;
 
 import com.rct.homework.lesson2.task08.commands.options.CommandOptionsProvider;
+import com.rct.homework.lesson2.task08.storage.Accountant;
 import com.rct.homework.lesson2.task08.storage.Storage;
 
 /**
@@ -34,6 +35,7 @@ public class CountProductsCommand extends Command {
 
     @Override
     public void execute(Storage storage) {
-        System.out.println("Products at storage: " + storage.getProductsAmount());
+        System.out.println("Products at storage: " +
+                new Accountant().getProductsAmount(storage));
     }
 }

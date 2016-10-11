@@ -92,7 +92,7 @@ public class Dialogs {
 
     /**
      * Command mode where user inputs commands in console in endless cycle.
-     * Cycle ends if user inputted command "quit".
+     * Application terminates with exit code 0 if user inputted command "quit".
      * If user inputs blank string it just will go to the next line.
      * If user inputs wrong command, help message will be shown with all
      * supported commands and parameters (wrong command causes exception throw, which is
@@ -100,6 +100,13 @@ public class Dialogs {
      */
     private void commandMode(Storage storage) {
         System.out.println("command mode:");
+        CommandBuilder commandBuilder = new CommandBuilder().
+                add(new AverageProductPriceCommand.Builder()).
+                add(new AverageTypePriceCommand.Builder()).
+                add(new QuitCommand.Builder()).
+                add(new CountProductsCommand.Builder()).
+                add(new CountTypesCommand.Builder());
+        CommandOptionsProvider options;
         while (true) {
             try {
                 System.out.print(COMMAND_WAITING_SYMBOL + " ");
@@ -107,13 +114,8 @@ public class Dialogs {
                 if (userInput.equals("")) {
                     continue;
                 }
-                CommandOptionsProvider options = new InputOptionsProvider(userInput);
-                Command command = (new CommandBuilder().
-                        add(new AverageProductPriceCommand.Builder()).
-                        add(new AverageTypePriceCommand.Builder()).
-                        add(new QuitCommand.Builder()).
-                        add(new CountProductsCommand.Builder()).
-                        add(new CountTypesCommand.Builder()).build(options));
+                options = new InputOptionsProvider(userInput);
+                Command command = commandBuilder.build(options);
                 command.execute(storage);
             } catch (InvalidParamsNumberException e) {
                 System.out.println(e.getMessage());

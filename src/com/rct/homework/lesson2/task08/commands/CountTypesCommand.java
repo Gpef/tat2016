@@ -2,6 +2,7 @@ package com.rct.homework.lesson2.task08.commands;
 
 import com.rct.homework.lesson2.task08.commands.options.CommandOptionsProvider;
 import com.rct.homework.lesson2.task08.exceptions.StorageException;
+import com.rct.homework.lesson2.task08.storage.Accountant;
 import com.rct.homework.lesson2.task08.storage.Storage;
 
 /**
@@ -36,7 +37,8 @@ public class CountTypesCommand extends Command {
     @Override
     public void execute(Storage storage) {
         try {
-            System.out.println("Types amount: " + storage.findTypesAmount());
+            System.out.println("Types amount: " +
+                    new Accountant().findTypesAmount(storage));
         } catch (StorageException e) {
             System.out.println(e.getMessage());
         }

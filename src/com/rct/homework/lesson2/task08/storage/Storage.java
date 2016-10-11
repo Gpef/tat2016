@@ -2,9 +2,7 @@ package com.rct.homework.lesson2.task08.storage;
 
 import com.rct.homework.lesson2.task08.exceptions.StorageException;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.stream.Collectors;
@@ -71,7 +69,7 @@ public class Storage {
      * @throws StorageException if there is no any products of
      *                          specified type at the storage
      */
-    private ArrayList<Product> getProductsOfType(String type) throws StorageException {
+    public ArrayList<Product> getProductsOfType(String type) throws StorageException {
         if (!typesAtStorage.contains(type)) {
             throw new StorageException("No products of that type at the storage");
         }
@@ -80,71 +78,16 @@ public class Storage {
     }
 
     /**
-     * Returns average price of products get from {@code ArrayList} products.
-     *
-     * @return average price of products. If products {@code ArrayList} is empty
-     * return 0
+     * @return {@code ArrayList} of all products at the storage
      */
-    private BigDecimal findAveragePrice(ArrayList<Product> products) {
-        if (products.size() == 0) {
-            return BigDecimal.valueOf(0);
-        }
-        BigDecimal averagePrice = BigDecimal.ZERO;
-        for (Product nextProduct : products) {
-            averagePrice = averagePrice.add(nextProduct.getPrice());
-        }
-        return averagePrice.divide(BigDecimal.valueOf(products.size()), 2, RoundingMode.HALF_UP);
+    public ArrayList<Product> getProductsAtStorage() {
+        return productsAtStorage;
     }
 
     /**
-     * Returns number of all products at the storage
-     *
-     * @return number of products at the storage
+     * @return {@code HashSet} of all types of products at the storage
      */
-    public int getProductsAmount() {
-        return productsAtStorage.size();
-    }
-
-    /**
-     * Returns amount of product types at the storage.
-     *
-     * @return amount of types at the storage
-     * @throws StorageException if there is no any products at
-     *                          the storage
-     */
-    public BigInteger findTypesAmount() throws StorageException {
-        if (0 == typesAtStorage.size()) {
-            throw new StorageException("Storage is empty");
-        }
-        return BigInteger.valueOf(typesAtStorage.size());
-    }
-
-    /**
-     * Finds average price of products with specified type.
-     * If there is no products of specified type throws
-     * {@code ProductException} exception.
-     *
-     * @param type type of products to calculate average price
-     * @return average price of product of specified type,
-     * @throws StorageException if there is no products of that
-     *                          type at the storage
-     */
-    public BigDecimal findAveragePriceOfType(String type) throws StorageException {
-        ArrayList<Product> productsOfType = getProductsOfType(type);
-        return findAveragePrice(productsOfType);
-    }
-
-    /**
-     * Finds average price of all products at the storage.
-     *
-     * @return average price of all products at the storage
-     * @throws StorageException if there is no products at
-     *                          the storage (array size == 0)
-     */
-    public BigDecimal findAveragePriceOfProducts() throws StorageException {
-        if (0 == productsAtStorage.size()) {
-            throw new StorageException("Storage is empty");
-        }
-        return findAveragePrice(productsAtStorage);
+    public HashSet<String> getTypesAtStorage() {
+        return typesAtStorage;
     }
 }

@@ -2,6 +2,7 @@ package com.rct.homework.lesson2.task08.commands;
 
 import com.rct.homework.lesson2.task08.commands.options.CommandOptionsProvider;
 import com.rct.homework.lesson2.task08.exceptions.StorageException;
+import com.rct.homework.lesson2.task08.storage.Accountant;
 import com.rct.homework.lesson2.task08.storage.Storage;
 
 /**
@@ -42,7 +43,8 @@ public class AverageTypePriceCommand extends Command {
     @Override
     public void execute(Storage storage) {
         try {
-            System.out.println("Average price of " + type + ": " + storage.findAveragePriceOfType(type));
+            System.out.println("Average price of " + type + ": " +
+                    new Accountant().findAveragePriceOfType(storage, type));
         } catch (StorageException e) {
             System.out.println(e.getMessage());
         }

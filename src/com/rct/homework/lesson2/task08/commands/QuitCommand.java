@@ -34,6 +34,6 @@ public class QuitCommand extends Command {
     @Override
     public void execute(Storage storage) {
         System.out.print("Bye!");
-        System.exit(1);
+        System.exit(0);
     }
 }
