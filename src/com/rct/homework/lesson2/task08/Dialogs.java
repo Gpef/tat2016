@@ -125,8 +125,9 @@ public class Dialogs {
     }
 
     /**
-     * Gets input from user and checks if it's valid.
-     * Grants only valid value to be returned.
+     * Gets input from user and checks if it can be parsed
+     * to number and if can - checks if it's > 0.
+     * Grants only valid price value to be returned.
      *
      * @return valid price value
      */
@@ -136,34 +137,46 @@ public class Dialogs {
             try {
                 priceString = getString(PRODUCT_PRICE);
 
-                if (Validator.isValidPrice(priceString)) {
+                if (Validator.isValidDecimal(priceString)) {
+                    BigDecimal price = new BigDecimal(priceString);
+                    if (price.compareTo(BigDecimal.valueOf(0)) == -1 ||
+                            price.compareTo(BigDecimal.valueOf(0)) == 0) {
+                        throw new StorageException("Error: Products amount can't be <= 0");
+                    }
                     return new BigDecimal(priceString);
                 }
-            } catch (ProductException e) {
+            } catch (NumberFormatException | StorageException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
     /**
-     * Gets input from user and checks if it's valid.
-     * Grants only valid value to be returned.
+     * Gets input from user and checks if it can be parsed
+     * to number and if can - checks if it's > 0.
+     * Grants only valid amount value to be returned.
      *
      * @return valid amount value
      */
     private BigInteger getValidAmount() {
-        String amount;
+        String amountString;
+        BigInteger amount;
         while (true) {
             try {
-                amount = getString(PRODUCT_AMOUNT);
-                if (Validator.isValidAmount(amount)) {
+                amountString = getString(PRODUCT_AMOUNT);
+                if (Validator.isValidInteger(amountString)) {
+                    amount = new BigInteger(amountString);
+                    if (amount.compareTo(BigInteger.valueOf(0)) == -1 ||
+                            amount.compareTo(BigInteger.valueOf(0)) == 0) {
+                        throw new ProductException("Error: Product price can't be <= 0");
+                    }
                     break;
                 }
-            } catch (StorageException e) {
+            } catch (NumberFormatException | ProductException e) {
                 System.out.println(e.getMessage());
             }
         }
-        return new BigInteger(amount);
+        return amount;
     }
 
     /**
