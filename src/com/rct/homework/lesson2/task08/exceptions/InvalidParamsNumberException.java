@@ -2,7 +2,7 @@ package com.rct.homework.lesson2.task08.exceptions;
 
 /**
  * Exception thrown if options provider has invalid number
- * of options -> incorrect input
+ * of options -> that means user inputted incorrect data.
  *
  * @author Oleg Baslak
  * @version 1.0

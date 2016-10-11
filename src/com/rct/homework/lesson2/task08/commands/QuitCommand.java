@@ -4,7 +4,7 @@ import com.rct.homework.lesson2.task08.commands.options.CommandOptionsProvider;
 import com.rct.homework.lesson2.task08.storage.Storage;
 
 /**
- * Represents command used to quit application
+ * Represents command used to quit application.
  *
  * @author Oleg Baslak
  * @version 1.0
@@ -15,8 +15,8 @@ public class QuitCommand extends Command {
     private static final int PARAMS = 0;
 
     /**
-     * QuitCommand builder performs options validation
-     * and creates a new QuitCommand
+     * {@code QuitCommand} builder performs options validation
+     * and creates a new {@code QuitCommand} command.
      */
     public static class Builder extends Command.Builder {
 

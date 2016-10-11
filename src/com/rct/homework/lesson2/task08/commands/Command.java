@@ -4,8 +4,8 @@ import com.rct.homework.lesson2.task08.commands.options.CommandOptionsProvider;
 import com.rct.homework.lesson2.task08.storage.Storage;
 
 /**
- * Represents command that will be performed after
- * user's input
+ * Represents command that will be executed after
+ * user's input.
  *
  * @author Oleg Baslak
  * @version 1.0
@@ -18,7 +18,7 @@ abstract public class Command {
 
         /**
          * Checks if builder can build command with specified
-         * options
+         * options.
          *
          * @param options options which specify command
          * @return true if the builder can build command with
@@ -27,7 +27,7 @@ abstract public class Command {
         public abstract boolean canBuild(CommandOptionsProvider options);
 
         /**
-         * Builds command based on specific options
+         * Builds command based on specific options.
          *
          * @param options options which specify command
          * @return built command
@@ -36,7 +36,7 @@ abstract public class Command {
     }
 
     /**
-     * Execute command depending on command implementation
+     * Execute command depending on command implementation.
      *
      * @param storage storage to work with
      */

@@ -16,8 +16,8 @@ public class CountProductsCommand extends Command {
     private static final int PARAMS = 0;
 
     /**
-     * CountProductsCommand builder performs options validation
-     * and creates a new CountProductsCommand
+     * {@code CountProductsCommand} builder performs options validation
+     * and creates a new {@code CountProductsCommand} command.
      */
     public static class Builder extends Command.Builder {
 

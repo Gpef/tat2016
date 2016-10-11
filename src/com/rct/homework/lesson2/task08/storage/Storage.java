@@ -7,6 +7,7 @@ import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.stream.Collectors;
 
 /**
  * Storage for keeping and managing products.
@@ -18,7 +19,7 @@ import java.util.HashSet;
 public class Storage {
 
     private ArrayList<Product> productsAtStorage;
-    private HashSet typesAtStorage;
+    private HashSet<String> typesAtStorage;
 
     public Storage() {
         productsAtStorage = new ArrayList<>();
@@ -26,13 +27,15 @@ public class Storage {
     }
 
     /**
-     * Adds <code>Product</code> to storage in an amount of <code>amount</code>
+     * Adds {@code Product} to storage in specified amount.
+     * Amount must be > 0. Otherwise - throws {@code StorageException}
+     * exception saying that amount must be > 0.
      *
      * @param product product needs to be added
+     * @throws StorageException if amount value os <= 0
      */
     public void add(Product product, BigInteger amount) throws StorageException {
-        if (amount.compareTo(BigInteger.valueOf(0)) == -1 ||
-                amount.compareTo(BigInteger.valueOf(0)) == 0) {
+        if (!checkAmount(amount)) {
             throw new StorageException("Can't added lower than or equal to zero product");
         }
         for (BigInteger i = BigInteger.valueOf(0);
@@ -45,13 +48,26 @@ public class Storage {
     }
 
     /**
-     * Returns <code>ArrayList</code> of products of specified
+     * Checks if amount variable has acceptable value.
+     * If it's <= 0 it returns {@code false}.
+     *
+     * @param amount amount to check
+     * @return {@code true} if amount is > 0,
+     * {@code false} - otherwise
+     */
+    private boolean checkAmount(BigInteger amount) {
+        return !(amount.compareTo(BigInteger.valueOf(0)) == -1 ||
+                amount.compareTo(BigInteger.valueOf(0)) == 0);
+    }
+
+    /**
+     * Returns {@code ArrayList} of products of specified
      * type, if there is no products of that type - throws
-     * <code>NoProductsOfTypeException</code>
+     * {@code NoProductsOfTypeException} exception.
      *
      * @param type type of product to return
      * @return array of products if there is at least
-     * one product of that type at the storage
+     * one product of specified type at the storage
      * @throws StorageException if there is no any products of
      *                          specified type at the storage
      */
@@ -59,20 +75,14 @@ public class Storage {
         if (!typesAtStorage.contains(type)) {
             throw new StorageException("No products of that type at the storage");
         }
-        ArrayList<Product> productOfType = new ArrayList<>();
-        for (Product nextProduct : productsAtStorage) {
-            if (nextProduct.getType().toLowerCase().
-                    equals(type.toLowerCase())) {
-                productOfType.add(nextProduct);
-            }
-        }
-        return productOfType;
+        return productsAtStorage.stream().filter(nextProduct -> nextProduct.getType().toLowerCase().
+                equals(type.toLowerCase())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
-     * Returns average price of a set of products
+     * Returns average price of products get from {@code ArrayList} products.
      *
-     * @return average price of products. If products array is empty
+     * @return average price of products. If products {@code ArrayList} is empty
      * return 0
      */
     private BigDecimal findAveragePrice(ArrayList<Product> products) {
@@ -96,9 +106,11 @@ public class Storage {
     }
 
     /**
-     * Returns amount of product types at the storage
+     * Returns amount of product types at the storage.
      *
      * @return amount of types at the storage
+     * @throws StorageException if there is no any products at
+     *                          the storage
      */
     public BigInteger findTypesAmount() throws StorageException {
         if (0 == typesAtStorage.size()) {
@@ -110,7 +122,7 @@ public class Storage {
     /**
      * Finds average price of products with specified type.
      * If there is no products of specified type throws
-     * <code>ProductException</code> exception.
+     * {@code ProductException} exception.
      *
      * @param type type of products to calculate average price
      * @return average price of product of specified type,
@@ -134,23 +146,5 @@ public class Storage {
             throw new StorageException("Storage is empty");
         }
         return findAveragePrice(productsAtStorage);
-    }
-
-    /**
-     * Debug purposes. Initialises ready-to-use storage
-     *
-     * @return initialised storage
-     */
-    public static Storage init() {
-        Storage storage = new Storage();
-        try {
-            storage.add(new Product("Pen", "COCO", new BigDecimal("1000")), BigInteger.valueOf(2));
-            storage.add(new Product("Pen", "COCO1", new BigDecimal("1000")), BigInteger.valueOf(3));
-            storage.add(new Product("Pen", "COCO2", new BigDecimal("1000")), BigInteger.valueOf(4));
-            storage.add(new Product("Pencil", "COCO", new BigDecimal("1000")), BigInteger.valueOf(5));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return storage;
     }
 }

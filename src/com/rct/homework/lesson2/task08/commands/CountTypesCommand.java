@@ -17,8 +17,8 @@ public class CountTypesCommand extends Command {
     private static final int PARAMS = 0;
 
     /**
-     * CountTypesCommand builder performs options validation
-     * and creates a new CountTypesCommand
+     * {@code CountTypesCommand} builder performs options validation
+     * and creates a new {@code CountTypesCommand} command.
      */
     public static class Builder extends Command.Builder {
 

@@ -6,7 +6,7 @@ import com.rct.homework.lesson2.task08.storage.Storage;
 
 /**
  * Represents command that shows average price of
- * all products at the storage
+ * all products at the storage.
  *
  * @author Oleg Baslak
  * @version 1.0
@@ -17,16 +17,13 @@ public class AverageProductPriceCommand extends Command {
     private static final int PARAMS = 0;
 
     /**
-     * AverageProductPrice builder performs options validation
-     * and creates a new AverageProductPriceCommand
+     * {@code AverageProductPrice} builder performs options validation
+     * and creates a new {@code AverageProductPriceCommand} command.
      */
     public static class Builder extends Command.Builder {
         @Override
         public boolean canBuild(CommandOptionsProvider options) {
-            if (!options.getCommand().equals(NAME) || options.getNumberOfOptions() != PARAMS){
-                return false;
-            }
-            return true;
+            return !(!options.getCommand().equals(NAME) || options.getNumberOfOptions() != PARAMS);
         }
 
         @Override

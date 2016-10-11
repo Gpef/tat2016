@@ -1,7 +1,8 @@
 package com.rct.homework.lesson2.task08.exceptions;
 
 /**
- * Thrown when errors with product occurred. Errors like wrong price and etc.
+ * Thrown when errors with product occurred.
+ * Errors like wrong price and etc.
  *
  * @author Oleg Baslak
  * @version 1.0

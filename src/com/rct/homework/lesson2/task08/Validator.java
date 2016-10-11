@@ -1,6 +1,7 @@
 package com.rct.homework.lesson2.task08;
 
 import com.rct.homework.lesson2.task08.exceptions.ProductException;
+import com.rct.homework.lesson2.task08.exceptions.StorageException;
 
 import java.math.BigDecimal;
 
@@ -19,6 +20,8 @@ abstract public class Validator {
      *
      * @param price price to check
      * @return true - if price is valid, false - otherwise
+     * @throws ProductException if occurred parsing error or
+     *                          price <= 0
      */
     public static boolean isValidPrice(String price) throws ProductException {
         BigDecimal parsedPrice;
@@ -35,22 +38,24 @@ abstract public class Validator {
     }
 
     /**
-     * Checks if string that must be parsed to <code>BigInteger</code>
+     * Checks if string that must be parsed to {@code BigInteger}
      * amount can be parsed and if it can checks if amount not <= 0.
      *
      * @param amount amount to check
      * @return true - if amount is valid, false - otherwise
+     * @throws StorageException if occurred parsing error or
+     *                          amount <= 0
      */
-    public static boolean isValidAmount(String amount) throws ProductException {
+    public static boolean isValidAmount(String amount) throws StorageException {
         BigDecimal parsedAmount;
         try {
             parsedAmount = new BigDecimal(amount);
         } catch (Exception e) {
-            throw new ProductException("Error: Can't parse " + "'" + amount + "'" + " to number");
+            throw new StorageException("Error: Can't parse " + "'" + amount + "'" + " to number");
         }
         if (parsedAmount.compareTo(BigDecimal.valueOf(0)) == -1 ||
                 parsedAmount.compareTo(BigDecimal.valueOf(0)) == 0) {
-            throw new ProductException("Error: Products amount can't be <= 0");
+            throw new StorageException("Error: Products amount can't be <= 0");
         }
         return true;
     }

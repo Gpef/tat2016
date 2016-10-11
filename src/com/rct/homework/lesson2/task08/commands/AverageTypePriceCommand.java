@@ -6,7 +6,7 @@ import com.rct.homework.lesson2.task08.storage.Storage;
 
 /**
  * Represents command that show average price of
- * specified product type at the storage
+ * specified product type at the storage.
  *
  * @author Oleg Baslak
  * @version 1.0
@@ -22,17 +22,14 @@ public class AverageTypePriceCommand extends Command {
     }
 
     /**
-     * AverageTypePrice builder performs options validation
-     * and creates a new AverageTypePriceCommand
+     * {@code AverageTypePrice} builder performs options validation
+     * and creates a new {@code AverageTypePriceCommand} command.
      */
     public static class Builder extends Command.Builder {
 
         @Override
         public boolean canBuild(CommandOptionsProvider options) {
-            if (!options.getCommand().equals(NAME) || options.getNumberOfOptions() != PARAMS) {
-                return false;
-            }
-            return true;
+            return !(!options.getCommand().equals(NAME) || options.getNumberOfOptions() != PARAMS);
 
         }
 

@@ -5,7 +5,7 @@ import com.rct.homework.lesson2.task08.exceptions.StorageException;
 import com.rct.homework.lesson2.task08.storage.Storage;
 
 /**
- * Main class of the application
+ * Main class of the application.
  *
  * @author Oleg Baslak
  * @version 1.0
@@ -14,7 +14,12 @@ import com.rct.homework.lesson2.task08.storage.Storage;
 public class Main {
 
     /**
-     * Entrance point to the application
+     * Entrance point to the application.
+     * Starts working from requesting information about new product to add.
+     * If user wants to continue adding products, he just inputs 'add'. If user
+     * inputs any other string, program will go to the command mode. Application
+     * will work in endless cycle and will quit only if user inputs "quit"
+     * command.
      *
      * @param args command line arguments
      */

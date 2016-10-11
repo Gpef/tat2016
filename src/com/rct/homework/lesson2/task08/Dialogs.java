@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 /**
  * Class for dialogs with user and showing messages and errors
- * while inputting
+ * while inputting.
  *
  * @author Oleg Baslak
  * @version 1.0
@@ -39,10 +39,13 @@ public class Dialogs {
 
     /**
      * Main function of dialog controller. Performs adding products to storage
-     * and switching to command mode
+     * and switching to command mode. If user inputs anything except 'add',
+     * application will switch to command mode.
      *
      * @param storage storage to work with
      * @throws ProductException if error occurred with parsing price to number
+     * @throws StorageException if error occurred while adding product to the
+     *                          storage
      */
     public void start(Storage storage) throws ProductException, StorageException {
         while (true) {
@@ -56,7 +59,7 @@ public class Dialogs {
     }
 
     /**
-     * Shows message to user and string from input
+     * Shows message to user and getting string from user.
      *
      * @param message message to show before getting input
      * @return string got from user input
@@ -67,7 +70,15 @@ public class Dialogs {
     }
 
     /**
-     * Product adding mode
+     * Product adding mode. Application waits from user to input
+     * product name, type, price and amount. Amount and price can't
+     * be <0 and must be numbers. If they not correspond - app will
+     * show message in console and ask to input again (It's going
+     * in endless cycle. To reach cycle's end valid values must be inputted).
+     *
+     * @throws ProductException if errors occurred while creating products
+     * @throws StorageException if errors occurred while adding product
+     *                          to the storage
      */
     private void addProductMode(Storage storage) throws ProductException, StorageException {
         System.out.println(NEW_PRODUCT);
@@ -80,11 +91,15 @@ public class Dialogs {
     }
 
     /**
-     * Command mode where user inputs commands in console
+     * Command mode where user inputs commands in console in endless cycle.
+     * Cycle ends if user inputted command "quit".
+     * If user inputs blank string it just will go to the next line.
+     * If user inputs wrong command, help message will be shown with all
+     * supported commands and parameters (wrong command causes exception throw, which is
+     * handled in method).
      */
     private void commandMode(Storage storage) {
         System.out.println("command mode:");
-
         while (true) {
             try {
                 System.out.print(COMMAND_WAITING_SYMBOL + " ");
@@ -108,9 +123,10 @@ public class Dialogs {
     }
 
     /**
-     * Gets input from user and checks if it's valid
+     * Gets input from user and checks if it's valid.
+     * Grants only valid value to be returned.
      *
-     * @return valid price
+     * @return valid price value
      */
     private BigDecimal getValidPrice() {
         String priceString;
@@ -128,10 +144,10 @@ public class Dialogs {
     }
 
     /**
-     * Gets input from user and checks if it's valid
-     * Grants only valid value to be returned
+     * Gets input from user and checks if it's valid.
+     * Grants only valid value to be returned.
      *
-     * @return valid amount
+     * @return valid amount value
      */
     private BigInteger getValidAmount() {
         String amount;
@@ -141,7 +157,7 @@ public class Dialogs {
                 if (Validator.isValidAmount(amount)) {
                     break;
                 }
-            } catch (ProductException e) {
+            } catch (StorageException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -149,7 +165,8 @@ public class Dialogs {
     }
 
     /**
-     * Show commands help in console
+     * Shows commands help in console with a list of
+     * supported commands and parameters.
      */
     private void showHelp() {
         System.out.println(HELP);

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 /**
  * Class that stores chain of builders and builds corresponds to
- * options command
+ * options command.
  *
  * @author Oleg Baslak
  * @version 1.0
@@ -18,7 +18,7 @@ public class CommandBuilder {
     private ArrayList<Command.Builder> builders = new ArrayList<>();
 
     /**
-     * Adds builder to the builders chain
+     * Adds command builder to the builders chain.
      *
      * @param builder builder to add to the chain
      * @return CommandBuilder object back to continue adding Builders
@@ -30,9 +30,11 @@ public class CommandBuilder {
     }
 
     /**
-     * Performing build of command
+     * Performing build of {@code Command} command.
      *
      * @return built command that corresponds inputted options
+     * @throws InvalidParamsNumberException if unsupported command or wrong
+     *                                      number of additional parameters to command
      */
     public Command build(CommandOptionsProvider options) throws InvalidParamsNumberException {
 

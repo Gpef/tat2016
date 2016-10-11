@@ -1,6 +1,5 @@
 package com.rct.homework.lesson2.task08.storage;
 
-import com.rct.homework.lesson2.task08.Validator;
 import com.rct.homework.lesson2.task08.exceptions.ProductException;
 
 import java.math.BigDecimal;
@@ -25,11 +24,10 @@ public class Product {
     private BigDecimal price;
 
     public Product(String _type, String _name, BigDecimal _price) throws ProductException {
-        if (!Validator.isValidPrice(_price.toString())) {
-            throw new ProductException("");
+        if (!checkPrice(_price)) {
+            throw new ProductException("Error: Product price can't be <= 0");
         }
-        price = _price;
-        price = price.setScale(2, BigDecimal.ROUND_HALF_UP);
+        price = _price.setScale(2, BigDecimal.ROUND_HALF_UP);
         if ("".equals(_type)) {
             _type = defaultType;
         }
@@ -38,6 +36,19 @@ public class Product {
         }
         type = _type.toLowerCase();
         name = _name;
+    }
+
+    /**
+     * Checks if price variable has acceptable value.
+     * If it's <= 0 return {@code false}
+     *
+     * @param price price to check
+     * @return {@code true} if price is > 0,
+     * {@code false} - otherwise
+     */
+    private boolean checkPrice(BigDecimal price) {
+        return !(price.compareTo(BigDecimal.valueOf(0)) == -1 ||
+                price.compareTo(BigDecimal.valueOf(0)) == 0);
     }
 
     public String getType() {
