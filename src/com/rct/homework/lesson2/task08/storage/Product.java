@@ -1,6 +1,7 @@
 package com.rct.homework.lesson2.task08.storage;
 
-import com.rct.homework.lesson2.task08.exceptions.PriceParseException;
+import com.rct.homework.lesson2.task08.Validator;
+import com.rct.homework.lesson2.task08.exceptions.ProductException;
 
 import java.math.BigDecimal;
 
@@ -23,20 +24,19 @@ public class Product {
     private String name;
     private BigDecimal price;
 
-    public Product(String _type, String _name, String _price) throws PriceParseException {
-        try {
-            price = new BigDecimal(_price);
-            price = price.setScale(2, BigDecimal.ROUND_HALF_UP);
-        } catch (NumberFormatException e) {
-            throw new PriceParseException();
+    public Product(String _type, String _name, BigDecimal _price) throws ProductException {
+        if (!Validator.isValidPrice(_price.toString())) {
+            throw new ProductException("");
         }
+        price = _price;
+        price = price.setScale(2, BigDecimal.ROUND_HALF_UP);
         if ("".equals(_type)) {
             _type = defaultType;
         }
         if ("".equals(_name)) {
             _name = defaultName;
         }
-        type = _type;
+        type = _type.toLowerCase();
         name = _name;
     }
 
@@ -50,5 +50,10 @@ public class Product {
 
     public BigDecimal getPrice() {
         return price;
+    }
+
+    @Override
+    public String toString() {
+        return getName() + "[type: " + getType() + "]" + ", price: " + getPrice();
     }
 }
