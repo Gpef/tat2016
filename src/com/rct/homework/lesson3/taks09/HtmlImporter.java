@@ -48,10 +48,10 @@ public class HtmlImporter extends Importer {
             "</html>";
     private final String TABLE_HEAD = "   <thead>\n" +
             "    <tr valign=\"top\" bgcolor =\"" + HEAD_COLOR + "\" align = center height = \"30\"> \n" +
-            "       <th width = \"130\">NAME</th>\n" +
-            "       <th width = \"130\">TYPE</th>\n" +
-            "       <th width = \"130\">CREATION DATE</th>\n" +
-            "       <th width = \"130\">SIZE (in Kb)</th>\n" +
+            "       <th width = \"130\">ИМЯ</th>\n" +
+            "       <th width = \"130\">ТИП</th>\n" +
+            "       <th width = \"130\">ДАТА СОЗДАНИЯ</th>\n" +
+            "       <th width = \"130\">РАЗМЕР (в Kb)</th>\n" +
             "    </tr>\n" +
             "   </thead>\n" +
             "   <tbody>\n";
