@@ -27,7 +27,7 @@ public class HTMLExporter extends Exporter {
             "<html>\n" +
             " <head>\n" +
             "  <meta charset=\"utf-8\">\n" +
-            "  <title>Files in directory</title>\n" +
+            "  <title>Servers List</title>\n" +
             " </head>\n" +
             " <body>\n" +
             "  <style type=\"text/css\">\n" +
