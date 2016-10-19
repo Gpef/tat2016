@@ -42,7 +42,7 @@ public class Server {
          */
         public static Server build(String ip) throws Exception {
             if (!canBuild(ip)) {
-                throw new Exception("can't build Server object with ip " + ip);
+                throw new Exception("error parsing ip " + ip);
             }
             return new Server(ip);
         }

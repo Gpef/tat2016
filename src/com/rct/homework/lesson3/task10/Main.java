@@ -4,7 +4,8 @@ import com.rct.homework.lesson3.task10.export.DataComposer;
 import com.rct.homework.lesson3.task10.export.HTMLExporter;
 import com.rct.homework.lesson3.task10.server.Server;
 import com.rct.homework.lesson3.task10.server.ServersPingSimulator;
-import com.rct.homework.lesson3.task10.server.ServersSource;
+import com.rct.homework.lesson3.task10.sources.ArgsServersSource;
+import com.rct.homework.lesson3.task10.sources.FileServersSource;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,11 +34,10 @@ public class Main {
     public static void main(String[] args) {
         try {
             ArrayList<Server> servers;
-            ServersSource serversSource = new ServersSource();
             if (args.length == 0) {
-                servers = serversSource.getServersFromFile(new File(inputPath));
+                servers = new FileServersSource(new File(inputPath)).getServers();
             } else {
-                servers = serversSource.getServersFromArgs(args);
+                servers = new ArgsServersSource(args).getServers();
             }
             ServersPingSimulator pingSimulator = new ServersPingSimulator();
             pingSimulator.pingServers(servers);
