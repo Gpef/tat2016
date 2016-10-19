@@ -97,9 +97,9 @@ public class HTMLExporter extends Exporter {
      * @return ready to paste table cell
      */
     private String getCell(PreparedData preparedData) {
-        return "    <tr>\n" +
-                "     <td bgcolor = \" " + COLOR_NORMAL_CELL + "\">" + preparedData.address + "</td>\n" +
-                "     <td bgcolor = \" " + (preparedData.isAlarmed ? COLOR_WARNING_CELL : COLOR_NORMAL_CELL) + "\">" + preparedData.ping + "</td>\n" +
+        return "    <tr bgcolor = \" " + (preparedData.isAlarmed ? COLOR_WARNING_CELL : COLOR_NORMAL_CELL) + "\">\n" +
+                "     <td>" + preparedData.address + "</td>\n" +
+                "     <td>" + preparedData.ping + "</td>\n" +
                 "    </tr>\n";
     }
 }
