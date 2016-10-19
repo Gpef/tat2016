@@ -17,10 +17,9 @@ public class HTMLExporter extends Exporter {
 
     private static final String COLOR_HEADER_CELL = "#999999";
     private static final String COLOR_NORMAL_CELL = "#EFEFEF";
-    private static final String COLOR_BORDERS = "#FFFFFF";
+    private static final String COLOR_WARNING_CELL = "#E86441";
 
-    private static final String COLOR_WARNING = "#E86441";
-    private static final String COLOR_COMMON = "#EFEFEF";
+    private static final String COLOR_BORDERS = "#FFFFFF";
 
     private final String FILE_HEADER
             = "<!DOCTYPE HTML>\n" +
@@ -100,7 +99,7 @@ public class HTMLExporter extends Exporter {
     private String getCell(PreparedData preparedData) {
         return "    <tr>\n" +
                 "     <td bgcolor = \" " + COLOR_NORMAL_CELL + "\">" + preparedData.address + "</td>\n" +
-                "     <td bgcolor = \" " + (preparedData.isAlarmed ? COLOR_WARNING : COLOR_COMMON) + "\">" + preparedData.ping + "</td>\n" +
+                "     <td bgcolor = \" " + (preparedData.isAlarmed ? COLOR_WARNING_CELL : COLOR_NORMAL_CELL) + "\">" + preparedData.ping + "</td>\n" +
                 "    </tr>\n";
     }
 }
