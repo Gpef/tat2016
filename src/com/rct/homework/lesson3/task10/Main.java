@@ -1,9 +1,8 @@
 package com.rct.homework.lesson3.task10;
 
-import com.rct.homework.lesson3.task10.export.DataComposer;
 import com.rct.homework.lesson3.task10.export.HTMLExporter;
 import com.rct.homework.lesson3.task10.server.Server;
-import com.rct.homework.lesson3.task10.server.ServersPingSimulator;
+import com.rct.homework.lesson3.task10.server.ServerPingSimulator;
 import com.rct.homework.lesson3.task10.sources.ArgsServersSource;
 import com.rct.homework.lesson3.task10.sources.FileServersSource;
 
@@ -39,12 +38,12 @@ public class Main {
             } else {
                 servers = new ArgsServersSource(args).getServers();
             }
-            ServersPingSimulator pingSimulator = new ServersPingSimulator();
+            ServerPingSimulator pingSimulator = new ServerPingSimulator();
             for(Server server : servers){
                 pingSimulator.pingServer(server);
             }
             HTMLExporter exporter = new HTMLExporter();
-            exporter.export(new DataComposer().compose(servers), new File(outputPath));
+            exporter.export(servers, new File(outputPath));
         } catch (IOException | InvalidParameterException e) {
             System.out.println(e.getMessage());
         }

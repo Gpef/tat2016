@@ -1,5 +1,7 @@
 package com.rct.homework.lesson3.task10.export;
 
+import com.rct.homework.lesson3.task10.server.Server;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -7,7 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Exports {@code PreparedData} prepared to export server's data to .html file
+ * Exports server's data to .html file. If server's ping is too high
+ * cell will be colored to red
  *
  * @author Oleg Baslak
  * @version 1.0
@@ -58,15 +61,24 @@ public class HTMLExporter extends Exporter {
             "   <tbody>\n";
 
     @Override
-    public void export(ArrayList<PreparedData> serversData, File outputFile) throws IOException {
+    public void export(ArrayList<Server> serversData, File outputFile) throws IOException {
         BufferedWriter output = new BufferedWriter(new FileWriter(outputFile));
         output.write(getHeader());
         output.write(getTableHeader());
-        for (PreparedData preparedData : serversData) {
-            output.write(getCell(preparedData));
-        }
-        output.write(getFooter());
 
+        int maxPing = serversData.get(0).getPing();
+        for (Server server : serversData) {
+            if (server.getPing() > maxPing) {
+                maxPing = server.getPing();
+            }
+        }
+        for (Server server : serversData) {
+            output.write(getCell(server.getIpv4Address(),
+                    String.valueOf(server.getPing()),
+                    (server.getPing() == maxPing)));
+        }
+
+        output.write(getFooter());
         output.close();
     }
 
@@ -93,13 +105,15 @@ public class HTMLExporter extends Exporter {
     }
 
     /**
-     * @param preparedData data to write into string
+     * @param isAlarmed {@code true} if cell must be colored
+     * @param ip ip address of server
+     * @param ping server's ping
      * @return ready to paste table cell
      */
-    private String getCell(PreparedData preparedData) {
-        return "    <tr bgcolor = \" " + (preparedData.isAlarmed ? COLOR_WARNING_CELL : COLOR_NORMAL_CELL) + "\">\n" +
-                "     <td>" + preparedData.address + "</td>\n" +
-                "     <td>" + preparedData.ping + "</td>\n" +
+    private String getCell(String ip, String ping, boolean isAlarmed) {
+        return "    <tr bgcolor = \" " + (isAlarmed ? COLOR_WARNING_CELL : COLOR_NORMAL_CELL) + "\">\n" +
+                "     <td>" + ip + "</td>\n" +
+                "     <td>" + ping + "</td>\n" +
                 "    </tr>\n";
     }
 }

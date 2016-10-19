@@ -9,7 +9,7 @@ import java.util.Random;
  * @version 1.0
  * @since 17.10.2016
  */
-public class ServersPingSimulator {
+public class ServerPingSimulator {
 
     /**
      * Performs server poll simulation

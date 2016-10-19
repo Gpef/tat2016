@@ -1,5 +1,7 @@
 package com.rct.homework.lesson3.task10.export;
 
+import com.rct.homework.lesson3.task10.server.Server;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,8 +18,9 @@ public abstract class Exporter {
     /**
      * Exports {@code Server} addresses and pings to file
      *
+     * @param servers servers to export
      * @param outputFile file into all data will be written
      * @throws IOException if errors with file existing or reading\writing rights occurred
      */
-    public abstract void export(ArrayList<PreparedData> servers, File outputFile) throws IOException;
+    public abstract void export(ArrayList<Server> servers, File outputFile) throws IOException;
 }
