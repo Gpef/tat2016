@@ -68,37 +68,47 @@ public class HtmlImporter extends Importer {
         String cellColor = COLOR_1;
 
         for (File file : allFiles) {
-            BasicFileAttributes attributes = Files.readAttributes(Paths.get(file.getCanonicalPath()), BasicFileAttributes.class);
-            String fileName = file.getName();
-            String type = "";
-            long size = 0;
-            if (file.isFile()) {
-                type = "FILE";
-                size = FileSearcher.bytesToKib(file.length());
-            }
-            if (file.isDirectory()) {
-                type = "DIR";
-                size = FileSearcher.bytesToKib(FileSearcher.getFolderSize(file));
-            }
-            FileTime date = attributes.creationTime();
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM.dd.yyyy");
-            String creationDate = simpleDateFormat.format(date.toMillis());
-
-            output.write("    <tr bgcolor = \" " + cellColor + "\">\n" +
-                    "     <td>" + fileName + "</td>\n" +
-                    "     <td>" + type + "</td>\n" +
-                    "     <td>" + creationDate + "</td>\n" +
-                    "     <td>" + size + "</td>\n" +
-                    "    </tr>\n");
-
             if (cellColor.equals(COLOR_1)) {
                 cellColor = COLOR_2;
             } else {
                 cellColor = COLOR_1;
             }
-
+            output.write(getCell(file, cellColor));
         }
         output.write(FILE_FOOTER);
         output.close();
     }
+
+    /**
+     * Returns ready to insert into table raw of data
+     * about folder\file (name, size, type and creation date)
+     *
+     * @param file file to put data from
+     * @return ready to insert raw
+     */
+    private String getCell(File file, String cellColor) throws IOException {
+        BasicFileAttributes attributes = Files.readAttributes(Paths.get(file.getCanonicalPath()), BasicFileAttributes.class);
+        String fileName = file.getName();
+        String type = "";
+        long size = 0;
+        if (file.isFile()) {
+            type = "FILE";
+            size = FileSearcher.bytesToKib(file.length());
+        }
+        if (file.isDirectory()) {
+            type = "DIR";
+            size = FileSearcher.bytesToKib(FileSearcher.getFolderSize(file));
+        }
+        FileTime date = attributes.creationTime();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM.dd.yyyy");
+        String creationDate = simpleDateFormat.format(date.toMillis());
+
+        return "    <tr bgcolor = \" " + cellColor + "\">\n" +
+                "     <td>" + fileName + "</td>\n" +
+                "     <td>" + type + "</td>\n" +
+                "     <td>" + creationDate + "</td>\n" +
+                "     <td>" + size + "</td>\n" +
+                "    </tr>\n";
+    }
+
 }
