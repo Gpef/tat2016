@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Exports server's data to .html file. If server's ping is too high
- * cell will be colored to red
+ * Exports server's data to .html file. Row with max server's ping
+ * will be colored to red.
  *
  * @author Oleg Baslak
  * @version 1.0
@@ -60,6 +60,12 @@ public class HTMLExporter extends Exporter {
             "   </thead>\n" +
             "   <tbody>\n";
 
+    /**
+     * @param serversData list of servers to export into table
+     * @param outputFile  file into all data will be written
+     * @throws IOException if problems with file writing occurred
+     *                     (error in permissions etc.)
+     */
     @Override
     public void export(ArrayList<Server> serversData, File outputFile) throws IOException {
         BufferedWriter output = new BufferedWriter(new FileWriter(outputFile));
@@ -105,10 +111,14 @@ public class HTMLExporter extends Exporter {
     }
 
     /**
-     * @param isAlarmed {@code true} if cell must be colored
-     * @param ip ip address of server
-     * @param ping server's ping
-     * @return ready to paste table cell
+     * Returns row ready to paste into table. If ping of
+     * server is the highest - this row will be painted red.
+     *
+     * @param isAlarmed {@code true} if cell must be painted because of
+     *                  too high ping
+     * @param ip        ip address of server
+     * @param ping      server's ping
+     * @return ready to paste table row
      */
     private String getCell(String ip, String ping, boolean isAlarmed) {
         return "    <tr bgcolor = \" " + (isAlarmed ? COLOR_WARNING_CELL : COLOR_NORMAL_CELL) + "\">\n" +

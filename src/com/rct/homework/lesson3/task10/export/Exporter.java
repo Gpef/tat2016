@@ -18,9 +18,9 @@ public abstract class Exporter {
     /**
      * Exports {@code Server} addresses and pings to file
      *
-     * @param servers servers to export
+     * @param serversData servers to export
      * @param outputFile file into all data will be written
      * @throws IOException if errors with file existing or reading\writing rights occurred
      */
-    public abstract void export(ArrayList<Server> servers, File outputFile) throws IOException;
+    public abstract void export(ArrayList<Server> serversData, File outputFile) throws IOException;
 }
