@@ -30,7 +30,7 @@ public class ArgsServersSource extends ServersSource {
         ArrayList<Server> servers = new ArrayList<>();
         for (String address : args) {
             try {
-                servers.add(Server.Builder.build(address));
+                servers.add(new Server(address));
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }

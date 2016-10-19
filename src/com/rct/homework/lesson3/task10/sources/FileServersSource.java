@@ -29,7 +29,7 @@ public class FileServersSource extends ServersSource{
 
         while ((currentAddressLine = reader.readLine()) != null) {
             try {
-                servers.add(Server.Builder.build(currentAddressLine));
+                servers.add(new Server(currentAddressLine));
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }

@@ -40,8 +40,9 @@ public class Main {
                 servers = new ArgsServersSource(args).getServers();
             }
             ServersPingSimulator pingSimulator = new ServersPingSimulator();
-            pingSimulator.pingServers(servers);
-
+            for(Server server : servers){
+                pingSimulator.pingServer(server);
+            }
             HTMLExporter exporter = new HTMLExporter();
             exporter.export(new DataComposer().compose(servers), new File(outputPath));
         } catch (IOException | InvalidParameterException e) {

@@ -1,6 +1,5 @@
 package com.rct.homework.lesson3.task10.server;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -13,14 +12,11 @@ import java.util.Random;
 public class ServersPingSimulator {
 
     /**
-     * Performs servers poll by calling ping method from
-     * {@code Server} class
+     * Performs server poll simulation
      *
-     * @param servers servers to ping addresses
+     * @param server server to ping addresses
      */
-    public void pingServers(ArrayList<Server> servers) {
-        for (Server server : servers) {
-            server.setPing(new Random().nextInt(490) + 10);
-        }
+    public void pingServer(Server server) {
+        server.setPing(new Random().nextInt(490) + 10);
     }
 }
