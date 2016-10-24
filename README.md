@@ -8,12 +8,12 @@
 <a href="https://github.com/Gpef/tat2016/tree/master/homework/src/task05" title="Task 05">Task05</a>
 
 **Week2:**
-<a href="https://github.com/Gpef/tat2016/tree/master/homework/src/task07" title="Task 07">Task 07</a>
-<a href="https://github.com/Gpef/tat2016/tree/master/homework/src/task08" title="Task 08">Task 08</a>
+<a href="https://github.com/Gpef/tat2016/tree/master/homework/src/task07" title="Task 07">Task07</a>
+<a href="https://github.com/Gpef/tat2016/tree/master/homework/src/task08" title="Task 08">Task08</a>
 
 **Week3:**
-<a href="https://github.com/Gpef/tat2016/tree/master/homework/src/task09" title="Task 09">Task 09</a>
-<a href="https://github.com/Gpef/tat2016/tree/master/homework/src/task10" title="Task 10">Task 10</a>
+<a href="https://github.com/Gpef/tat2016/tree/master/homework/src/task09" title="Task 09">Task09</a>
+<a href="https://github.com/Gpef/tat2016/tree/master/homework/src/task10" title="Task 10">Task10</a>
 
 **Week4:**
 <a href="https://github.com/Gpef/tat2016/tree/master/projects/project1" title="Project1">Project1</a>
