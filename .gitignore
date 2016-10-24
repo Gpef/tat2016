@@ -10,7 +10,7 @@
 hs_err_pid*
 
 # Biniry files
-bin/
+homework/bin/
 *.class
 
 .idea/
