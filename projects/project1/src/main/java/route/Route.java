@@ -51,7 +51,7 @@ public class Route {
     /**
      * Class for getting route from sources like files and etc.
      */
-    private static class RouteReader {
+    private final static class RouteReader {
 
         /**
          * Gets route presented in file as lines of pairs of double

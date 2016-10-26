@@ -53,7 +53,7 @@ public class Main {
 
     /**
      * Make string that contains time spend for passing
-     * the route and it's cost in according to fuel price.
+     * the route and it's cost in according to the fuel price.
      *
      * @param transportType route moving mean
      * @param route         route to count statistics
