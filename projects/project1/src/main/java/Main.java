@@ -3,8 +3,6 @@ import route.Route;
 import route.RouteUtils;
 import transport.*;
 import transport.fuel.Fuel;
-import transport.fuel.FuelPrice;
-import transport.fuel.FuelType;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,15 +35,11 @@ public class Main {
         try {
             Route route = Route.readFromFile(new File(routeFilePath));
 
-            Fuel carFuel = new Fuel(FuelType.PETROL, FuelPrice.PETROL);
-            Fuel busFuel = new Fuel(FuelType.DIESEL, FuelPrice.DIESEL);
-            Fuel tardisFuel = new Fuel(FuelType.MERCURY, FuelPrice.MERCURY);
-
             CanPassRoute human = new Human();
             CanPassRoute bike = new Bicycle();
-            CanPassRoute car = new Car(carFuel, CAR_FUEL_CONSUMPTION, 1);
-            CanPassRoute bus = new Bus(busFuel, BUS_FUEL_CONSUMPTION, 40);
-            CanPassRoute tardis = new Tardis(tardisFuel, TARDIS_FUEL_CONSUMPTION, 1);
+            CanPassRoute car = new Car(Fuel.PETROL, CAR_FUEL_CONSUMPTION, 1);
+            CanPassRoute bus = new Bus(Fuel.DIESEL, BUS_FUEL_CONSUMPTION, 40);
+            CanPassRoute tardis = new Tardis(Fuel.MERCURY, TARDIS_FUEL_CONSUMPTION, 1);
 
             System.out.format("Route length: %.2f km.\n", RouteUtils.calculateRouteLength(route));
             System.out.println(getRouteStats(human, route));
