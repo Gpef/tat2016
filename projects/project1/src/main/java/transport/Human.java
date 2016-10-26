@@ -2,14 +2,15 @@ package transport;
 
 import route.Checkpoint;
 import route.Route;
+import transport.base.CanPassRoute;
 
 import java.util.ArrayList;
 
 import static route.RouteUtils.calculateDistance;
 
 /**
- * Ordinary human. Moving very slowly, but don't
- * consumes fuel.
+ * Ordinary human. Moving very slowly, but doesn't
+ * consume fuel.
  *
  * @author Oleg Baslak
  * @version 1.0

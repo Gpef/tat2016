@@ -1,4 +1,4 @@
-package transport;
+package transport.base;
 
 import transport.fuel.Fuel;
 

@@ -2,10 +2,12 @@ import exceptions.RouteException;
 import route.Route;
 import route.RouteUtils;
 import transport.*;
+import transport.base.CanPassRoute;
 import transport.fuel.Fuel;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Main class of the application.
@@ -35,19 +37,15 @@ public class Main {
         try {
             Route route = Route.readFromFile(new File(routeFilePath));
 
-            CanPassRoute human = new Human();
-            CanPassRoute bike = new Bicycle();
-            CanPassRoute car = new Car(Fuel.PETROL, CAR_FUEL_CONSUMPTION, 1);
-            CanPassRoute bus = new Bus(Fuel.DIESEL, BUS_FUEL_CONSUMPTION, 40);
-            CanPassRoute tardis = new Tardis(Fuel.MERCURY, TARDIS_FUEL_CONSUMPTION, 1);
+            ArrayList<CanPassRoute> means = new ArrayList<>();
+            means.add(new Human());
+            means.add(new Bicycle());
+            means.add(new Car(Fuel.PETROL, CAR_FUEL_CONSUMPTION, 1));
+            means.add(new Bus(Fuel.DIESEL, BUS_FUEL_CONSUMPTION, 40));
+            means.add(new Tardis(Fuel.MERCURY, TARDIS_FUEL_CONSUMPTION, 1));
 
             System.out.format("Route length: %.2f km.\n", RouteUtils.calculateRouteLength(route));
-            System.out.println(getRouteStats(human, route));
-            System.out.println(getRouteStats(bike, route));
-            System.out.println(getRouteStats(car, route));
-            System.out.println(getRouteStats(bus, route));
-            System.out.println(getRouteStats(tardis, route));
-
+            means.forEach(mean -> System.out.println(getRouteStats(mean, route)));
         } catch (IOException | RouteException e) {
             System.out.println(e.getMessage());
         }

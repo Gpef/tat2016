@@ -2,6 +2,7 @@ package transport;
 
 import route.Checkpoint;
 import route.Route;
+import transport.base.PhysicalVehicle;
 
 import java.util.ArrayList;
 
@@ -9,7 +10,7 @@ import static route.RouteUtils.calculateDistance;
 
 /**
  * Represents ordinary bicycle driving by physical
- * force of human.
+ * force of people.
  *
  * @author Oleg Baslak
  * @version 1.0

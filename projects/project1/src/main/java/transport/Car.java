@@ -1,5 +1,6 @@
 package transport;
 
+import transport.base.MotorVehicle;
 import transport.fuel.Fuel;
 import route.Checkpoint;
 import route.Route;
@@ -10,7 +11,8 @@ import static route.RouteUtils.calculateDistance;
 import static route.RouteUtils.calculateRouteLength;
 
 /**
- * Represents common car that moving fast.
+ * Represents common car that is moving fast and has little
+ * fuel consumption.
  *
  * @author Oleg Baslak
  * @version 1.0

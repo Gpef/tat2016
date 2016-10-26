@@ -1,4 +1,4 @@
-package transport;
+package transport.base;
 
 /**
  * Base class for vehicles that don't consumes any

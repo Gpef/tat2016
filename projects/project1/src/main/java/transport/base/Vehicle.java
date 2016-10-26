@@ -1,4 +1,4 @@
-package transport;
+package transport.base;
 
 /**
  * Base class for types of transport that are moving with

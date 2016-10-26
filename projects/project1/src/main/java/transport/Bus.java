@@ -1,5 +1,6 @@
 package transport;
 
+import transport.base.MotorVehicle;
 import transport.fuel.Fuel;
 import route.Checkpoint;
 import route.Route;

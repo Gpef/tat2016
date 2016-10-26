@@ -1,4 +1,4 @@
-package transport;
+package transport.base;
 
 /**
  * Base class for special mechanisms.
@@ -8,4 +8,5 @@ package transport;
  * @since 26.10.2016
  */
 public abstract class Mechanism implements CanPassRoute {
+
 }

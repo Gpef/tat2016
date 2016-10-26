@@ -1,6 +1,7 @@
 package transport;
 
 import route.Route;
+import transport.base.Mechanism;
 import transport.fuel.Fuel;
 
 import static route.RouteUtils.calculateRouteLength;
