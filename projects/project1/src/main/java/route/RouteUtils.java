@@ -10,7 +10,9 @@ import java.util.ArrayList;
  * @version 1.0
  * @since 26.10.2016
  */
-public abstract class RouteUtils {
+public final class RouteUtils {
+
+    private RouteUtils() {}
 
     /**
      * Calculates distance between two points, using

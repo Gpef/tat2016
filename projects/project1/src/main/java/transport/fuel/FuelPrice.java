@@ -11,7 +11,7 @@ package transport.fuel;
 public abstract class FuelPrice {
 
     // Prices for 1 litre of transport.fuel is USD
-    public static double PETROL = 1;
-    public static double DIESEL = 0.8;
-    public static double MERCURY = 1;
+    public final static double PETROL = 1;
+    public final static double DIESEL = 0.8;
+    public final static double MERCURY = 1;
 }
