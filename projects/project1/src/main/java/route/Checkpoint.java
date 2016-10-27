@@ -21,11 +21,13 @@ public class Checkpoint {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Checkpoint that = (Checkpoint) o;
-
         return Double.compare(that.x, x) == 0 && Double.compare(that.y, y) == 0;
     }
 }

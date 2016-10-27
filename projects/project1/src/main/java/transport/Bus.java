@@ -1,14 +1,14 @@
 package transport;
 
-import transport.base.MotorVehicle;
-import transport.fuel.Fuel;
 import route.Checkpoint;
 import route.Route;
+import route.RouteUtils;
+import transport.base.MotorVehicle;
+import transport.fuel.Fuel;
 
 import java.util.ArrayList;
 
-import static route.RouteUtils.calculateDistance;
-import static route.RouteUtils.calculateRouteLength;
+import static transport.DefaultStats.BUS_AVERAGE_SPEED;
 
 /**
  * Represents bus that is moving slow, but can carry many passengers.
@@ -22,7 +22,7 @@ public class Bus extends MotorVehicle {
     protected double passengersCount;
 
     public Bus(Fuel busFuel, double busFuelConsumption, int busPassengers) {
-        averageSpeed = 60;
+        averageSpeed = BUS_AVERAGE_SPEED;
         fuel = busFuel;
         fuelConsumption = busFuelConsumption;
         passengersCount = busPassengers;
@@ -37,13 +37,13 @@ public class Bus extends MotorVehicle {
         double routeTime = 0;
         ArrayList<Checkpoint> points = route.getCheckpoints();
         for (int i = 1; i < points.size() - 1; i++) {
-            routeTime += calculateDistance(points.get(i - 1), points.get(i)) / getSpeed();
+            routeTime += new RouteUtils().calculateDistance(points.get(i - 1), points.get(i)) / getSpeed();
         }
         return routeTime;
     }
 
     @Override
     public double calculateCost(Route route) {
-        return fuelConsumption / 100 * calculateRouteLength(route) * fuel.getPrice() / passengersCount;
+        return fuelConsumption / 100 * new RouteUtils().calculateRouteLength(route) * fuel.getPrice() / passengersCount;
     }
 }

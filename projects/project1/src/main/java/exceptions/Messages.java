@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- * Messages used that must be added to exception messages
+ * Messages that must be added to exception messages
  * to classify situations when they are thrown in program.
  *
  * @author Oleg Baslak

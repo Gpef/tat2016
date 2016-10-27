@@ -2,11 +2,12 @@ package transport;
 
 import route.Checkpoint;
 import route.Route;
+import route.RouteUtils;
 import transport.base.CanPassRoute;
 
 import java.util.ArrayList;
 
-import static route.RouteUtils.calculateDistance;
+import static transport.DefaultStats.HUMAN_AVERAGE_SPEED;
 
 /**
  * Ordinary human. Moving very slowly, but doesn't
@@ -21,7 +22,7 @@ public class Human implements CanPassRoute {
     private double averageSpeed;
 
     public Human() {
-        averageSpeed = 6;
+        averageSpeed = HUMAN_AVERAGE_SPEED;
     }
 
     public double getSpeed() {
@@ -33,7 +34,7 @@ public class Human implements CanPassRoute {
         double routeTime = 0;
         ArrayList<Checkpoint> points = route.getCheckpoints();
         for (int i = 1; i < points.size() - 1; i++) {
-            routeTime += calculateDistance(points.get(i - 1), points.get(i)) / getSpeed();
+            routeTime += new RouteUtils().calculateDistance(points.get(i - 1), points.get(i)) / getSpeed();
         }
         return routeTime;
     }

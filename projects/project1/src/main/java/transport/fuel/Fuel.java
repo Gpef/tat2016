@@ -15,11 +15,10 @@ public enum Fuel {
     DIESEL(0.8),
     MERCURY(1);
 
-
     public String type;
     private double price;
 
-    private Fuel(double fuelPrice) {
+    Fuel(double fuelPrice) {
         price = fuelPrice;
     }
 

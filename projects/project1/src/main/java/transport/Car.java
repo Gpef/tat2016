@@ -1,14 +1,14 @@
 package transport;
 
-import transport.base.MotorVehicle;
-import transport.fuel.Fuel;
 import route.Checkpoint;
 import route.Route;
+import route.RouteUtils;
+import transport.base.MotorVehicle;
+import transport.fuel.Fuel;
 
 import java.util.ArrayList;
 
-import static route.RouteUtils.calculateDistance;
-import static route.RouteUtils.calculateRouteLength;
+import static transport.DefaultStats.CAR_AVERAGE_SPEED;
 
 /**
  * Represents common car that is moving fast and has little
@@ -23,7 +23,7 @@ public class Car extends MotorVehicle {
     protected double passengersCount;
 
     public Car(Fuel carFuel, double carFuelConsumption, int carPassengers) {
-        averageSpeed = 90;
+        averageSpeed = CAR_AVERAGE_SPEED;
         fuelConsumption = carFuelConsumption;
         passengersCount = carPassengers;
         fuel = carFuel;
@@ -38,13 +38,13 @@ public class Car extends MotorVehicle {
         double routeTime = 0;
         ArrayList<Checkpoint> points = route.getCheckpoints();
         for (int i = 1; i < points.size() - 1; i++) {
-            routeTime += calculateDistance(points.get(i - 1), points.get(i)) / getSpeed();
+            routeTime += new RouteUtils().calculateDistance(points.get(i - 1), points.get(i)) / getSpeed();
         }
         return routeTime;
     }
 
     @Override
     public double calculateCost(Route route) {
-        return fuelConsumption / 100 * calculateRouteLength(route) * fuel.getPrice() / passengersCount;
+        return fuelConsumption / 100 * new RouteUtils().calculateRouteLength(route) * fuel.getPrice() / passengersCount;
     }
 }

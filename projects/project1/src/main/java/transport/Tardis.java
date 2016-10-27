@@ -1,10 +1,9 @@
 package transport;
 
 import route.Route;
-import transport.base.Mechanism;
+import route.RouteUtils;
+import transport.base.CanPassRoute;
 import transport.fuel.Fuel;
-
-import static route.RouteUtils.calculateRouteLength;
 
 /**
  * Represents police box for teleporting in space and time.
@@ -13,7 +12,7 @@ import static route.RouteUtils.calculateRouteLength;
  * @version 1.0
  * @since 26.10.2016
  */
-public class Tardis extends Mechanism {
+public class Tardis implements CanPassRoute {
 
     protected Fuel fuel;
     protected double fuelConsumption;
@@ -38,6 +37,6 @@ public class Tardis extends Mechanism {
 
     @Override
     public double calculateCost(Route route) {
-        return fuelConsumption / 100 * calculateRouteLength(route) * fuel.getPrice() / passengersCount;
+        return fuelConsumption / 100 * new RouteUtils().calculateRouteLength(route) * fuel.getPrice() / passengersCount;
     }
 }

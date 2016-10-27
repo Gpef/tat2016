@@ -2,11 +2,12 @@ package transport;
 
 import route.Checkpoint;
 import route.Route;
-import transport.base.PhysicalVehicle;
+import route.RouteUtils;
+import transport.base.Vehicle;
 
 import java.util.ArrayList;
 
-import static route.RouteUtils.calculateDistance;
+import static transport.DefaultStats.BICYCLE_AVERAGE_SPEED;
 
 /**
  * Represents ordinary bicycle driving by physical
@@ -16,10 +17,10 @@ import static route.RouteUtils.calculateDistance;
  * @version 1.0
  * @since 25.10.2016
  */
-public class Bicycle extends PhysicalVehicle {
+public class Bicycle extends Vehicle {
 
     public Bicycle() {
-        averageSpeed = 16;
+        averageSpeed = BICYCLE_AVERAGE_SPEED;
     }
 
     public double getSpeed() {
@@ -31,7 +32,7 @@ public class Bicycle extends PhysicalVehicle {
         double routeTime = 0;
         ArrayList<Checkpoint> points = route.getCheckpoints();
         for (int i = 1; i < points.size() - 1; i++) {
-            routeTime += calculateDistance(points.get(i - 1), points.get(i)) / getSpeed();
+            routeTime += new RouteUtils().calculateDistance(points.get(i - 1), points.get(i)) / getSpeed();
         }
         return routeTime;
     }
