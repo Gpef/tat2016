@@ -20,7 +20,7 @@ public final class RouteUtils {
      * @param point2 to this point
      * @return distance between point1 and point2
      */
-    public double calculateDistance(Checkpoint point1, Checkpoint point2) {
+    public double calculateEuclidDistance(Checkpoint point1, Checkpoint point2) {
         return Math.sqrt(Math.pow((point2.x - point1.x), 2) +
                 Math.pow((point2.y - point1.y), 2));
     }
@@ -31,11 +31,11 @@ public final class RouteUtils {
      * @param route route needed to find length
      * @return calculated route's length
      */
-    public double calculateRouteLength(Route route) {
+    public double calculateEuclidRouteLength(Route route) {
         double routeLength = 0;
         ArrayList<Checkpoint> points = route.getCheckpoints();
-        for (int i = 1; i < points.size() - 1; i++) {
-            routeLength += calculateDistance(points.get(i - 1), points.get(i));
+        for (int i = 1; i < points.size(); i++) {
+            routeLength += calculateEuclidDistance(points.get(i - 1), points.get(i));
         }
         return routeLength;
     }

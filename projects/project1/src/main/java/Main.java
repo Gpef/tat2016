@@ -1,4 +1,3 @@
-import exceptions.RouteReaderException;
 import route.Route;
 import route.RouteUtils;
 import route.reader.RouteFileReader;
@@ -33,9 +32,9 @@ public class Main {
     public static void main(String[] args) {
         try {
             Route route = new RouteFileReader(new File(routeFilePath)).read();
-            System.out.format("Route length: %.2f km.\n", new RouteUtils().calculateRouteLength(route));
+            System.out.format("Route length: %.2f km.\n", new RouteUtils().calculateEuclidRouteLength(route));
             createMovingMeans().forEach(mean -> System.out.println(getRouteStats(mean, route)));
-        } catch (RouteReaderException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }

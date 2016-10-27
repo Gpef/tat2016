@@ -34,7 +34,7 @@ public class Human implements CanPassRoute {
         double routeTime = 0;
         ArrayList<Checkpoint> points = route.getCheckpoints();
         for (int i = 1; i < points.size() - 1; i++) {
-            routeTime += new RouteUtils().calculateDistance(points.get(i - 1), points.get(i)) / getSpeed();
+            routeTime += new RouteUtils().calculateEuclidDistance(points.get(i - 1), points.get(i)) / getSpeed();
         }
         return routeTime;
     }

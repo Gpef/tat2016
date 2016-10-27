@@ -37,6 +37,6 @@ public class Tardis implements CanPassRoute {
 
     @Override
     public double calculateCost(Route route) {
-        return fuelConsumption / 100 * new RouteUtils().calculateRouteLength(route) * fuel.getPrice() / passengersCount;
+        return fuelConsumption / 100 * new RouteUtils().calculateEuclidRouteLength(route) * fuel.getPrice() / passengersCount;
     }
 }

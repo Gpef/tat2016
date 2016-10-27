@@ -16,5 +16,5 @@ public abstract class RouteReader {
      *
      * @return read route
      */
-    public abstract Route read() throws RouteReaderException;
+    public abstract Route read() throws Exception;
 }

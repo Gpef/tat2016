@@ -36,7 +36,7 @@ public class RouteFileReader extends RouteReader {
      *                              and last checkpoints are equals (they can't
      *                              be equal by the program's logic)
      */
-    public Route read() throws RouteReaderException {
+    public Route read() throws Exception {
         ArrayList<Checkpoint> checkpoints = new ArrayList<>();
         BufferedReader reader;
         try {
@@ -59,12 +59,10 @@ public class RouteFileReader extends RouteReader {
                 }
             }
 
-            checkValidness(checkpoints);
+            return new Route(checkpoints);
         } catch (IOException e) {
             throw new RouteReaderException(Messages.ERROR + " " + e.getMessage());
         }
-
-        return new Route(checkpoints);
     }
 
     /**
@@ -76,7 +74,7 @@ public class RouteFileReader extends RouteReader {
      *                    to check
      * @throws RouteReaderException if at least one rule was broken
      */
-    private boolean checkValidness(ArrayList<Checkpoint> checkpoints) throws RouteReaderException {
+    private void checkValidness(ArrayList<Checkpoint> checkpoints) throws RouteReaderException {
         if (checkpoints.size() == 0) {
             throw new RouteReaderException(Messages.ERROR + " No checkpoints found in file");
         }
@@ -84,8 +82,7 @@ public class RouteFileReader extends RouteReader {
             throw new RouteReaderException(Messages.ERROR + " Route can't contain only one checkpoint");
         }
         if (checkpoints.get(0).equals(checkpoints.get(checkpoints.size() - 1))) {
-            throw new RouteReaderException(Messages.ERROR + " First and last checkpoints of route can't be equalcc");
+            throw new RouteReaderException(Messages.ERROR + " First and last checkpoints of route can't be equal");
         }
-        return true;
     }
 }
