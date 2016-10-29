@@ -21,8 +21,8 @@ public final class RouteUtils {
      * @return distance between point1 and point2
      */
     public double calculateEuclidDistance(Checkpoint point1, Checkpoint point2) {
-        return Math.sqrt(Math.pow((point2.x - point1.x), 2) +
-                Math.pow((point2.y - point1.y), 2));
+        return Math.sqrt(Math.pow((point2.getX() - point1.getX()), 2) +
+                Math.pow((point2.getY() - point1.getY()), 2));
     }
 
     /**

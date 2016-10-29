@@ -19,7 +19,7 @@ import static transport.DefaultStats.BUS_AVERAGE_SPEED;
  */
 public class Bus extends MotorVehicle {
 
-    protected double passengersCount;
+    private double passengersCount;
 
     public Bus(Fuel busFuel, double busFuelConsumption, int busPassengers) {
         averageSpeed = BUS_AVERAGE_SPEED;

@@ -14,9 +14,9 @@ import transport.fuel.Fuel;
  */
 public class Tardis implements CanPassRoute {
 
-    protected Fuel fuel;
-    protected double fuelConsumption;
-    protected double passengersCount;
+    private Fuel fuel;
+    private double fuelConsumption;
+    private double passengersCount;
 
     public Tardis(Fuel tardisFuel, double tardisFuelConsumption, int tardisPassengersCount) {
         fuelConsumption = tardisFuelConsumption;

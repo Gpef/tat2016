@@ -64,25 +64,4 @@ public class RouteFileReader extends RouteReader {
             throw new RouteReaderException(Messages.ERROR + " " + e.getMessage());
         }
     }
-
-    /**
-     * Checks list of checkpoints to valid rules and throws
-     * {@code RouteReaderException} if checkpoints list doesn't
-     * correspond to any rule.
-     *
-     * @param checkpoints list of {@code Checkpoint} checkpoints
-     *                    to check
-     * @throws RouteReaderException if at least one rule was broken
-     */
-    private void checkValidness(ArrayList<Checkpoint> checkpoints) throws RouteReaderException {
-        if (checkpoints.size() == 0) {
-            throw new RouteReaderException(Messages.ERROR + " No checkpoints found in file");
-        }
-        if (checkpoints.size() == 1) {
-            throw new RouteReaderException(Messages.ERROR + " Route can't contain only one checkpoint");
-        }
-        if (checkpoints.get(0).equals(checkpoints.get(checkpoints.size() - 1))) {
-            throw new RouteReaderException(Messages.ERROR + " First and last checkpoints of route can't be equal");
-        }
-    }
 }

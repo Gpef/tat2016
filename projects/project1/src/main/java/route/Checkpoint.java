@@ -11,13 +11,30 @@ package route;
  */
 public class Checkpoint {
 
-    public final double x;
-    public final double y;
+    private double x;
+    private double y;
 
     public Checkpoint(double coordinateX, double coordinateY) {
         x = coordinateX;
         y = coordinateY;
     }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setX(double newX) {
+        x = newX;
+    }
+
+    public void setY(double newY) {
+        y = newY;
+    }
+
 
     @Override
     public boolean equals(Object o) {

@@ -17,7 +17,7 @@ public class Route {
 
     private ArrayList<Checkpoint> checkpoints;
 
-    public Route(ArrayList<Checkpoint> checkpointsList) throws Exception {
+    public Route(ArrayList<Checkpoint> checkpointsList) throws RouteException {
         checkRouteValidness(checkpointsList);
         checkpoints = checkpointsList;
     }
