@@ -26,11 +26,11 @@ public abstract class MotorVehicle extends Vehicle {
         return fuelConsumption;
     }
 
-    public double getPassengersCount() {
+    public int getPassengersCount() {
         return passengersCount;
     }
 
-    public double getPassengersCapacity() {
+    public int getPassengersCapacity() {
         return passengersCapacity;
     }
 

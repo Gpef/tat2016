@@ -10,8 +10,6 @@ import transport.fuel.Fuel;
 import java.util.ArrayList;
 
 import static transport.DefaultStats.BUS_AVERAGE_SPEED;
-import static transport.DefaultStats.BUS_FUEL_CONSUMPTION;
-import static transport.DefaultStats.BUS_PASSENGERS_CAPACITY;
 
 /**
  * Represents bus that is moving slow, but can carry many passengers.
@@ -43,27 +41,6 @@ public class Bus extends MotorVehicle {
         this.fuelConsumption = busFuelConsumption;
         this.passengersCount = busPassengersCount;
         this.passengersCapacity = busPassengersCapacity;
-    }
-
-    /**
-     * Creates new bus object. Performs parameters validating.
-     * Also validates parameters from config class that
-     * contains default parameters.
-     *
-     * @param busPassengersCount passengers count
-     * @throws WrongParameterException if at least one parameter has not valid value and
-     *                                 {@code Bus} object can't be created
-     */
-    public Bus(int busPassengersCount) throws WrongParameterException {
-        validateFuelConsumption(BUS_FUEL_CONSUMPTION);
-        validatePassengers(busPassengersCount, BUS_PASSENGERS_CAPACITY);
-        validateSpeed(BUS_AVERAGE_SPEED);
-
-        this.averageSpeed = BUS_AVERAGE_SPEED;
-        this.fuel = Fuel.DIESEL;
-        this.fuelConsumption = BUS_FUEL_CONSUMPTION;
-        this.passengersCount = busPassengersCount;
-        this.passengersCapacity = BUS_PASSENGERS_CAPACITY;
     }
 
     @Override

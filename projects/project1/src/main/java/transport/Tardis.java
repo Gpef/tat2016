@@ -43,27 +43,6 @@ public class Tardis implements CanPassRoute {
     }
 
     /**
-     * Creates new tarids object. Performs parameters validating.
-     * Also validates parameters from config class that
-     * contains default parameters.
-     *
-     * @param passengersCount passengers count. Can't be > max
-     *                        passengers capacity
-     * @throws WrongParameterException if at least one parameter has
-     *                                 not valid value and {@code Tardos} object
-     *                                 can't be created
-     */
-    public Tardis(int passengersCount) throws WrongParameterException {
-        validatePassengers(passengersCount, DefaultStats.TARDIS_PASSENGERS_CAPACITY);
-        validateFuelConsumption(DefaultStats.TARDIS_FUEL_CONSUMPTION);
-
-        this.fuel = Fuel.MERCURY;
-        this.fuelConsumption = DefaultStats.TARDIS_FUEL_CONSUMPTION;
-        this.passengersCapacity = DefaultStats.TARDIS_PASSENGERS_CAPACITY;
-        this.passengersCount = passengersCount;
-    }
-
-    /**
      * @param route route to calculate spend time for
      *              selected passing type
      * @return 2 seconds, because tardis needs 2 seconds to
@@ -87,11 +66,11 @@ public class Tardis implements CanPassRoute {
         return fuelConsumption;
     }
 
-    public double getPassengersCount() {
+    public int getPassengersCount() {
         return passengersCount;
     }
 
-    public double getPassengersCapacity() {
+    public int getPassengersCapacity() {
         return passengersCapacity;
     }
 

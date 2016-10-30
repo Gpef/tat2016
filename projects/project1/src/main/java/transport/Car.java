@@ -38,25 +38,6 @@ public class Car extends MotorVehicle {
         this.fuel = carFuel;
     }
 
-    /**
-     * Creates new bus object. Performs parameters validating.
-     * Also validates parameters from config class that
-     * contains default parameters.
-     *
-     * @param passengersCount passengers count
-     */
-    public Car(int passengersCount) throws WrongParameterException {
-        validatePassengers(passengersCount, DefaultStats.CAR_PASSENGERS_CAPACITY);
-        validateSpeed(DefaultStats.CAR_AVERAGE_SPEED);
-        validateFuelConsumption(DefaultStats.CAR_FUEL_CONSUMPTION);
-
-        this.averageSpeed = DefaultStats.CAR_AVERAGE_SPEED;
-        this.fuelConsumption = DefaultStats.CAR_FUEL_CONSUMPTION;
-        this.passengersCapacity = DefaultStats.CAR_PASSENGERS_CAPACITY;
-        this.passengersCount = passengersCount;
-        this.fuel = Fuel.PETROL;
-    }
-
     @Override
     public double calculateTime(Route route) {
         double routeTime = 0;
