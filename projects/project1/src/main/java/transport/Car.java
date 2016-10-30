@@ -1,5 +1,6 @@
 package transport;
 
+import exceptions.WrongParameterException;
 import route.Checkpoint;
 import route.Route;
 import route.RouteUtils;
@@ -7,8 +8,6 @@ import transport.base.MotorVehicle;
 import transport.fuel.Fuel;
 
 import java.util.ArrayList;
-
-import static transport.DefaultStats.CAR_AVERAGE_SPEED;
 
 /**
  * Represents common car that is moving fast and has little
@@ -20,31 +19,58 @@ import static transport.DefaultStats.CAR_AVERAGE_SPEED;
  */
 public class Car extends MotorVehicle {
 
-    private double passengersCount;
+    /**
+     * Creates new car object. Performs parameters validating.
+     *
+     * @param carFuel         fuel type
+     * @param fuelConsumption fuel consumption
+     * @param passengersCount passengers count
+     */
+    public Car(Fuel carFuel, double fuelConsumption, int passengersCount, int passengersCapacity) throws WrongParameterException {
+        validateFuelConsumption(fuelConsumption);
+        validateSpeed(DefaultStats.CAR_AVERAGE_SPEED);
+        validatePassengers(passengersCount, passengersCapacity);
 
-    public Car(Fuel carFuel, double carFuelConsumption, int carPassengers) {
-        averageSpeed = CAR_AVERAGE_SPEED;
-        fuelConsumption = carFuelConsumption;
-        passengersCount = carPassengers;
-        fuel = carFuel;
+        this.averageSpeed = DefaultStats.CAR_AVERAGE_SPEED;
+        this.fuelConsumption = fuelConsumption;
+        this.passengersCapacity = passengersCapacity;
+        this.passengersCount = passengersCount;
+        this.fuel = carFuel;
     }
 
-    public double getSpeed() {
-        return averageSpeed;
+    /**
+     * Creates new bus object. Performs parameters validating.
+     * Also validates parameters from config class that
+     * contains default parameters.
+     *
+     * @param passengersCount passengers count
+     */
+    public Car(int passengersCount) throws WrongParameterException {
+        validatePassengers(passengersCount, DefaultStats.CAR_PASSENGERS_CAPACITY);
+        validateSpeed(DefaultStats.CAR_AVERAGE_SPEED);
+        validateFuelConsumption(DefaultStats.CAR_FUEL_CONSUMPTION);
+
+        this.averageSpeed = DefaultStats.CAR_AVERAGE_SPEED;
+        this.fuelConsumption = DefaultStats.CAR_FUEL_CONSUMPTION;
+        this.passengersCapacity = DefaultStats.CAR_PASSENGERS_CAPACITY;
+        this.passengersCount = passengersCount;
+        this.fuel = Fuel.PETROL;
     }
 
     @Override
     public double calculateTime(Route route) {
         double routeTime = 0;
         ArrayList<Checkpoint> points = route.getCheckpoints();
-        for (int i = 1; i < points.size() - 1; i++) {
-            routeTime += new RouteUtils().calculateEuclidDistance(points.get(i - 1), points.get(i)) / getSpeed();
+        RouteUtils routeUtils = new RouteUtils();
+        for (int i = 1; i < points.size(); i++) {
+            routeTime += routeUtils.calculateEuclidDistance(points.get(i - 1), points.get(i)) / getSpeed();
         }
         return routeTime;
     }
 
     @Override
     public double calculateCost(Route route) {
-        return fuelConsumption / 100 * new RouteUtils().calculateEuclidRouteLength(route) * fuel.getPrice() / passengersCount;
+        return this.fuelConsumption / 100 * fuel.getPrice() *
+                new RouteUtils().calculateEuclidRouteLength(route) / this.passengersCount;
     }
 }

@@ -1,5 +1,6 @@
 package transport;
 
+import exceptions.WrongParameterException;
 import route.Checkpoint;
 import route.Route;
 import route.RouteUtils;
@@ -9,6 +10,8 @@ import transport.fuel.Fuel;
 import java.util.ArrayList;
 
 import static transport.DefaultStats.BUS_AVERAGE_SPEED;
+import static transport.DefaultStats.BUS_FUEL_CONSUMPTION;
+import static transport.DefaultStats.BUS_PASSENGERS_CAPACITY;
 
 /**
  * Represents bus that is moving slow, but can carry many passengers.
@@ -19,31 +22,65 @@ import static transport.DefaultStats.BUS_AVERAGE_SPEED;
  */
 public class Bus extends MotorVehicle {
 
-    private double passengersCount;
+    /**
+     * Creates new bus object. Performs parameters validating.
+     *
+     * @param busFuel               type of fuel
+     * @param busFuelConsumption    fuel consumption per 100 km
+     * @param busPassengersCount    passengers count
+     * @param busPassengersCapacity max passengers capacity
+     * @throws WrongParameterException if at least one parameter has
+     *                                 not valid value and {@code Bus} object
+     *                                 can't be created
+     */
+    public Bus(Fuel busFuel, double busFuelConsumption, int busPassengersCount, int busPassengersCapacity) throws WrongParameterException {
+        validateFuelConsumption(busFuelConsumption);
+        validatePassengers(busPassengersCount, busPassengersCapacity);
+        validateSpeed(BUS_AVERAGE_SPEED);
 
-    public Bus(Fuel busFuel, double busFuelConsumption, int busPassengers) {
-        averageSpeed = BUS_AVERAGE_SPEED;
-        fuel = busFuel;
-        fuelConsumption = busFuelConsumption;
-        passengersCount = busPassengers;
+        this.averageSpeed = BUS_AVERAGE_SPEED;
+        this.fuel = busFuel;
+        this.fuelConsumption = busFuelConsumption;
+        this.passengersCount = busPassengersCount;
+        this.passengersCapacity = busPassengersCapacity;
     }
 
-    public double getSpeed() {
-        return averageSpeed;
+    /**
+     * Creates new bus object. Performs parameters validating.
+     * Also validates parameters from config class that
+     * contains default parameters.
+     *
+     * @param busPassengersCount passengers count
+     * @throws WrongParameterException if at least one parameter has not valid value and
+     *                                 {@code Bus} object can't be created
+     */
+    public Bus(int busPassengersCount) throws WrongParameterException {
+        validateFuelConsumption(BUS_FUEL_CONSUMPTION);
+        validatePassengers(busPassengersCount, BUS_PASSENGERS_CAPACITY);
+        validateSpeed(BUS_AVERAGE_SPEED);
+
+        this.averageSpeed = BUS_AVERAGE_SPEED;
+        this.fuel = Fuel.DIESEL;
+        this.fuelConsumption = BUS_FUEL_CONSUMPTION;
+        this.passengersCount = busPassengersCount;
+        this.passengersCapacity = BUS_PASSENGERS_CAPACITY;
     }
 
     @Override
     public double calculateTime(Route route) {
         double routeTime = 0;
         ArrayList<Checkpoint> points = route.getCheckpoints();
-        for (int i = 1; i < points.size() - 1; i++) {
-            routeTime += new RouteUtils().calculateEuclidDistance(points.get(i - 1), points.get(i)) / getSpeed();
+        RouteUtils routeUtils = new RouteUtils();
+        for (int i = 1; i < points.size(); i++) {
+            routeTime += routeUtils.calculateEuclidDistance(points.get(i - 1), points.get(i)) / getSpeed();
         }
         return routeTime;
     }
 
     @Override
     public double calculateCost(Route route) {
-        return fuelConsumption / 100 * new RouteUtils().calculateEuclidRouteLength(route) * fuel.getPrice() / passengersCount;
+        return this.fuelConsumption / 100 * fuel.getPrice() *
+                new RouteUtils().calculateEuclidRouteLength(route) / this.passengersCount;
     }
+
 }

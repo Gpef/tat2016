@@ -1,5 +1,6 @@
 package transport;
 
+import exceptions.WrongParameterException;
 import route.Checkpoint;
 import route.Route;
 import route.RouteUtils;
@@ -21,12 +22,38 @@ public class Human implements CanPassRoute {
 
     private double averageSpeed;
 
-    public Human() {
-        averageSpeed = HUMAN_AVERAGE_SPEED;
+    public Human() throws WrongParameterException {
+        validateSpeed(HUMAN_AVERAGE_SPEED);
+        this.averageSpeed = HUMAN_AVERAGE_SPEED;
     }
 
     public double getSpeed() {
-        return averageSpeed;
+        return this.averageSpeed;
+    }
+
+    /**
+     * Sets new speed to vehicle. Throws {@code WrongParameterException}
+     * if new speed parameter isn't valid.
+     *
+     * @param newSpeed new speed to set
+     * @throws WrongParameterException if newSpeed <= 0
+     */
+    public void setSpeed(double newSpeed) throws WrongParameterException {
+        validateSpeed(newSpeed);
+        this.averageSpeed = newSpeed;
+    }
+
+    /**
+     * Validates speed parameter. If it's wrong
+     * throws {@code WrongParameterException}.
+     *
+     * @param validateSpeed speed parameter to validate
+     * @throws WrongParameterException if new speed is <= 0
+     */
+    protected void validateSpeed(double validateSpeed) throws WrongParameterException {
+        if (Double.compare(validateSpeed, 0) <= 0) {
+            throw new WrongParameterException("Error creating new " + this.getClass().getSimpleName() + ": speed can't be <= 0");
+        }
     }
 
     @Override

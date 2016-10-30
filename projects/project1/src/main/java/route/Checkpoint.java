@@ -35,7 +35,6 @@ public class Checkpoint {
         y = newY;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

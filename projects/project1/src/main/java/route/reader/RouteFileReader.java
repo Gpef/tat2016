@@ -2,13 +2,11 @@ package route.reader;
 
 import exceptions.Messages;
 import exceptions.RouteReaderException;
+import exceptions.WrongParameterException;
 import route.Checkpoint;
 import route.Route;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -22,8 +20,25 @@ public class RouteFileReader extends RouteReader {
 
     private File routeFile;
 
-    public RouteFileReader(File txtFile) {
+    public RouteFileReader(File txtFile) throws WrongParameterException {
+        validateFile(txtFile);
         routeFile = txtFile;
+    }
+
+    /**
+     * Tries to create new file reader to cause
+     * {@code FileNotFoundException} exception if
+     * file send into method isn't exists.
+     *
+     * @param file file to validate
+     * @throws WrongParameterException if file isn't found
+     */
+    private void validateFile(File file) throws WrongParameterException {
+        try {
+            new FileReader(file);
+        } catch (FileNotFoundException e) {
+            throw new WrongParameterException("File with route wasn't found");
+        }
     }
 
     /**

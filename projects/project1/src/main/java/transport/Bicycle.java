@@ -1,5 +1,6 @@
 package transport;
 
+import exceptions.WrongParameterException;
 import route.Checkpoint;
 import route.Route;
 import route.RouteUtils;
@@ -19,20 +20,28 @@ import static transport.DefaultStats.BICYCLE_AVERAGE_SPEED;
  */
 public class Bicycle extends Vehicle {
 
-    public Bicycle() {
-        averageSpeed = BICYCLE_AVERAGE_SPEED;
-    }
+    /**
+     * Creates new bicycle object. Performs parameters validating.
+     * Also validates parameters from config class that
+     * contains default parameters.
+     *
+     * @throws WrongParameterException if default bicycle speed has
+     *                                 not valid value and {@code Bus} object
+     *                                 can't be created
+     */
+    public Bicycle() throws WrongParameterException {
+        validateSpeed(BICYCLE_AVERAGE_SPEED);
 
-    public double getSpeed() {
-        return averageSpeed;
+        this.averageSpeed = BICYCLE_AVERAGE_SPEED;
     }
 
     @Override
     public double calculateTime(Route route) {
         double routeTime = 0;
         ArrayList<Checkpoint> points = route.getCheckpoints();
-        for (int i = 1; i < points.size() - 1; i++) {
-            routeTime += new RouteUtils().calculateEuclidDistance(points.get(i - 1), points.get(i)) / getSpeed();
+        RouteUtils routeUtils = new RouteUtils();
+        for (int i = 1; i < points.size(); i++) {
+            routeTime += routeUtils.calculateEuclidDistance(points.get(i - 1), points.get(i)) / getSpeed();
         }
         return routeTime;
     }
