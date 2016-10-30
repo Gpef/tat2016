@@ -1,7 +1,6 @@
 package transport.fuel;
 
 import exceptions.WrongParameterException;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,12 +26,5 @@ public class FuelTest {
     @Test(expected = WrongParameterException.class)
     public void setPriceEqualsZero() throws Exception {
         fuel.setPrice(0);
-    }
-
-    @Test
-    public void setPriceMoreZero() throws Exception {
-        fuel.setPrice(11);
-        Assert.assertEquals(11, fuel.getPrice(), 1e-3);
-        fuel.setPrice(1);
     }
 }
