@@ -1,5 +1,6 @@
 package transport;
 
+import exceptions.Messages;
 import exceptions.WrongParameterException;
 import route.Route;
 import route.RouteUtils;
@@ -144,7 +145,10 @@ public class Tardis implements CanPassRoute {
      * @throws WrongParameterException if fuel consumption parameter <= 0
      */
     private void validateFuelConsumption(double validateFuelConsumption) throws WrongParameterException {
-        if (Double.compare(validateFuelConsumption, 0) <= 0) {
+        if (Double.isNaN(validateFuelConsumption) || Double.isInfinite(validateFuelConsumption)) {
+            throw new WrongParameterException(Messages.ERROR + " " + validateFuelConsumption +
+                    " is not valid values for fuel consumption");
+        }if (Double.compare(validateFuelConsumption, 0) <= 0) {
             throw new WrongParameterException("Fuel consumption can't be <= 0");
         }
     }

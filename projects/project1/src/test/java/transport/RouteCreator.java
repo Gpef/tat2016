@@ -1,6 +1,7 @@
 package transport;
 
 import exceptions.RouteException;
+import exceptions.WrongParameterException;
 import route.Checkpoint;
 import route.Route;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  * @version 1.0
  * @since 30.10.2016
  */
-public abstract class RouteCreator {
+public final class RouteCreator {
 
     /**
      * Creates valid route500km length 500km with 3 points:
@@ -23,7 +24,7 @@ public abstract class RouteCreator {
      * @throws RouteException if error occurred while creating
      *                        new route500km
      */
-    public static Route createValid500km() throws RouteException {
+    public Route createValid500km() throws RouteException, WrongParameterException {
         ArrayList<Checkpoint> checkpoints = new ArrayList<>();
         checkpoints.add(new Checkpoint(1, 0));
         checkpoints.add(new Checkpoint(1, 100));
@@ -41,7 +42,7 @@ public abstract class RouteCreator {
      * @throws RouteException if error occurred while creating
      *                        new route500km
      */
-    public static Route createValid10000km() throws RouteException{
+    public Route createValid10000km() throws RouteException, WrongParameterException {
         ArrayList<Checkpoint> checkpoints = new ArrayList<>();
         checkpoints.add(new Checkpoint(1, 0));
         checkpoints.add(new Checkpoint(1, 100));

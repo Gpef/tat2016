@@ -1,5 +1,6 @@
 package transport;
 
+import exceptions.Messages;
 import exceptions.WrongParameterException;
 import route.Checkpoint;
 import route.Route;
@@ -51,7 +52,9 @@ public class Human implements CanPassRoute {
      * @throws WrongParameterException if new speed is <= 0
      */
     protected void validateSpeed(double validateSpeed) throws WrongParameterException {
-        if (Double.compare(validateSpeed, 0) <= 0) {
+        if (Double.isNaN(validateSpeed) || Double.isInfinite(validateSpeed)){
+            throw new WrongParameterException(Messages.ERROR + " " + validateSpeed + " is not valid values for speed");
+        }if (Double.compare(validateSpeed, 0) <= 0) {
             throw new WrongParameterException("Error creating new " + this.getClass().getSimpleName() + ": speed can't be <= 0");
         }
     }

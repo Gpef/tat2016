@@ -1,5 +1,6 @@
 package route;
 
+import exceptions.RouteException;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -40,6 +41,12 @@ public class RouteTest {
 
     @Test(expected = exceptions.RouteException.class)
     public void routeWithEmptyCheckpoints() throws Exception {
+        ArrayList<Checkpoint> checkpoints = new ArrayList<>();
+        new Route(checkpoints);
+    }
+
+    @Test (expected = RouteException.class)
+    public void nullChecpointsList() throws Exception{
         ArrayList<Checkpoint> checkpoints = new ArrayList<>();
         new Route(checkpoints);
     }

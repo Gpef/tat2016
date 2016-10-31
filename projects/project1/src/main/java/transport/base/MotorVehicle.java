@@ -1,5 +1,6 @@
 package transport.base;
 
+import exceptions.Messages;
 import exceptions.WrongParameterException;
 import transport.fuel.Fuel;
 
@@ -111,6 +112,10 @@ public abstract class MotorVehicle extends Vehicle {
      * @throws WrongParameterException if fuel consumption parameter <= 0
      */
     protected void validateFuelConsumption(double validateFuelConsumption) throws WrongParameterException {
+        if (Double.isNaN(validateFuelConsumption) || Double.isInfinite(validateFuelConsumption)) {
+            throw new WrongParameterException(Messages.ERROR + " " + validateFuelConsumption +
+                    " is not valid values for fuel consumption");
+        }
         if (Double.compare(validateFuelConsumption, 0) <= 0) {
             throw new WrongParameterException("Fuel consumption can't be <= 0");
         }

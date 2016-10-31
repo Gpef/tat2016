@@ -17,32 +17,34 @@ public class TardisTest {
     private static double PRECISION_EPSILON = 1e-3;
     private static double DEFAULT_MOVING_TIME = 5.5e-4;
     private Tardis defaultTardis;
+    private RouteCreator routeCreator;
 
     @Before
     public void setUp() throws Exception {
         defaultTardis = new Tardis(10, 1, 1);
+        routeCreator = new RouteCreator();
     }
 
     @Test
     public void calculateTime() throws Exception {
-        Route route500km = RouteCreator.createValid500km();
-        Route route10000km = RouteCreator.createValid10000km();
+        Route route500km = routeCreator.createValid500km();
+        Route route10000km = routeCreator.createValid10000km();
         assertEquals(DEFAULT_MOVING_TIME, new Tardis(10, 1, 1).calculateTime(route500km), PRECISION_EPSILON);
         assertEquals(DEFAULT_MOVING_TIME, new Tardis(10, 1, 1).calculateTime(route10000km), PRECISION_EPSILON);
     }
 
     @Test
     public void calculateCost1Passenger() throws Exception {
-        Route route500km = RouteCreator.createValid500km();
-        Route route10000km = RouteCreator.createValid10000km();
+        Route route500km = routeCreator.createValid500km();
+        Route route10000km = routeCreator.createValid10000km();
         assertEquals(50, new Tardis(10, 1, 1).calculateCost(route500km), PRECISION_EPSILON);
         assertEquals(1000.0, new Tardis(10, 1, 1).calculateCost(route10000km), PRECISION_EPSILON);
     }
 
     @Test
     public void calculateCost10Passenger() throws Exception {
-        Route route500km = RouteCreator.createValid500km();
-        Route route10000km = RouteCreator.createValid10000km();
+        Route route500km = routeCreator.createValid500km();
+        Route route10000km = routeCreator.createValid10000km();
         assertEquals(5, new Tardis(10, 10, 10).calculateCost(route500km), PRECISION_EPSILON);
         assertEquals(100.0, new Tardis(10, 10, 10).calculateCost(route10000km), PRECISION_EPSILON);
     }
@@ -155,5 +157,20 @@ public class TardisTest {
     @Test(expected = exceptions.WrongParameterException.class)
     public void setPassengersCapacityMoreZeroLowerPassengersCount() throws Exception {
         new Tardis(10, 5, 5).setPassengersCapacity(1);
+    }
+
+    @Test (expected = WrongParameterException.class)
+    public void setFuelConsumptionNaN() throws Exception{
+        defaultTardis.setFuelConsumption(Double.NaN);
+    }
+
+    @Test (expected = WrongParameterException.class)
+    public void setFuelConsumptionPosInfinity() throws Exception{
+        defaultTardis.setFuelConsumption(Double.POSITIVE_INFINITY);
+    }
+
+    @Test (expected = WrongParameterException.class)
+    public void setFuelConsumptionNegInfinity() throws Exception{
+        defaultTardis.setFuelConsumption(Double.NEGATIVE_INFINITY);
     }
 }

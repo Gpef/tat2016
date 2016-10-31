@@ -13,6 +13,7 @@ import exceptions.WrongParameterException;
  */
 public enum Fuel {
 
+    FOR_TESTS(10),
     PETROL(1),
     DIESEL(0.8),
     MERCURY(1);

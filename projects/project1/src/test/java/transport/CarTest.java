@@ -16,32 +16,34 @@ import static org.junit.Assert.assertEquals;
 public class CarTest {
     private static double PRECISION_EPSILON = 1e-3;
     private Car defaultCar;
+    private RouteCreator routeCreator;
 
     @Before
     public void setUp() throws Exception {
         defaultCar = new Car(Fuel.PETROL, 5, 1, 5);
+        routeCreator = new RouteCreator();
     }
 
     @Test
     public void calculateTime() throws Exception {
-        Route route500km = RouteCreator.createValid500km();
-        Route route10000km = RouteCreator.createValid10000km();
+        Route route500km = routeCreator.createValid500km();
+        Route route10000km = routeCreator.createValid10000km();
         assertEquals(5.5555, new Car(Fuel.PETROL, 5, 1, 5).calculateTime(route500km), PRECISION_EPSILON);
         assertEquals(111.1111, new Car(Fuel.PETROL, 5, 1, 5).calculateTime(route10000km), PRECISION_EPSILON);
     }
 
     @Test
     public void calculateCost1Passenger() throws Exception {
-        Route route500km = RouteCreator.createValid500km();
-        Route route10000km = RouteCreator.createValid10000km();
+        Route route500km = routeCreator.createValid500km();
+        Route route10000km = routeCreator.createValid10000km();
         assertEquals(25.0, new Car(Fuel.PETROL, 5, 1, 5).calculateCost(route500km), PRECISION_EPSILON);
         assertEquals(500.0, new Car(Fuel.PETROL, 5, 1, 5).calculateCost(route10000km), PRECISION_EPSILON);
     }
 
     @Test
     public void calculateCost5Passenger() throws Exception {
-        Route route500km = RouteCreator.createValid500km();
-        Route route10000km = RouteCreator.createValid10000km();
+        Route route500km = routeCreator.createValid500km();
+        Route route10000km = routeCreator.createValid10000km();
         assertEquals(5.0, new Car(Fuel.PETROL, 5, 5, 5).calculateCost(route500km), PRECISION_EPSILON);
         assertEquals(100.0, new Car(Fuel.PETROL, 5, 5, 5).calculateCost(route10000km), PRECISION_EPSILON);
     }
@@ -169,5 +171,35 @@ public class CarTest {
     public void setSpeedMoreZero() throws Exception {
         defaultCar.setSpeed(14);
         assertEquals(14, defaultCar.getSpeed(), PRECISION_EPSILON);
+    }
+
+    @Test(expected = WrongParameterException.class)
+    public void setSpeedNaN() throws Exception {
+        defaultCar.setSpeed(Double.NaN);
+    }
+
+    @Test(expected = WrongParameterException.class)
+    public void setSpeedNegInfinity() throws Exception {
+        defaultCar.setSpeed(Double.NEGATIVE_INFINITY);
+    }
+
+    @Test(expected = WrongParameterException.class)
+    public void setSpeedPosInfinity() throws Exception {
+        defaultCar.setSpeed(Double.POSITIVE_INFINITY);
+    }
+
+    @Test (expected = WrongParameterException.class)
+    public void setFuelConsumptionNaN() throws Exception{
+        defaultCar.setFuelConsumption(Double.NaN);
+    }
+
+    @Test (expected = WrongParameterException.class)
+    public void setFuelConsumptionPosInfinity() throws Exception{
+        defaultCar.setFuelConsumption(Double.POSITIVE_INFINITY);
+    }
+
+    @Test (expected = WrongParameterException.class)
+    public void setFuelConsumptionNegInfinity() throws Exception{
+        defaultCar.setFuelConsumption(Double.NEGATIVE_INFINITY);
     }
 }

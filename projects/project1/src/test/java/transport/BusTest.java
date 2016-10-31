@@ -17,32 +17,34 @@ public class BusTest {
 
     private static double PRECISION_EPSILON = 1e-3;
     private Bus defaultBus;
+    private RouteCreator routeCreator;
 
     @Before
     public void setUp() throws Exception {
         defaultBus = new Bus(Fuel.DIESEL, 25, 40, 40);
+        routeCreator = new RouteCreator();
     }
 
     @Test
     public void calculateTime() throws Exception {
-        Route route500km = RouteCreator.createValid500km();
-        Route route10000km = RouteCreator.createValid10000km();
+        Route route500km = routeCreator.createValid500km();
+        Route route10000km = routeCreator.createValid10000km();
         assertEquals(7.1428, new Bus(Fuel.DIESEL, 25, 40, 40).calculateTime(route500km), PRECISION_EPSILON);
         assertEquals(142.8571, new Bus(Fuel.DIESEL, 25, 40, 40).calculateTime(route10000km), PRECISION_EPSILON);
     }
 
     @Test
     public void calculateCost1Passenger() throws Exception {
-        Route route500km = RouteCreator.createValid500km();
-        Route route10000km = RouteCreator.createValid10000km();
+        Route route500km = routeCreator.createValid500km();
+        Route route10000km = routeCreator.createValid10000km();
         assertEquals(100.0, new Bus(Fuel.DIESEL, 25, 1, 40).calculateCost(route500km), PRECISION_EPSILON);
         assertEquals(2000.0, new Bus(Fuel.DIESEL, 25, 1, 40).calculateCost(route10000km), PRECISION_EPSILON);
     }
 
     @Test
     public void calculateCost40Passenger() throws Exception {
-        Route route500km = RouteCreator.createValid500km();
-        Route route10000km = RouteCreator.createValid10000km();
+        Route route500km = routeCreator.createValid500km();
+        Route route10000km = routeCreator.createValid10000km();
         assertEquals(2.5, new Bus(Fuel.DIESEL, 25, 40, 40).calculateCost(route500km), PRECISION_EPSILON);
         assertEquals(50.0, new Bus(Fuel.DIESEL, 25, 40, 40).calculateCost(route10000km), PRECISION_EPSILON);
     }
@@ -171,4 +173,34 @@ public class BusTest {
         defaultBus.setSpeed(14);
         assertEquals(14, defaultBus.getSpeed(), PRECISION_EPSILON);
     }
+    @Test(expected = WrongParameterException.class)
+    public void setSpeedNaN() throws Exception {
+        defaultBus.setSpeed(Double.NaN);
+    }
+
+    @Test(expected = WrongParameterException.class)
+    public void setSpeedNegInfinity() throws Exception {
+        defaultBus.setSpeed(Double.NEGATIVE_INFINITY);
+    }
+
+    @Test(expected = WrongParameterException.class)
+    public void setSpeedPosInfinity() throws Exception {
+        defaultBus.setSpeed(Double.POSITIVE_INFINITY);
+    }
+
+    @Test (expected = WrongParameterException.class)
+    public void setFuelConsumptionNaN() throws Exception{
+        defaultBus.setFuelConsumption(Double.NaN);
+    }
+
+    @Test (expected = WrongParameterException.class)
+    public void setFuelConsumptionPosInfinity() throws Exception{
+        defaultBus.setFuelConsumption(Double.POSITIVE_INFINITY);
+    }
+
+    @Test (expected = WrongParameterException.class)
+    public void setFuelConsumptionNegInfinity() throws Exception{
+        defaultBus.setFuelConsumption(Double.NEGATIVE_INFINITY);
+    }
+
 }
