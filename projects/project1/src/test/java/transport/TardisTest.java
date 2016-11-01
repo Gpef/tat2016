@@ -2,9 +2,10 @@ package transport;
 
 import exceptions.WrongParameterException;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import route.Route;
+import transport.data.TardisDataProviders;
+import transport.data.TransportParamsDataProviders;
 
 import static org.testng.Assert.assertEquals;
 
@@ -15,96 +16,24 @@ import static org.testng.Assert.assertEquals;
  */
 public class TardisTest {
 
-    private static double DEFAULT_MOVING_TIME = 5.5e-4;
     private Tardis defaultTardis;
-
-    @DataProvider(name = "invalidConstructor")
-    public Object[][] getInvalidConstructorData() throws Exception {
-        return new Object[][]{
-                {-15d, 1, 1},
-                {0d, 1, 1},
-                {10d, -15, 1},
-                {10d, 0, 1},
-                {10d, 1, -15},
-                {10d, 1, 0},
-                {10d, 5, 1},
-        };
-    }
-
-    @DataProvider(name = "validConstructor")
-    public Object[][] getValidConstructorData() throws Exception {
-        return new Object[][]{
-                {10d, 1, 2},
-                {10d, 1, 1}
-        };
-    }
-
-    @DataProvider(name = "invalidFuelConsumption")
-    public Object[][] getInvalidFuelConsumptionData() throws Exception {
-        return new Object[][]{
-                {Double.NaN},
-                {Double.POSITIVE_INFINITY},
-                {Double.NEGATIVE_INFINITY},
-                {0d},
-                {-100d},
-                {-1e-300d}
-        };
-    }
-
-    @DataProvider(name = "validFuelConsumption")
-    public Object[][] getValidFuelConsumptionData() throws Exception {
-        return new Object[][]{
-                {Double.MAX_VALUE},
-                {Double.MIN_VALUE},
-                {1e-300d}
-        };
-    }
-
-    @DataProvider(name = "routeTime")
-    public Object[][] getRouteTimeData() throws Exception {
-        RouteCreator routeCreator = new RouteCreator();
-        return new Object[][]{
-                {routeCreator.createValid500km(), DEFAULT_MOVING_TIME},
-                {routeCreator.createValid10000km(), DEFAULT_MOVING_TIME},
-        };
-    }
-
-    @DataProvider(name = "routeCost")
-    public Object[][] getRouteCostData() throws Exception {
-        RouteCreator routeCreator = new RouteCreator();
-        return new Object[][]{
-                {routeCreator.createValid500km(), 1, 50d},
-                {routeCreator.createValid500km(), 10, 5d},
-                {routeCreator.createValid10000km(), 1, 1000d},
-                {routeCreator.createValid10000km(), 10, 100d},
-        };
-    }
-
-    @DataProvider(name = "invalidPassengers")
-    public Object[][] getInvalidPassengersData() throws Exception {
-        return new Object[][]{
-                {-100},
-                {0},
-                {Integer.MIN_VALUE}
-        };
-    }
 
     @BeforeMethod
     public void setUp() throws Exception {
         defaultTardis = new Tardis(10, 1, 1);
     }
 
-    @Test(dataProvider = "routeTime")
+    @Test(dataProvider = "routeTime", dataProviderClass = TardisDataProviders.class)
     public void calculateTime(Route route, double time) throws Exception {
         assertEquals(time, new Tardis(10, 1, 1).calculateTime(route), 1e-3);
     }
 
-    @Test(dataProvider = "routeCost")
+    @Test(dataProvider = "routeCost", dataProviderClass = TardisDataProviders.class)
     public void calculateCost(Route route, int passengerNumber, double cost) throws Exception {
         assertEquals(cost, new Tardis(10, passengerNumber, passengerNumber).calculateCost(route), 1e-3);
     }
 
-    @Test(dataProvider = "validConstructor")
+    @Test(dataProvider = "validConstructor", dataProviderClass = TardisDataProviders.class)
     public void validConstructorData(double fuelConsumption,
                                      int passengersCount, int passengerCapacity) throws Exception {
         Tardis car = new Tardis(fuelConsumption, passengersCount, passengerCapacity);
@@ -112,24 +41,27 @@ public class TardisTest {
         assertEquals(passengerCapacity, car.getPassengersCapacity());
     }
 
-    @Test(dataProvider = "invalidConstructor", expectedExceptions = WrongParameterException.class)
+    @Test(dataProvider = "invalidConstructor", dataProviderClass = TardisDataProviders.class,
+            expectedExceptions = WrongParameterException.class)
     public void invalidConstructorData(double fuelConsumption,
                                        int passengersCount, int passengerCapacity) throws Exception {
         new Tardis(fuelConsumption, passengersCount, passengerCapacity);
     }
 
-    @Test(dataProvider = "invalidFuelConsumption", expectedExceptions = WrongParameterException.class)
+    @Test(dataProvider = "invalidFuelConsumption", dataProviderClass = TransportParamsDataProviders.class,
+            expectedExceptions = WrongParameterException.class)
     public void setInvalidFuelConsumption(double fuelConsumption) throws Exception {
         defaultTardis.setFuelConsumption(fuelConsumption);
     }
 
-    @Test(dataProvider = "validFuelConsumption")
+    @Test(dataProvider = "validFuelConsumption", dataProviderClass = TransportParamsDataProviders.class)
     public void setValidFuelConsumption(double fuelConsumption) throws Exception {
         defaultTardis.setFuelConsumption(fuelConsumption);
         assertEquals(defaultTardis.getFuelConsumption(), fuelConsumption);
     }
 
-    @Test(dataProvider = "invalidPassengers", expectedExceptions = exceptions.WrongParameterException.class)
+    @Test(dataProvider = "invalidPassengers", dataProviderClass = TransportParamsDataProviders.class,
+            expectedExceptions = exceptions.WrongParameterException.class)
     public void setInvalidPassengersCount(int passengersCount) throws Exception {
         defaultTardis.setPassengersCapacity(passengersCount);
     }
@@ -153,7 +85,8 @@ public class TardisTest {
         new Tardis(10, 1, 1).setPassengersCount(5);
     }
 
-    @Test(dataProvider = "invalidPassengers", expectedExceptions = exceptions.WrongParameterException.class)
+    @Test(dataProvider = "invalidPassengers", dataProviderClass = TransportParamsDataProviders.class,
+            expectedExceptions = exceptions.WrongParameterException.class)
     public void setInvalidPassengersCapacity(int passengersCapacity) throws Exception {
         defaultTardis.setPassengersCapacity(passengersCapacity);
     }
