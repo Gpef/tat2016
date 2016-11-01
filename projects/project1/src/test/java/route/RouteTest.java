@@ -1,9 +1,12 @@
 package route;
 
 import exceptions.RouteException;
-import org.junit.Test;
+import exceptions.WrongParameterException;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @author Oleg Baslak
@@ -12,43 +15,18 @@ import java.util.ArrayList;
  */
 public class RouteTest {
 
-    @Test(expected = exceptions.RouteException.class)
-    public void routeWithOnePoint() throws Exception {
-        ArrayList<Checkpoint> checkpoints = new ArrayList<>();
-        Checkpoint point = new Checkpoint(1, 1);
-        checkpoints.add(point);
-        new Route(checkpoints);
+    @DataProvider(name = "invalidRoute")
+    public Object[][] getInvalidRouteData() throws WrongParameterException {
+        return new Object[][]{
+                {new ArrayList<>(Arrays.asList(new Checkpoint(1d, 1d), new Checkpoint(1d, 1d)))},
+                {new ArrayList<>(Arrays.asList(new Checkpoint(1d, 1d), new Checkpoint(10d, 10d),
+                        new Checkpoint(-1d, -1d), new Checkpoint(1d, 1d)))},
+                {new ArrayList<Checkpoint>()}
+        };
     }
 
-    @Test(expected = exceptions.RouteException.class)
-    public void routeWithSameFirstAndLastCheckPoints() throws Exception {
-        ArrayList<Checkpoint> checkpoints = new ArrayList<>();
-        checkpoints.add(new Checkpoint(1, 1));
-        checkpoints.add(new Checkpoint(1, 2));
-        checkpoints.add(new Checkpoint(1, 3));
-        checkpoints.add(new Checkpoint(1, 1));
+    @Test(dataProvider = "invalidRoute", expectedExceptions = RouteException.class)
+    public void invalidRoute(ArrayList<Checkpoint> checkpoints) throws Exception {
         new Route(checkpoints);
     }
-
-    @Test(expected = exceptions.RouteException.class)
-    public void routeWithTwoSameCheckPoints() throws Exception {
-        ArrayList<Checkpoint> checkpoints = new ArrayList<>();
-        Checkpoint point1 = new Checkpoint(1, 1);
-        checkpoints.add(point1);
-        checkpoints.add(point1);
-        new Route(checkpoints);
-    }
-
-    @Test(expected = exceptions.RouteException.class)
-    public void routeWithEmptyCheckpoints() throws Exception {
-        ArrayList<Checkpoint> checkpoints = new ArrayList<>();
-        new Route(checkpoints);
-    }
-
-    @Test (expected = RouteException.class)
-    public void nullChecpointsList() throws Exception{
-        ArrayList<Checkpoint> checkpoints = new ArrayList<>();
-        new Route(checkpoints);
-    }
-
 }

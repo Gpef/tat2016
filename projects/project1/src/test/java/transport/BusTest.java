@@ -1,12 +1,13 @@
 package transport;
 
 import exceptions.WrongParameterException;
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import route.Route;
 import transport.fuel.Fuel;
 
-import static org.junit.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertEquals;
 
 /**
  * @author Oleg Baslak
@@ -15,113 +16,149 @@ import static org.junit.Assert.assertEquals;
  */
 public class BusTest {
 
-    private static double PRECISION_EPSILON = 1e-3;
     private Bus defaultBus;
-    private RouteCreator routeCreator;
 
-    @Before
+    @DataProvider(name = "invalidConstructor")
+    public Object[][] getInvalidConstructorData() throws Exception {
+        return new Object[][]{
+                {Fuel.DIESEL, -15d, 40, 40},
+                {Fuel.DIESEL, 0d, 40, 40},
+                {Fuel.DIESEL, 25d, -15, 40},
+                {Fuel.DIESEL, 25d, 0, 40},
+                {Fuel.DIESEL, 25d, 40, -15},
+                {Fuel.DIESEL, 25d, 40, 0},
+                {Fuel.DIESEL, 25d, 50, 40},
+        };
+    }
+
+    @DataProvider(name = "validConstructor")
+    public Object[][] getValidConstructorData() throws Exception {
+        return new Object[][]{
+                {Fuel.DIESEL, 25d, 30, 40},
+                {Fuel.DIESEL, 25d, 40, 40}
+        };
+    }
+
+    @DataProvider(name = "invalidSpeed")
+    public Object[][] getInvalidSpeedData() throws Exception {
+        return new Object[][]{
+                {Double.NaN},
+                {Double.POSITIVE_INFINITY},
+                {Double.NEGATIVE_INFINITY},
+                {0d},
+                {-10d},
+        };
+    }
+
+    @DataProvider(name = "validSpeed")
+    public Object[][] getValidSpeedData() throws Exception {
+        return new Object[][]{
+                {1d},
+                {Double.MIN_VALUE},
+                {Double.MAX_VALUE}
+        };
+    }
+
+    @DataProvider(name = "invalidFuelConsumption")
+    public Object[][] getInvalidFuelConsumptionData() throws Exception {
+        return new Object[][]{
+                {Double.NaN},
+                {Double.POSITIVE_INFINITY},
+                {Double.NEGATIVE_INFINITY},
+                {0d},
+                {-100d},
+                {-1e-300d}
+        };
+    }
+
+    @DataProvider(name = "validFuelConsumption")
+    public Object[][] getValidFuelConsumptionData() throws Exception {
+        return new Object[][]{
+                {Double.MAX_VALUE},
+                {Double.MIN_VALUE},
+                {1e-3d}
+        };
+    }
+
+    @DataProvider(name = "routeTime")
+    public Object[][] getRouteTimeData() throws Exception {
+        RouteCreator routeCreator = new RouteCreator();
+        return new Object[][]{
+                {routeCreator.createValid500km(), 7.1428},
+                {routeCreator.createValid10000km(), 142.8571},
+        };
+    }
+
+    @DataProvider(name = "routeCost")
+    public Object[][] getRouteCostData() throws Exception {
+        RouteCreator routeCreator = new RouteCreator();
+        return new Object[][]{
+                {routeCreator.createValid500km(), 1, 100d},
+                {routeCreator.createValid500km(), 40, 2.5d},
+                {routeCreator.createValid10000km(), 1, 2000d},
+                {routeCreator.createValid10000km(), 40, 50d},
+        };
+    }
+
+    @DataProvider(name = "invalidPassengers")
+    public Object[][] getInvalidPassengersData() throws Exception {
+        return new Object[][]{
+                {-100},
+                {0},
+                {Integer.MIN_VALUE}
+        };
+    }
+
+    @BeforeMethod
     public void setUp() throws Exception {
         defaultBus = new Bus(Fuel.DIESEL, 25, 40, 40);
-        routeCreator = new RouteCreator();
+    }
+
+    @Test(dataProvider = "routeTime")
+    public void calculateTime(Route route, double time) throws Exception {
+        assertEquals(time, new Bus(Fuel.DIESEL, 25, 40, 40).calculateTime(route), 1e-3);
+    }
+
+    @Test(dataProvider = "routeCost")
+    public void calculateCost(Route route, int passengerNumber, double cost) throws Exception {
+        assertEquals(cost, new Bus(Fuel.DIESEL, 25, passengerNumber, passengerNumber).calculateCost(route));
+    }
+
+    @Test(dataProvider = "validConstructor")
+    public void validConstructorData(Fuel fuel, double fuelConsumption,
+                                     int passengersCount, int passengerCapacity) throws Exception {
+        Bus bus = new Bus(fuel, fuelConsumption, passengersCount, passengerCapacity);
+        assertEquals(passengersCount, bus.getPassengersCount());
+        assertEquals(passengerCapacity, bus.getPassengersCapacity());
+    }
+
+    @Test(dataProvider = "invalidConstructor", expectedExceptions = WrongParameterException.class)
+    public void invalidConstructorData(Fuel fuel, double fuelConsumption,
+                                       int passengersCount, int passengerCapacity) throws Exception {
+        new Bus(fuel, fuelConsumption, passengersCount, passengerCapacity);
+    }
+
+    @Test(dataProvider = "invalidFuelConsumption", expectedExceptions = WrongParameterException.class)
+    public void setInvalidFuelConsumption(double fuelConsumption) throws Exception {
+        defaultBus.setFuelConsumption(fuelConsumption);
+    }
+
+    @Test(dataProvider = "validFuelConsumption")
+    public void setValidFuelConsumption(double fuelConsumption) throws Exception {
+        defaultBus.setFuelConsumption(fuelConsumption);
+        assertEquals(defaultBus.getFuelConsumption(), fuelConsumption);
+    }
+
+    @Test(dataProvider = "invalidPassengers", expectedExceptions = exceptions.WrongParameterException.class)
+    public void setInvalidPassengersCount(int passengersCount) throws Exception {
+        defaultBus.setPassengersCapacity(passengersCount);
     }
 
     @Test
-    public void calculateTime() throws Exception {
-        Route route500km = routeCreator.createValid500km();
-        Route route10000km = routeCreator.createValid10000km();
-        assertEquals(7.1428, new Bus(Fuel.DIESEL, 25, 40, 40).calculateTime(route500km), PRECISION_EPSILON);
-        assertEquals(142.8571, new Bus(Fuel.DIESEL, 25, 40, 40).calculateTime(route10000km), PRECISION_EPSILON);
-    }
-
-    @Test
-    public void calculateCost1Passenger() throws Exception {
-        Route route500km = routeCreator.createValid500km();
-        Route route10000km = routeCreator.createValid10000km();
-        assertEquals(100.0, new Bus(Fuel.DIESEL, 25, 1, 40).calculateCost(route500km), PRECISION_EPSILON);
-        assertEquals(2000.0, new Bus(Fuel.DIESEL, 25, 1, 40).calculateCost(route10000km), PRECISION_EPSILON);
-    }
-
-    @Test
-    public void calculateCost40Passenger() throws Exception {
-        Route route500km = routeCreator.createValid500km();
-        Route route10000km = routeCreator.createValid10000km();
-        assertEquals(2.5, new Bus(Fuel.DIESEL, 25, 40, 40).calculateCost(route500km), PRECISION_EPSILON);
-        assertEquals(50.0, new Bus(Fuel.DIESEL, 25, 40, 40).calculateCost(route10000km), PRECISION_EPSILON);
-    }
-
-    @Test
-    public void constructorFullParamAllValid() throws Exception {
-        Bus bus = new Bus(Fuel.DIESEL, 25, 40, 40);
-        assertEquals(25, bus.getFuelConsumption(), PRECISION_EPSILON);
+    public void setPassengersCountEqualsCapacity() throws Exception {
+        Bus bus = new Bus(Fuel.DIESEL, 25, 30, 40);
+        bus.setPassengersCount(40);
         assertEquals(40, bus.getPassengersCount());
-        assertEquals(40, bus.getPassengersCapacity());
-    }
-
-    @Test(expected = WrongParameterException.class)
-    public void constructorFullParamFuelConsumptionLowerZero() throws Exception {
-        new Bus(Fuel.DIESEL, -15, 40, 40);
-    }
-
-    @Test(expected = WrongParameterException.class)
-    public void constructorFullParamFuelConsumptionEqualsZero() throws Exception {
-        new Bus(Fuel.DIESEL, 0, 40, 40);
-    }
-
-    @Test(expected = WrongParameterException.class)
-    public void constructorFullParamPassengersCountLowerZero() throws Exception {
-        new Bus(Fuel.DIESEL, 25, -15, 40);
-    }
-
-    @Test(expected = WrongParameterException.class)
-    public void constructorFullParamPassengersCountEqualsZero() throws Exception {
-        new Bus(Fuel.DIESEL, 25, 0, 40);
-    }
-
-    @Test(expected = WrongParameterException.class)
-    public void constructorFullParamPassengersCapacityLowerZero() throws Exception {
-        new Bus(Fuel.DIESEL, 25, 40, -15);
-    }
-
-    @Test(expected = WrongParameterException.class)
-    public void constructorFullParamPassengersCapacityEqualsZero() throws Exception {
-        new Bus(Fuel.DIESEL, 25, 40, 0);
-    }
-
-    @Test
-    public void constructorFullParamPassengersCountEqualsCapacity() throws Exception {
-        Bus bus = new Bus(Fuel.DIESEL, 25, 40, 40);
-        assertEquals(40, bus.getPassengersCount());
-        assertEquals(40, bus.getPassengersCapacity());
-    }
-
-    @Test(expected = WrongParameterException.class)
-    public void constructorFullParamPassengersCountMoreThanCapacity() throws Exception {
-        new Bus(Fuel.DIESEL, 25, 50, 40);
-    }
-
-    @Test(expected = WrongParameterException.class)
-    public void setFuelConsumptionEqualsZero() throws Exception {
-        defaultBus.setFuelConsumption(0);
-    }
-
-    @Test(expected = WrongParameterException.class)
-    public void setFuelConsumptionLowerZero() throws Exception {
-        defaultBus.setFuelConsumption(-11);
-    }
-
-    @Test
-    public void setFuelConsumptionMoreZero() throws Exception {
-        defaultBus.setFuelConsumption(11);
-    }
-
-    @Test(expected = exceptions.WrongParameterException.class)
-    public void setPassengersCountEqualsZero() throws Exception {
-        defaultBus.setPassengersCount(0);
-    }
-
-    @Test(expected = exceptions.WrongParameterException.class)
-    public void setPassengersCountLowerZero() throws Exception {
-        defaultBus.setPassengersCount(-11);
     }
 
     @Test
@@ -131,76 +168,36 @@ public class BusTest {
         assertEquals(5, bus.getPassengersCount());
     }
 
-    @Test(expected = exceptions.WrongParameterException.class)
+    @Test(expectedExceptions = exceptions.WrongParameterException.class)
     public void setPassengersCountMoreCapacity() throws Exception {
         new Bus(Fuel.DIESEL, 25, 40, 40).setPassengersCount(50);
     }
 
-    @Test(expected = exceptions.WrongParameterException.class)
-    public void setPassengersCapacityEqualsZero() throws Exception {
-        defaultBus.setPassengersCapacity(0);
-    }
-
-    @Test(expected = exceptions.WrongParameterException.class)
-    public void setPassengersCapacityLowerZero() throws Exception {
-        defaultBus.setPassengersCapacity(-11);
+    @Test(dataProvider = "invalidPassengers", expectedExceptions = exceptions.WrongParameterException.class)
+    public void setInvalidPassengersCapacity(int passengersCapacity) throws Exception {
+        defaultBus.setPassengersCapacity(passengersCapacity);
     }
 
     @Test
-    public void setPassengersCapacityMoreZeroMorePassengersCount() throws Exception {
+    public void setPassengersCapacityMorePassengersCount() throws Exception {
         Bus bus = new Bus(Fuel.DIESEL, 25, 40, 40);
         bus.setPassengersCapacity(50);
         assertEquals(50, bus.getPassengersCapacity());
     }
 
-    @Test(expected = exceptions.WrongParameterException.class)
-    public void setPassengersCapacityMoreZeroLowerPassengersCount() throws Exception {
+    @Test(expectedExceptions = exceptions.WrongParameterException.class)
+    public void setPassengersCapacityLowerPassengersCount() throws Exception {
         new Bus(Fuel.DIESEL, 25, 40, 40).setPassengersCapacity(10);
     }
 
-    @Test(expected = exceptions.WrongParameterException.class)
-    public void setSpeedLowerZero() throws Exception {
-        defaultBus.setSpeed(-15);
+    @Test(dataProvider = "validSpeed")
+    public void setValidSpeed(double speed) throws Exception {
+        defaultBus.setSpeed(speed);
+        assertEquals(speed, defaultBus.getSpeed());
     }
 
-    @Test(expected = exceptions.WrongParameterException.class)
-    public void setSpeedEqualsZero() throws Exception {
-        defaultBus.setSpeed(0);
+    @Test(dataProvider = "invalidSpeed", expectedExceptions = WrongParameterException.class)
+    public void setInvalidSpeed(double speed) throws Exception {
+        defaultBus.setSpeed(speed);
     }
-
-    @Test
-    public void setSpeedMoreZero() throws Exception {
-        defaultBus.setSpeed(14);
-        assertEquals(14, defaultBus.getSpeed(), PRECISION_EPSILON);
-    }
-    @Test(expected = WrongParameterException.class)
-    public void setSpeedNaN() throws Exception {
-        defaultBus.setSpeed(Double.NaN);
-    }
-
-    @Test(expected = WrongParameterException.class)
-    public void setSpeedNegInfinity() throws Exception {
-        defaultBus.setSpeed(Double.NEGATIVE_INFINITY);
-    }
-
-    @Test(expected = WrongParameterException.class)
-    public void setSpeedPosInfinity() throws Exception {
-        defaultBus.setSpeed(Double.POSITIVE_INFINITY);
-    }
-
-    @Test (expected = WrongParameterException.class)
-    public void setFuelConsumptionNaN() throws Exception{
-        defaultBus.setFuelConsumption(Double.NaN);
-    }
-
-    @Test (expected = WrongParameterException.class)
-    public void setFuelConsumptionPosInfinity() throws Exception{
-        defaultBus.setFuelConsumption(Double.POSITIVE_INFINITY);
-    }
-
-    @Test (expected = WrongParameterException.class)
-    public void setFuelConsumptionNegInfinity() throws Exception{
-        defaultBus.setFuelConsumption(Double.NEGATIVE_INFINITY);
-    }
-
 }

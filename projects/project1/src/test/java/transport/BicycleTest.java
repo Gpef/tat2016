@@ -1,11 +1,12 @@
 package transport;
 
 import exceptions.WrongParameterException;
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import route.Route;
 
-import static org.junit.Assert.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 /**
  * @author Oleg Baslak
@@ -14,60 +15,56 @@ import static org.junit.Assert.assertEquals;
  */
 public class BicycleTest {
 
-    private static double PRECISION_EPSILON = 1e-3;
     private Bicycle defaultBicycle;
-    private RouteCreator routeCreator;
 
-    @Before
+    @DataProvider(name = "invalidSpeed")
+    public Object[][] getInvalidSpeedData() throws Exception {
+        return new Object[][]{
+                {Double.NaN},
+                {Double.POSITIVE_INFINITY},
+                {Double.NEGATIVE_INFINITY},
+                {0d},
+                {-10d},
+        };
+    }
+
+    @DataProvider(name = "validSpeed")
+    public Object[][] getValidSpeedData() throws Exception {
+        return new Object[][]{
+                {1d},
+                {Double.MIN_VALUE},
+                {Double.MAX_VALUE}
+        };
+    }
+
+    @DataProvider(name = "validRouteTime")
+    public Object[][] getValidRouteTimeData() throws Exception {
+        RouteCreator routeCreator = new RouteCreator();
+        return new Object[][]{
+                {routeCreator.createValid500km(), 31.25},
+                {routeCreator.createValid10000km(), 625.0},
+        };
+    }
+
+    @BeforeMethod
     public void setUp() throws Exception {
         defaultBicycle = new Bicycle();
-        routeCreator = new RouteCreator();
     }
 
-    @Test
-    public void calculateTime() throws Exception {
-        Route route500km = routeCreator.createValid500km();
-        Route route10000km = routeCreator.createValid10000km();
-        assertEquals(31.25, defaultBicycle.calculateTime(route500km), PRECISION_EPSILON);
-        assertEquals(625.0, defaultBicycle.calculateTime(route10000km), PRECISION_EPSILON);
+    @Test (dataProvider = "validRouteTime")
+    public void calculateTime(Route route, double time) throws Exception {
+        assertEquals(defaultBicycle.calculateTime(route), time, 1e-3);
     }
 
-    @Test
-    public void calculateCost() throws Exception {
-        Route route500km = routeCreator.createValid500km();
-        Route route10000km = routeCreator.createValid10000km();
-        assertEquals(0.0, defaultBicycle.calculateCost(route500km), PRECISION_EPSILON);
-        assertEquals(0.0, defaultBicycle.calculateCost(route10000km), PRECISION_EPSILON);
+    @Test(dataProvider = "invalidSpeed", expectedExceptions = WrongParameterException.class)
+    public void setInvalidSpeed(double speed) throws Exception {
+        defaultBicycle.setSpeed(speed);
     }
 
-    @Test(expected = exceptions.WrongParameterException.class)
-    public void setSpeedLowerZero() throws Exception {
-       defaultBicycle.setSpeed(-15);
+    @Test(dataProvider = "validSpeed")
+    public void setValidSpeed(double speed) throws Exception {
+        defaultBicycle.setSpeed(speed);
+        assertEquals(defaultBicycle.getSpeed(), speed);
     }
 
-    @Test(expected = exceptions.WrongParameterException.class)
-    public void setSpeedEqualsZero() throws Exception {
-        defaultBicycle.setSpeed(0);
-    }
-
-    @Test
-    public void setSpeedMoreThanZero() throws Exception {
-        defaultBicycle.setSpeed(14);
-        assertEquals(14, defaultBicycle.getSpeed(), PRECISION_EPSILON);
-    }
-
-    @Test(expected = WrongParameterException.class)
-    public void setSpeedNaN() throws Exception {
-        defaultBicycle.setSpeed(Double.NaN);
-    }
-
-    @Test(expected = WrongParameterException.class)
-    public void setSpeedNegInfinity() throws Exception {
-        defaultBicycle.setSpeed(Double.NEGATIVE_INFINITY);
-    }
-
-    @Test(expected = WrongParameterException.class)
-    public void setSpeedPosInfinity() throws Exception {
-        defaultBicycle.setSpeed(Double.POSITIVE_INFINITY);
-    }
 }

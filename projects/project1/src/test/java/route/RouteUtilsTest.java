@@ -1,11 +1,11 @@
 package route;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 /**
  * @author Oleg Baslak
@@ -17,7 +17,7 @@ public class RouteUtilsTest {
     private static double PRECISION_EPSILON = 1e-3;
     private static RouteUtils routeUtils;
 
-    @Before
+    @BeforeMethod
     public void setUp() {
         routeUtils = new RouteUtils();
     }

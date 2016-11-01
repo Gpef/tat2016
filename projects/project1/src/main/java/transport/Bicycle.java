@@ -1,5 +1,6 @@
 package transport;
 
+import exceptions.RoutePassingException;
 import exceptions.WrongParameterException;
 import route.Checkpoint;
 import route.Route;
@@ -36,18 +37,16 @@ public class Bicycle extends Vehicle {
     }
 
     @Override
-    public double calculateTime(Route route) {
+    public double calculateTime(Route route) throws RoutePassingException {
         double routeTime = 0;
         ArrayList<Checkpoint> points = route.getCheckpoints();
         RouteUtils routeUtils = new RouteUtils();
         for (int i = 1; i < points.size(); i++) {
             routeTime += routeUtils.calculateEuclidDistance(points.get(i - 1), points.get(i)) / getSpeed();
         }
+        if (Double.isInfinite(routeTime)) {
+            throw new RoutePassingException("Some variables has bad values, so passing time is infinite");
+        }
         return routeTime;
-    }
-
-    @Override
-    public double calculateCost(Route route) {
-        return 0;
     }
 }

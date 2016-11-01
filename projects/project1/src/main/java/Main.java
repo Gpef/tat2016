@@ -1,9 +1,11 @@
 import exceptions.Messages;
+import exceptions.RoutePassingException;
 import exceptions.WrongParameterException;
 import route.Route;
 import route.RouteUtils;
 import route.reader.RouteFileReader;
 import transport.*;
+import transport.base.CanCostPassingRoute;
 import transport.base.CanPassRoute;
 import transport.fuel.Fuel;
 
@@ -33,7 +35,13 @@ public class Main {
         try {
             Route route = new RouteFileReader(new File(routeFilePath)).read();
             System.out.format("Route length: %.2f km.\n", new RouteUtils().calculateEuclidRouteLength(route));
-            createMovingMeans().forEach(mean -> System.out.println(getRouteStats(mean, route)));
+            createMovingMeans().forEach(mean -> {
+                try {
+                    System.out.println(getRouteStats(mean, route));
+                } catch (RoutePassingException e) {
+                    System.out.println(Messages.ERROR + " " + mean.getClass().getSimpleName() + ": " + e.getMessage());
+                }
+            });
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -48,10 +56,14 @@ public class Main {
      * @return string that contains name of moving mean, time
      * spend to pass route and it's price
      */
-    private static String getRouteStats(CanPassRoute transportType, Route route) {
-        return transportType.getClass().getSimpleName() +
-                String.format(" spend %f hours", transportType.calculateTime(route)) +
-                String.format(", with price %.2f USD", transportType.calculateCost(route));
+    private static String getRouteStats(CanPassRoute transportType, Route route) throws RoutePassingException {
+        StringBuilder routeStats = new StringBuilder(transportType.getClass().getSimpleName());
+        routeStats.append(String.format(" spend %f hours", transportType.calculateTime(route)));
+        if (transportType instanceof CanCostPassingRoute) {
+            routeStats.append(String.format(", with price %.2f USD",
+                    ((CanCostPassingRoute) transportType).calculateCost(route)));
+        }
+        return routeStats.toString();
     }
 
     /**

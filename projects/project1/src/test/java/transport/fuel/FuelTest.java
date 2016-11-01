@@ -1,9 +1,10 @@
 package transport.fuel;
 
 import exceptions.WrongParameterException;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertEquals;
 
 /**
  * @author Oleg Baslak
@@ -14,17 +15,17 @@ public class FuelTest {
 
     Fuel fuel;
 
-    @Before
+    @BeforeMethod
     public void setUp(){
         fuel = Fuel.FOR_TESTS;
     }
 
-    @Test(expected = WrongParameterException.class)
+    @Test(expectedExceptions = WrongParameterException.class)
     public void setPriceLowerZero() throws Exception {
         fuel.setPrice(-11);
     }
 
-    @Test(expected = WrongParameterException.class)
+    @Test(expectedExceptions = WrongParameterException.class)
     public void setPriceEqualsZero() throws Exception {
         fuel.setPrice(0);
     }
@@ -32,6 +33,6 @@ public class FuelTest {
     @Test
     public void setPriceMoreZero() throws Exception{
         fuel.setPrice(111);
-        Assert.assertEquals(111, fuel.getPrice(), 1e-3);
+        assertEquals(111, fuel.getPrice(), 1e-3);
     }
 }

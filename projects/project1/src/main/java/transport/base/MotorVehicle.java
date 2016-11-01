@@ -12,7 +12,7 @@ import transport.fuel.Fuel;
  * @version 1.0
  * @since 26.10.2016
  */
-public abstract class MotorVehicle extends Vehicle {
+public abstract class MotorVehicle extends Vehicle implements CanCostPassingRoute {
 
     protected Fuel fuel;
     protected double fuelConsumption;   // Fuel consumption for 100 km

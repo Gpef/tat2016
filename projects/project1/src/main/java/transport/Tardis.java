@@ -1,9 +1,11 @@
 package transport;
 
 import exceptions.Messages;
+import exceptions.RoutePassingException;
 import exceptions.WrongParameterException;
 import route.Route;
 import route.RouteUtils;
+import transport.base.CanCostPassingRoute;
 import transport.base.CanPassRoute;
 import transport.fuel.Fuel;
 
@@ -14,7 +16,7 @@ import transport.fuel.Fuel;
  * @version 1.0
  * @since 26.10.2016
  */
-public class Tardis implements CanPassRoute {
+public class Tardis implements CanPassRoute, CanCostPassingRoute {
 
     private Fuel fuel;
     private double fuelConsumption;
@@ -55,8 +57,13 @@ public class Tardis implements CanPassRoute {
     }
 
     @Override
-    public double calculateCost(Route route) {
-        return fuelConsumption / 100 * new RouteUtils().calculateEuclidRouteLength(route) * fuel.getPrice() / passengersCount;
+    public double calculateCost(Route route) throws RoutePassingException {
+        double routeCost = fuelConsumption / 100 * new RouteUtils().calculateEuclidRouteLength(route) *
+                fuel.getPrice() / passengersCount;
+        if (Double.isInfinite(routeCost)) {
+            throw new RoutePassingException("Some variables has bad values, so cost is infinite");
+        }
+        return routeCost;
     }
 
     public Fuel getFuel() {
@@ -148,7 +155,8 @@ public class Tardis implements CanPassRoute {
         if (Double.isNaN(validateFuelConsumption) || Double.isInfinite(validateFuelConsumption)) {
             throw new WrongParameterException(Messages.ERROR + " " + validateFuelConsumption +
                     " is not valid values for fuel consumption");
-        }if (Double.compare(validateFuelConsumption, 0) <= 0) {
+        }
+        if (Double.compare(validateFuelConsumption, 0) <= 0) {
             throw new WrongParameterException("Fuel consumption can't be <= 0");
         }
     }
