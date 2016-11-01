@@ -1,12 +1,10 @@
 package route;
 
 import exceptions.RouteException;
-import exceptions.WrongParameterException;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import route.data.RouteDataProvider;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * @author Oleg Baslak
@@ -15,17 +13,8 @@ import java.util.Arrays;
  */
 public class RouteTest {
 
-    @DataProvider(name = "invalidRoute")
-    public Object[][] getInvalidRouteData() throws WrongParameterException {
-        return new Object[][]{
-                {new ArrayList<>(Arrays.asList(new Checkpoint(1d, 1d), new Checkpoint(1d, 1d)))},
-                {new ArrayList<>(Arrays.asList(new Checkpoint(1d, 1d), new Checkpoint(10d, 10d),
-                        new Checkpoint(-1d, -1d), new Checkpoint(1d, 1d)))},
-                {new ArrayList<Checkpoint>()}
-        };
-    }
-
-    @Test(dataProvider = "invalidRoute", expectedExceptions = RouteException.class)
+    @Test(dataProvider = "invalidRoute", dataProviderClass = RouteDataProvider.class,
+            expectedExceptions = RouteException.class)
     public void invalidRoute(ArrayList<Checkpoint> checkpoints) throws Exception {
         new Route(checkpoints);
     }

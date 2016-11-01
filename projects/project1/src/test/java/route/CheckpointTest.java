@@ -1,8 +1,8 @@
 package route;
 
 import exceptions.WrongParameterException;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import route.data.CheckpointDataProvider;
 
 import static org.testng.Assert.*;
 
@@ -13,46 +13,15 @@ import static org.testng.Assert.*;
  */
 public class CheckpointTest {
 
-    private Checkpoint checkpoint;
-
-    @DataProvider(name = "invalidConstructor")
-    public Object[][] getInvalidConstructorData() throws WrongParameterException {
-        return new Object[][]{
-                {0d, Double.NaN},
-                {0d, Double.POSITIVE_INFINITY},
-                {0d, Double.NEGATIVE_INFINITY},
-                {Double.NaN, 0d},
-                {Double.POSITIVE_INFINITY, 0d},
-                {Double.NEGATIVE_INFINITY, 0d},
-        };
-    }
-
-    @DataProvider(name = "validConstructor")
-    public Object[][] getValidConstructorData() throws WrongParameterException {
-        return new Object[][]{
-                {0d, 0d},
-                {123.456789, 432.456789},
-                {-123.456789, -432.456789}
-        };
-    }
-
-    @DataProvider(name = "invalidPoint")
-    public Object[][] getInvalidPointData() throws WrongParameterException {
-        return new Object[][]{
-                {Double.NaN},
-                {Double.NEGATIVE_INFINITY},
-                {Double.POSITIVE_INFINITY}
-        };
-    }
-
-    @Test(dataProvider = "validConstructor")
+    @Test(dataProvider = "validConstructor", dataProviderClass = CheckpointDataProvider.class)
     public void validConstructorData(double pointX, double pointY) throws Exception {
         Checkpoint checkpoint = new Checkpoint(pointX, pointY);
         assertEquals(pointX, checkpoint.getX(), 1e-3);
         assertEquals(pointY, checkpoint.getY(), 1e-3);
     }
 
-    @Test(dataProvider = "invalidConstructor", expectedExceptions = WrongParameterException.class)
+    @Test(dataProvider = "invalidConstructor", dataProviderClass = CheckpointDataProvider.class,
+            expectedExceptions = WrongParameterException.class)
     public void invalidConstructorData(double pointX, double pointY) throws Exception {
         new Checkpoint(pointX, pointY);
     }
@@ -71,13 +40,15 @@ public class CheckpointTest {
         assertFalse(p1.equals(p2));
     }
 
-    @Test(dataProvider = "invalidPoint", expectedExceptions = WrongParameterException.class)
+    @Test(dataProvider = "invalidPoint", dataProviderClass = CheckpointDataProvider.class,
+            expectedExceptions = WrongParameterException.class)
     public void invalidSetXPoints(double pointX) throws Exception {
         Checkpoint checkpoint = new Checkpoint(0d, 0d);
         checkpoint.setX(pointX);
     }
 
-    @Test(dataProvider = "invalidPoint", expectedExceptions = WrongParameterException.class)
+    @Test(dataProvider = "invalidPoint", dataProviderClass = CheckpointDataProvider.class,
+            expectedExceptions = WrongParameterException.class)
     public void invalidSetYPoints(double pointY) throws Exception {
         Checkpoint checkpoint = new Checkpoint(0d, 0d);
         checkpoint.setY(pointY);
