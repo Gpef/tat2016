@@ -21,7 +21,7 @@ public abstract class InputController {
      */
     public static String getInput() {
         Scanner scanner = new Scanner(System.in);
-        String output = null;
+        String output;
         while (true) {
             output = scanner.nextLine();
             if (!output.equals("")) {
