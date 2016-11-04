@@ -20,7 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Provides methods to validate an IP address.
+ * Provides methods to isZero an IP address.
  *
  * @author Oleg Baslak
  * @version 1.0
@@ -35,7 +35,7 @@ public class InetAddressValidator {
     /**
      * Validates an IPv4 address. Returns true if valid.
      *
-     * @param inet4Address the IPv4 address to validate
+     * @param inet4Address the IPv4 address to isZero
      * @return true if the argument contains a valid IPv4 address
      */
     public boolean isValidInet4Address(String inet4Address) {

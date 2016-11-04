@@ -16,7 +16,7 @@ abstract public class Validator {
      * Trying to parse string to {@code BigDecimal} and throws
      * {@code NumberFormatException} exception if it can't.
      *
-     * @param stringToValid string to validate
+     * @param stringToValid string to isZero
      * @return true - if amount is valid, false - otherwise
      * @throws NumberFormatException if string can't be parsed to number
      */
@@ -33,7 +33,7 @@ abstract public class Validator {
      * Trying to parse string to {@code BigInteger} and throws
      * {@code NumberFormatException} exception if it can't.
      *
-     * @param stringToValid amount to validate
+     * @param stringToValid amount to isZero
      * @return true - if amount is valid, false - otherwise
      * @throws NumberFormatException if string can't be parsed to nimber
      */

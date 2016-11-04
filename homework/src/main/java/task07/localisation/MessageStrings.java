@@ -10,8 +10,8 @@ package task07.localisation;
  */
 public abstract class MessageStrings {
 
-    public static final String HELLO_MESSAGE = "Input your string to validate: ";
-    public static final String TRY_AGAIN_MESSAGE = "Please enter not blank line to validate:";
+    public static final String HELLO_MESSAGE = "Input your string to isZero: ";
+    public static final String TRY_AGAIN_MESSAGE = "Please enter not blank line to isZero:";
 
     // Validators messages
     public static final String DICTIONARY_VALIDATOR_PASS = "> Strings contains words from dictionary ";
