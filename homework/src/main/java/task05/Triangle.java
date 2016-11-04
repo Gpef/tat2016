@@ -50,12 +50,16 @@ public class Triangle {
     }
 
     /**
-     * Checks if number is <= 0.
+     * Checks if number is <= 0 or null.
      *
      * @param numberToValidate number to check
-     * @throws WrongSideLengthException if number is <= 0
+     * @throws WrongSideLengthException if number is <= 0 or null
      */
     private void validate(BigDecimal numberToValidate) throws WrongSideLengthException {
+        if (null == numberToValidate) {
+            throw new WrongSideLengthException(numberToValidate + " side is null");
+        }
+
         if (numberToValidate.compareTo(BigDecimal.valueOf(0)) <= 0) {
             throw new WrongSideLengthException(numberToValidate + " isn't valid side");
         }

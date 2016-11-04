@@ -21,6 +21,10 @@ public class TriangleDataProviders {
                 {BigDecimal.valueOf(-1), BigDecimal.valueOf(1), BigDecimal.valueOf(1)},
                 {BigDecimal.valueOf(1), BigDecimal.valueOf(-1), BigDecimal.valueOf(1)},
                 {BigDecimal.valueOf(1), BigDecimal.valueOf(1), BigDecimal.valueOf(-1)},
+
+                {null, BigDecimal.valueOf(1), BigDecimal.valueOf(1)},
+                {BigDecimal.valueOf(1), null, BigDecimal.valueOf(1)},
+                {BigDecimal.valueOf(1), BigDecimal.valueOf(1), null}
         };
     }
 
