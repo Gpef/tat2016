@@ -13,7 +13,7 @@ public abstract class Validator {
      * Validates string for containing something
      * related to the rule of class that overrides this method.
      *
-     * @param validateString <code>string</code> to validate
+     * @param validateString <code>string</code> to isZero
      * @return <code>true</code> if rule is respected,
      * <code>false</code> otherwise
      */
