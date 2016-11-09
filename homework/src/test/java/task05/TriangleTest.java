@@ -2,7 +2,7 @@ package task05;
 
 import org.testng.annotations.Test;
 import task05.data.TriangleDataProviders;
-import task05.exceptions.WrongSideLengthException;
+import task05.exceptions.TriangleException;
 
 import java.math.BigDecimal;
 
@@ -17,27 +17,24 @@ public class TriangleTest {
 
     private Triangle triangle;
 
-    @Test(dataProvider = "invalidTriangles", dataProviderClass = TriangleDataProviders.class,
-            expectedExceptions = WrongSideLengthException.class)
-    public void invalidConstructorData(BigDecimal sideA, BigDecimal sideB, BigDecimal sideC) throws Exception {
+    @Test(dataProvider = "validXMLTriangle", dataProviderClass = TriangleDataProviders.class)
+    public void validTriangleConstructorData(
+            BigDecimal sideA,
+            BigDecimal sideB,
+            BigDecimal sideC,
+            short triangleType
+    ) throws Exception {
         triangle = new Triangle(sideA, sideB, sideC);
+        assertEquals(triangle.getType(), triangleType);
     }
 
-    @Test(dataProvider = "validIsoscelesTriangle", dataProviderClass = TriangleDataProviders.class)
-    public void validIsoscelesConstructorData(BigDecimal sideA, BigDecimal sideB, BigDecimal sideC) throws Exception {
+    @Test(dataProvider = "invalidXMLTriangle", dataProviderClass = TriangleDataProviders.class,
+    expectedExceptions = TriangleException.class)
+    public void invalidTriangleConstructorData(
+            BigDecimal sideA,
+            BigDecimal sideB,
+            BigDecimal sideC
+    ) throws Exception {
         triangle = new Triangle(sideA, sideB, sideC);
-        assertEquals(triangle.getType(), Triangle.ISOSCELES);
-    }
-
-    @Test(dataProvider = "validEquilateralTriangle", dataProviderClass = TriangleDataProviders.class)
-    public void validEquilateralConstructorData(BigDecimal sideA, BigDecimal sideB, BigDecimal sideC) throws Exception {
-        triangle = new Triangle(sideA, sideB, sideC);
-        assertEquals(triangle.getType(), Triangle.EQUILATERAL);
-    }
-
-    @Test(dataProvider = "validCommonTriangle", dataProviderClass = TriangleDataProviders.class)
-    public void validCommonConstructorData(BigDecimal sideA, BigDecimal sideB, BigDecimal sideC) throws Exception {
-        triangle = new Triangle(sideA, sideB, sideC);
-        assertEquals(triangle.getType(), Triangle.COMMON);
     }
 }
