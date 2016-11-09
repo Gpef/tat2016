@@ -32,63 +32,6 @@ public class TriangleDataProviders {
     private static final String ISOSCELES_NODE = "isosceles";
     private static final String INVALID_NODE = "invalid";
 
-
-    // HardCode DataProviders
-
-    @DataProvider(name = "invalidTriangles")
-    public static Object[][] getInvalidTriangleData() {
-        return new Object[][]{
-                {BigDecimal.valueOf(0), BigDecimal.valueOf(1), BigDecimal.valueOf(1)},
-                {BigDecimal.valueOf(1), BigDecimal.valueOf(0), BigDecimal.valueOf(1)},
-                {BigDecimal.valueOf(1), BigDecimal.valueOf(1), BigDecimal.valueOf(0)},
-
-                {BigDecimal.valueOf(-1), BigDecimal.valueOf(1), BigDecimal.valueOf(1)},
-                {BigDecimal.valueOf(1), BigDecimal.valueOf(-1), BigDecimal.valueOf(1)},
-                {BigDecimal.valueOf(1), BigDecimal.valueOf(1), BigDecimal.valueOf(-1)},
-
-                {null, BigDecimal.valueOf(1), BigDecimal.valueOf(1)},
-                {BigDecimal.valueOf(1), null, BigDecimal.valueOf(1)},
-                {BigDecimal.valueOf(1), BigDecimal.valueOf(1), null}
-        };
-    }
-
-    @DataProvider(name = "validCommonTriangle")
-    public static Object[][] getValidCommonTriangleData() {
-        return new Object[][]{
-                {BigDecimal.valueOf(3), BigDecimal.valueOf(4), BigDecimal.valueOf(5)},
-        };
-    }
-
-    @DataProvider(name = "validEquilateralTriangle")
-    public static Object[][] getValidEquilateralTriangleData() {
-        return new Object[][]{
-                {BigDecimal.valueOf(1), BigDecimal.valueOf(1), BigDecimal.valueOf(1)},
-        };
-    }
-
-    @DataProvider(name = "validIsoscelesTriangle")
-    public static Object[][] getValidIsoscelesTriangleData() {
-        return new Object[][]{
-                {BigDecimal.valueOf(10), BigDecimal.valueOf(10), BigDecimal.valueOf(9)},
-                {BigDecimal.valueOf(10), BigDecimal.valueOf(9), BigDecimal.valueOf(10)},
-                {BigDecimal.valueOf(9), BigDecimal.valueOf(10), BigDecimal.valueOf(10)},
-        };
-    }
-
-    @DataProvider(name = "validNotExistTriangle")
-    public static Object[][] getValidNotExistTriangleData() {
-        return new Object[][]{
-                {BigDecimal.valueOf(1), BigDecimal.valueOf(10), BigDecimal.valueOf(100)},
-                {BigDecimal.valueOf(10), BigDecimal.valueOf(100), BigDecimal.valueOf(1)},
-                {BigDecimal.valueOf(100), BigDecimal.valueOf(10), BigDecimal.valueOf(1)},
-
-                {BigDecimal.valueOf(1), BigDecimal.valueOf(1), BigDecimal.valueOf(2)},
-                {BigDecimal.valueOf(1), BigDecimal.valueOf(2), BigDecimal.valueOf(1)},
-                {BigDecimal.valueOf(2), BigDecimal.valueOf(1), BigDecimal.valueOf(1)}
-
-        };
-    }
-
     // XML DataProviders
 
     @DataProvider(name = "validXMLTriangle")
