@@ -1,8 +1,6 @@
 package task05.data;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -12,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Performs parsing and working with XML document.
+ * Performs parsing XML document.
  *
  * @author Oleg Baslak
  * @version 1.0
@@ -21,7 +19,7 @@ import java.io.IOException;
 public class XMLParser {
 
     /**
-     * Parses input file and returns ready to use xml document.
+     * Parses input file and returns ready to use xml {@code Document} document.
      *
      * @param inputFile xml file to parse
      * @return parsed {@code Document} document
@@ -31,22 +29,9 @@ public class XMLParser {
      *                                      rights to read)
      * @throws SAXException                 general exception for XML parsing errors
      */
-    public Document getXMLDocument(File inputFile) throws ParserConfigurationException, IOException, SAXException {
+    public Document parseXMLDocument(File inputFile) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
         return documentBuilder.parse(inputFile);
-    }
-
-    /**
-     * Removes all TEXT nodes from node list.
-     *
-     * @param nodeList list to find and remove text nodes
-     */
-    public void removeTextNodes(NodeList nodeList) {
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            if (Node.TEXT_NODE == nodeList.item(i).getNodeType()) {
-                nodeList.item(i).getParentNode().removeChild(nodeList.item(i));
-            }
-        }
     }
 }

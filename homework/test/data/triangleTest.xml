@@ -2,13 +2,13 @@
 <testData>
     <validTriangles>
 
-        <common side_a="3" side_b="4" side_c="5"/>
+        <valid side_a="3" side_b="4" side_c="5" type="common"/>
 
-        <equilateral side_a="1" side_b="1" side_c="1"/>
+        <valid side_a="1" side_b="1" side_c="1" type="equilateral"/>
 
-        <isosceles side_a="10" side_b="10" side_c="9"/>
-        <isosceles side_a="10" side_b="9" side_c="10"/>
-        <isosceles side_a="9" side_b="10" side_c="10"/>
+        <valid side_a="10" side_b="10" side_c="9" type="isosceles"/>
+        <valid side_a="10" side_b="9" side_c="10" type="isosceles"/>
+        <valid side_a="9" side_b="10" side_c="10" type="isosceles"/>
 
     </validTriangles>
 
