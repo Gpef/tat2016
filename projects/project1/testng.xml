@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Transport" parallel="none">
+    <test name="CheckpointsTests">
+        <classes>
+            <class name="route.CheckpointTest"/>
+        </classes>
+    </test>
+
+    <test name="RouteTests">
+        <classes>
+            <class name="route.RouteTest"/>
+            <class name="route.RouteUtilsTest"/>
+        </classes>
+    </test>
+
+    <test name="FuelTests">
+        <classes>
+            <class name="transport.fuel.FuelTest"/>
+        </classes>
+    </test>
+
+    <test name="BusTests">
+        <classes>
+            <class name="transport.BusTest"/>
+        </classes>
+    </test>
+
+    <test name="BicycleTests">
+        <classes>
+            <class name="transport.BicycleTest"/>
+        </classes>
+    </test>
+
+    <test name="CarTests">
+        <classes>
+            <class name="transport.CarTest"/>
+        </classes>
+    </test>
+
+    <test name="HumanTests">
+        <classes>
+            <class name="transport.HumanTest"/>
+        </classes>
+    </test>
+
+    <test name="TardisTests">
+        <classes>
+            <class name="transport.TardisTest"/>
+        </classes>
+    </test>
+</suite>
