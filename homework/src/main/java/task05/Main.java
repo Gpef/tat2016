@@ -1,8 +1,5 @@
 package task05;
 
-import task05.exceptions.TriangleNotExistsException;
-import task05.exceptions.WrongSideLengthException;
-import task05.exceptions.WrongSidesNumberException;
 import task05.reader.ConsoleTriangleReader;
 
 import java.math.BigDecimal;
@@ -19,9 +16,7 @@ public class Main {
 
     /* String constants (messages, errors etc.) */
     private static final String INPUT_REQUEST = "Input 3 sides of triangle:";
-
     private static final int NUMBER_OF_ARGUMENTS = 3;
-
 
     /**
      * Entrance point to the app
@@ -35,7 +30,7 @@ public class Main {
             BigDecimal[] sides = consoleTriangleReader.readSides(NUMBER_OF_ARGUMENTS);
             Triangle triangle = new Triangle(sides[0], sides[1], sides[2]);
             System.out.println(triangle.getType());
-        } catch (WrongSidesNumberException | WrongSideLengthException | TriangleNotExistsException e) {
+        } catch (task05.exceptions.TriangleException e) {
             System.out.println(e.getMessage());
             System.exit(1);
         }

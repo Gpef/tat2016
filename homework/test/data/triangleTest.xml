@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testData>
+    <validTriangles>
+
+        <valid side_a="3" side_b="4" side_c="5" type="common"/>
+
+        <valid side_a="1" side_b="1" side_c="1" type="equilateral"/>
+
+        <valid side_a="10" side_b="10" side_c="9" type="isosceles"/>
+        <valid side_a="10" side_b="9" side_c="10" type="isosceles"/>
+        <valid side_a="9" side_b="10" side_c="10" type="isosceles"/>
+
+    </validTriangles>
+
+    <invalidTriangles>
+        <invalid side_a="0" side_b="1" side_c="1"/>
+        <invalid side_a="1" side_b="0" side_c="1"/>
+        <invalid side_a="1" side_b="1" side_c="0"/>
+
+        <invalid side_a="-1" side_b="1" side_c="1"/>
+        <invalid side_a="1" side_b="-1" side_c="1"/>
+        <invalid side_a="1" side_b="1" side_c="-1"/>
+
+        <invalid side_b="1" side_c="1"/>
+        <invalid side_a="1" side_c="1"/>
+        <invalid side_a="1" side_b="1"/>
+
+        <invalid side_a="1" side_b="10" side_c="100"/>
+        <invalid side_a="100" side_b="1" side_c="10"/>
+        <invalid side_a="10" side_b="100" side_c="1"/>
+
+        <invalid side_a="1" side_b="1" side_c="2"/>
+        <invalid side_a="1" side_b="2" side_c="1"/>
+        <invalid side_a="2" side_b="1" side_c="1"/>
+    </invalidTriangles>
+
+</testData>

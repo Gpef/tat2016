@@ -1,12 +1,14 @@
 package task05;
 
+import task05.exceptions.TriangleException;
 import task05.exceptions.TriangleNotExistsException;
 import task05.exceptions.WrongSideLengthException;
 
 import java.math.BigDecimal;
 
 /**
- * Checks triangle existing and type
+ * Represents triangle object.
+ * Checks triangle existing and type.
  *
  * @author Oleg Baslak
  * @version 1.2
@@ -15,15 +17,21 @@ import java.math.BigDecimal;
 public class Triangle {
 
     /* Triangle types string constants */
-    public static final String COMMON = "Common";                                   //  Ordinary triangle
-    public static final String EQUILATERAL = "Equilateral (ravnostoronnij)";        //  With all sides equal each other
-    public static final String ISOSCELES = "Isosceles (ravnobedrennij)";            //  With two equal sides only
+    public static final String STRING_COMMON = "Common";                                   //  Ordinary triangle
+    public static final String STRING_EQUILATERAL = "Equilateral (ravnostoronnij)";        //  With all sides equal each other
+    public static final String STRING_ISOSCELES = "Isosceles (ravnobedrennij)";            //  With two equal sides only
+
+    public static final short TYPE_COMMON = 1;
+    public static final short TYPE_EQUILATERAL = 2;
+    public static final short TYPE_ISOSCELES = 3;
 
     private BigDecimal sideA;
     private BigDecimal sideB;
     private BigDecimal sideC;
 
-    public Triangle(BigDecimal sideA, BigDecimal sideB, BigDecimal sideC) throws TriangleNotExistsException, WrongSideLengthException {
+    private short type;
+
+    public Triangle(BigDecimal sideA, BigDecimal sideB, BigDecimal sideC) throws TriangleException {
         validate(sideA);
         validate(sideB);
         validate(sideC);
@@ -34,6 +42,7 @@ public class Triangle {
         } else {
             throw new TriangleNotExistsException();
         }
+        type = defineType(new BigDecimal[]{sideA, sideB, sideC});
     }
 
     /**
@@ -55,9 +64,9 @@ public class Triangle {
      * @param numberToValidate number to check
      * @throws WrongSideLengthException if number is <= 0 or null
      */
-    private void validate(BigDecimal numberToValidate) throws WrongSideLengthException {
+    private void validate(BigDecimal numberToValidate) throws TriangleException {
         if (null == numberToValidate) {
-            throw new WrongSideLengthException(numberToValidate + " side is null");
+            throw new WrongSideLengthException("Side is null");
         }
 
         if (numberToValidate.compareTo(BigDecimal.valueOf(0)) <= 0) {
@@ -66,26 +75,54 @@ public class Triangle {
     }
 
     /**
-     * Checks type of triangle and returns it's type as {@code String}
+     * Finds what type is triangle and returns
+     * const value assigned to this type.
+     *
+     * @param sides sides of triangle to find type
+     * @return value assigned to triangle's type
+     */
+    private short defineType(BigDecimal[] sides) {
+        if (sides[0].compareTo(sides[1]) == 0 &&
+                sides[1].compareTo(sides[2]) == 0 &&
+                sides[2].compareTo(sides[0]) == 0) {
+            return TYPE_EQUILATERAL;
+        }
+
+        if (sides[0].compareTo(sides[1]) == 0 ||
+                sides[0].compareTo(sides[2]) == 0 ||
+                sides[2].compareTo(sides[1]) == 0) {
+            return TYPE_ISOSCELES;
+        }
+
+        return TYPE_COMMON;
+    }
+
+    /**
+     * @return type of triangle as short variable
+     */
+    public short getType() {
+        return type;
+    }
+
+    /**
+     * Returns triangle's type as {@code String}
      *
      * @return type of triangle if object isn't null. If it's null
      * returns message that triangle isn't created.
      */
-    public String getType() {
+    public String getTypeName() {
         if (null == sideA || null == sideB || null == sideC) {
             return "Triangle isn't created";
         }
-
-        if (sideA.compareTo(sideB) == 0 &&
-                sideB.compareTo(sideC) == 0 &&
-                sideC.compareTo(sideA) == 0) {
-            return EQUILATERAL;
+        switch (type) {
+            case TYPE_EQUILATERAL: {
+                return STRING_EQUILATERAL;
+            }
+            case TYPE_ISOSCELES: {
+                return STRING_ISOSCELES;
+            }
         }
 
-        if (sideA.compareTo(sideB) == 0 || sideA.compareTo(sideC) == 0 || sideC.compareTo(sideB) == 0) {
-            return ISOSCELES;
-        }
-
-        return COMMON;
+        return STRING_COMMON;
     }
 }
