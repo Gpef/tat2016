@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" ?>
+<commands>
+
+    <command name="open">
+        <url>http://www.google.com</url>
+        <timeout>3000</timeout>
+    </command>
+
+    <command name="checkPageTitle">
+        <title>Google</title>
+    </command>
+
+    <command name="checkPageContains">
+        <text>Google.ry</text>
+    </command>
+
+    <command name="checkLinkPresentByHref">
+        <href>https://mail.google.com/mail/?tab=wm</href>
+    </command>
+
+    <command name="checkLinkPresentByName">
+        <link-name>Реклама</link-name>
+    </command>
+
+</commands>

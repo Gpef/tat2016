@@ -1,0 +1,25 @@
+﻿{
+  "commands": [
+    {
+      "command": "open",
+      "url": "http://www.google.com",
+      "timeout": "3000"
+    },
+    {
+      "command": "checkLinkPresentByName",
+      "link_name": "Реклама"
+    },
+    {
+      "command": "checkPageTitle",
+      "title": "Googl"
+    },
+    {
+      "command": "checkLinkPresentByHref",
+      "href": "https://mail.google.com/mail/?tab=wm"
+    },
+    {
+      "command": "checkLinkPresentByName",
+      "link_name": "Реклама"
+    }
+  ]
+}
