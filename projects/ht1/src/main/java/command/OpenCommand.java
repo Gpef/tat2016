@@ -57,6 +57,9 @@ public class OpenCommand extends Command {
 
         @Override
         public boolean canBuild(HashMap<String, String> properties) {
+            if (null == properties){
+                return false;
+            }
             try {
                 Long.parseLong(properties.get(PROPERTY_TIMEOUT));
             } catch (Exception e) {
@@ -70,6 +73,9 @@ public class OpenCommand extends Command {
 
         @Override
         public Command build(HashMap<String, String> properties) throws CommandException {
+            if (null == properties) {
+                throw new InvalidParamsException("Can't build command with null properties");
+            }
             if (canBuild(properties)) {
                 return new OpenCommand(properties);
             } else {

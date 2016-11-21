@@ -50,6 +50,9 @@ public class CheckPageContainsCommand extends Command {
 
         @Override
         public boolean canBuild(HashMap<String, String> properties) {
+            if (null == properties){
+                return false;
+            }
             return properties.get(PROPERTY_COMMAND_NAME) != null &&
                     properties.get(PROPERTY_COMMAND_NAME).equals(COMMAND_NAME) &&
                     properties.get(PROPERTY_TEXT) != null;
@@ -57,6 +60,9 @@ public class CheckPageContainsCommand extends Command {
 
         @Override
         public Command build(HashMap<String, String> properties) throws CommandException {
+            if (null == properties) {
+                throw new InvalidParamsException("Can't build command with null properties");
+            }
             if (canBuild(properties)) {
                 return new CheckPageContainsCommand(properties);
             } else {
