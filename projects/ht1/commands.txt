@@ -1,0 +1,10 @@
+﻿--command=open --url=http://google.by --timeout = 3000
+--command=checkPageTitle --title=Google
+--command=checkPageContains --text=Google.ry
+ads
+""
+"ad'"
+--command=checkLinkPresentByHref  --href=https://mail.google.com/mail/?tab=wm
+--command=checkLinkPresentByName  --link_name=Реклама
+--command = plp df
+--command=checkPageTitle --title=Добро пожаловать | ВКонтакте
