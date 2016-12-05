@@ -11,14 +11,10 @@ echo [TEST-INFO] VM is now running. Start verifying tests.
 echo -----------------------------------------------------
 cd..
 cd..
-mvn verify -Dwebdriver.driver=chrome
-pause
-mvn /K verify -Dwebdriver.driver=edge
+cmd /c mvn verify -Dwebdriver.driver=chrome
 echo -----------------------------------------------------
 echo [TEST-INFO] Tests passed. Opening report
 echo -----------------------------------------------------
-cd auto/vagrant
+cmd /c target\report\index.html
+cd auto\vagrant
 vagrant destroy
-cd..
-cd..
-cmd /k target/report/index.html

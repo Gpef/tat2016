@@ -14,5 +14,6 @@ mvn verify -Dwebdriver.driver=edge
 echo -----------------------------------------------------
 echo [TEST-INFO] Tests passed. Opening report
 echo -----------------------------------------------------
+start target/report/index.html
 cd auto/vagrant
 vagrant destroy
