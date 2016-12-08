@@ -13,7 +13,12 @@ For more information read
 
 Drivers stored in folders filtered by OS at `auto/drivers/`. Paths can be changed in `test.properties`.
 
-All test properties stored in `src/test/resources/test.properties`
+All test properties stored in `src/test/resources/test.properties`.
+
+To run tests in any browsers, put it's name and path to driver executable into `test.properties` and
+run in command line `mvn verify -Dwebdriver.driver=${drivername}`, for example, properties file contains
+`webdriver.chrome.driver=auto\\drivers\\win\\chromedriver.exe` and you can run tests with command 
+`mvn verify -Dwebdriver.driver=chrome`.
 
 ### Running
 Run maven goal `verify` or one of the next scripts: 
@@ -21,5 +26,6 @@ Run maven goal `verify` or one of the next scripts:
 * Unix-based: run `auto/unix_run.sh`
 
 ### Report 
-After running `mvn verify` automatically generated report can be opened by `target/report/index.html`.
+* After running `mvn verify` automatically generated report can be opened by `target/report/index.html`.
 Examples can be find in `img/` directory.
+* After running automated script, new vm with wordpress will be installed, All test results put into /reports/folder
