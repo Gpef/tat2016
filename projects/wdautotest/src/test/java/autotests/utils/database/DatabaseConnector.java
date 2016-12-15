@@ -1,6 +1,6 @@
 package autotests.utils.database;
 
-import autotests.utils.config.Config;
+import autotests.utils.config.DatabaseConfig;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,8 +13,8 @@ import java.sql.SQLException;
  * @version 1.0
  * @since 29.11.2016
  */
-public class DBConnector {
-    private Config config = Config.getConfig();
+public class DatabaseConnector {
+    private DatabaseConfig wordpressConfig = DatabaseConfig.getConfig();
 
     /**
      * Opens connection with database
@@ -25,9 +25,9 @@ public class DBConnector {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(
-                    config.getDbUrl(),
-                    config.getDbUser(),
-                    config.getDbPassword()
+                    wordpressConfig.getUrl(),
+                    wordpressConfig.getUsername(),
+                    wordpressConfig.getPassword()
             );
         } catch (SQLException e) {
             // Handle SQLException if such has been thrown
