@@ -14,6 +14,9 @@ import java.util.Properties;
  */
 public class PropertiesReader {
 
+    private PropertiesReader() {
+    }
+
     /**
      * Get all properties from properties file with specified path.
      *
@@ -53,30 +56,5 @@ public class PropertiesReader {
                 .filter(key -> key.startsWith(prefix))
                 .forEach(key -> properties.setProperty(key, sourceProperties.getProperty(key)));
         return properties;
-    }
-
-    /**
-     * Get properties with specified prefix from resource file with specified path and
-     * cuts this prefix in properties keys.
-     *
-     * @param resourcePath path to .properties file
-     * @param prefix       prefix to get properties with
-     * @return loaded properties without prefixes
-     */
-    public static Properties cutPropertiesForPrefix(String resourcePath, String prefix) {
-        Properties sourceProperties = getProperties(resourcePath);
-        Properties properties = new Properties();
-        sourceProperties.keySet().stream()
-                .filter(Objects::nonNull)
-                .map(Object::toString)
-                .filter(key -> key.startsWith(prefix))
-                .forEach(key -> properties.setProperty(
-                        key.substring(prefix.length()+1),
-                        sourceProperties.getProperty(key))
-                );
-        return properties;
-    }
-
-    private PropertiesReader() {
     }
 }
