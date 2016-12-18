@@ -1,10 +1,10 @@
-### Enviroment
+### Environment
 
 To run autotests next apps need to be installed:
 * Vagrant (with Oracle VirtualBox)
 * Maven (path to mvn\bin mast be in system property PATH)
 * JDK 1.8
-* Webdrivers for browsers (see: [Before run](#before-run))
+* Webdrivers for [supported](#supported-browsers) browsers (see: [Before run](#before-run))
 
 ### Properties
 
@@ -23,9 +23,18 @@ Run maven goal `verify` or one of the next scripts:
 
 To run tests in any browsers, put it's name and path to driver executable into `src/test/resources/test.properties` and
 run in command line `mvn verify -Dwebdriver.driver=${drivername}`, for example, properties file contains
-`webdriver.chrome.driver=auto\\drivers\\win\\chromedriver.exe` and you can run tests with command 
+`webdriver.chrome.driver=drivers\\chromedriver.exe` and you can run tests with command 
 `mvn verify -Dwebdriver.driver=chrome`.
 
-### Report 
-* After running `mvn verify` automatically generated report can be opened by `target/report/index.html`.
+
+### Supported browsers
+* Chrome
+* Microsoft Edge
+* Firefox
+* Opera
+You can found example drivers binaries in `/drivers` package.
+
+### Report  
+After running `mvn verify` automatically generated report can be opened by `target/report/index.html`. Automated 
+tests script contains example of how to move this reports in folder specified for browser.
 Examples can be find in `img/` directory.
