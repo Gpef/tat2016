@@ -1,6 +1,6 @@
-package autotests.utils.config;
+package utils.config;
 
-import autotests.utils.io.PropertiesReader;
+import utils.io.PropertiesReader;
 
 import java.util.Properties;
 

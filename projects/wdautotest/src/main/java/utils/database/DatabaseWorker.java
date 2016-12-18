@@ -1,6 +1,6 @@
-package autotests.utils.database;
+package utils.database;
 
-import autotests.utils.exceptions.DatabaseException;
+import utils.exceptions.DatabaseException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

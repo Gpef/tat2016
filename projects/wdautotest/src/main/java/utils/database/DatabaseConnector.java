@@ -1,6 +1,6 @@
-package autotests.utils.database;
+package utils.database;
 
-import autotests.utils.config.DatabaseConfig;
+import utils.config.DatabaseConfig;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

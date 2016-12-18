@@ -1,4 +1,4 @@
-package autotests.utils.io;
+package utils.io;
 
 import java.io.IOException;
 import java.io.InputStream;

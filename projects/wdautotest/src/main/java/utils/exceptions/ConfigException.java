@@ -1,4 +1,4 @@
-package autotests.utils.exceptions;
+package utils.exceptions;
 
 /**
  * Exception for error with autotests.config reading, parsing.

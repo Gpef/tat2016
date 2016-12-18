@@ -1,4 +1,4 @@
-package autotests.utils.exceptions;
+package utils.exceptions;
 
 /**
  * Exceptions thrown while working with database.
