@@ -1,8 +1,8 @@
 @echo off
 title Wordpress automated testing
 cd vagrant
-@echo vagrant destroy --force
-@echo vagrant up
+vagrant destroy --force
+vagrant up
 cd ../..
 rmdir /s /q reports
 mkdir reports

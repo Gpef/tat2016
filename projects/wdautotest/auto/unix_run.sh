@@ -1,6 +1,6 @@
 cd vagrant
-@echo vagrant destroy --force
-@echo vagrant up
+vagrant destroy --force
+vagrant up
 cd ../..
 rm -rf reports/
 mkdir reports
