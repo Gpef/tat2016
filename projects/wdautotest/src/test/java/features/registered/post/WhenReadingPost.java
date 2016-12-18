@@ -1,7 +1,6 @@
-package autotests.features.registered.post;
+package features.registered.post;
 
-import autotests.features.AbstractFeature;
-import autotests.steps.EndUserSteps;
+import features.AbstractFeature;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
@@ -10,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
+import steps.EndUserSteps;
 
 import java.util.concurrent.TimeUnit;
 
@@ -38,6 +38,6 @@ public class WhenReadingPost extends AbstractFeature {
         user.atReadingPost().openMainPage();
         user.atReadingPost().openLastPost();
         user.atReadingPost().shouldSeeAuthorVCard();
-        user.atReadingPost().shouldSeeLeaveReply();
+        user.atReadingPost().shouldSeePostText();
     }
 }

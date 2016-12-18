@@ -1,25 +1,24 @@
-package autotests.features.registered.authorization;
+package features.registered.comments;
 
-import autotests.steps.EndUserSteps;
+import features.AbstractFeature;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Title;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
+import steps.EndUserSteps;
 
 import java.util.concurrent.TimeUnit;
 
 /**
  * @author Oleg Baslak
  * @version 1.0
- * @since 05.12.2016
+ * @since 04.12.2016
  */
 @RunWith(SerenityRunner.class)
-public class WhenFailedLogin {
-
+public class WhenLeavingReply extends AbstractFeature {
     @Managed
     public WebDriver driver;
 
@@ -32,10 +31,8 @@ public class WhenFailedLogin {
     }
 
     @Test
-    @Title("User can't login with unregistered data and will see error")
-    public void userCantLoginWithoutRegisteredProfile() throws Exception {
-        user.atLogin().openLoginPage();
-        user.atLogin().loginWithLoginPassword("not exists", "not exists");
-        user.atLogin().shouldSeeLoginErrorMessage();
+    public void replyMustBeUnderPostAfterLeaving() throws Exception{
+        user.atLeavingReply();
     }
+
 }

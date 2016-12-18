@@ -1,10 +1,9 @@
-package autotests.steps;
+package steps;
 
-import autotests.ui.MainPage;
-import autotests.ui.PostPage;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
-import org.assertj.core.api.JUnitSoftAssertions;
+import ui.pages.MainPage;
+import ui.pages.PostPage;
 
 import static junit.framework.TestCase.assertTrue;
 
@@ -29,13 +28,11 @@ public class ReadingPostSteps extends ScenarioSteps {
 
     @Step("Post's author information should be present in vcard")
     public void shouldSeeAuthorVCard() {
-        assertTrue("Author vcard wasn't found", onPostPage.authorVCard.isPresent());
+        assertTrue("Author vcard wasn't found", onPostPage.isAuthorVCardPresent());
     }
 
     @Step("Reply section should be present")
-    public void shouldSeeLeaveReply() {
-        JUnitSoftAssertions softAssertions = new JUnitSoftAssertions();
-        softAssertions.assertThat(onPostPage.replyHeaderSection.isPresent()).isTrue();
-        softAssertions.assertThat(onPostPage.replyTextArea.isPresent()).isTrue();
+    public void shouldSeePostText() {
+        assertTrue("Post text wasn't found", onPostPage.isPostTextPresent());
     }
 }
