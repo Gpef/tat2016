@@ -39,6 +39,10 @@ public class WhenLogin extends AbstractFeature {
         return Arrays.asList(
                 new Object[][]{
                         {"editor", "editor", DatabaseWorker.EDITOR},
+                        {"subscriber","subscriber", DatabaseWorker.SUBSCRIBER},
+                        {"admin", "admin", DatabaseWorker.ADMINISTRATOR},
+                        {"author","author", DatabaseWorker.AUTHOR},
+                        {"contributor","contributor", DatabaseWorker.CONTRIBUTOR}
                 });
     }
 
@@ -60,7 +64,7 @@ public class WhenLogin extends AbstractFeature {
     }
 
     @Test
-    @Title("Registered users (all roles) with login, password can login")
+    @Title("Registered users of each role can login")
     public void userShouldSeeMainPageAfterLogin() throws Exception {
         user.atLogin().openLoginPage();
         user.atLogin().loginWithLoginPassword(login, password);

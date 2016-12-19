@@ -48,7 +48,7 @@ public class LoginSteps extends ScenarioSteps {
     @Step("Welcome message with name 'Howdy, username' should appear")
     public void shouldSeeWelcomeMessage() {
         assertTrue("Welcome message with 'Howdy' wasn't found",
-                onProfilePopupElement.$(ProfilePopupElement.NAME_HOWDY).isVisible()
+                onProfilePopupElement.isHowdyVisible()
         );
     }
 

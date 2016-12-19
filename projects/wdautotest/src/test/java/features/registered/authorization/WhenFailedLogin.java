@@ -1,10 +1,12 @@
 package features.registered.authorization;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import steps.EndUserSteps;
 
@@ -15,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0
  * @since 05.12.2016
  */
-//@RunWith(SerenityRunner.class)
+@RunWith(SerenityRunner.class)
 public class WhenFailedLogin {
 
     @Managed
