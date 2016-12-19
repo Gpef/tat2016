@@ -34,8 +34,9 @@ public class WhenLogout extends AbstractFeature {
     }
 
     @Test
-    @Title("After logout authorization page opens")
+    @Title("After clickLogout authorization page opens")
     public void userShouldSeeLoginPageAfterLogout() throws Exception {
+        user.atLogout().focusOnProfilePopup();
         user.atLogout().logout();
         user.atLogout().shouldSeeLogoutMessage();
     }

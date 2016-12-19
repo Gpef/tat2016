@@ -22,9 +22,14 @@ public class LogoutSteps extends ScenarioSteps {
         onLoginPage.login("admin", "admin");
     }
 
-    @Step("Logging out after clickng 'Log Out'")
+    @Step("Focus on profile popup to see  Log Out link")
+    public void focusOnProfilePopup(){
+        onProfilePopupElement.focus();
+    }
+
+    @Step("Logging out after clicking 'Log Out'")
     public void logout() {
-        onProfilePopupElement.logout();
+        onProfilePopupElement.clickLogout();
         assertTrue("Error message wasn't found", onLoginPage.isErrorMessageVisible());
         assertTrue("Error message doesn't equals to specified",
                 onLoginPage.getMessageText().equals("You are now " + "logged out.")
