@@ -10,8 +10,8 @@ mkdir reports
 
 # Chrome block
 mvn clean verify -Dwebdriver.driver=chrome
-mv target\report reports\chrome
-cd reports\chrome\
+mv target/report reports/chrome
+cd reports/chrome/
 cd ../..
 # Chrome block end
 
