@@ -1,5 +1,6 @@
 package features.registered.authorization;
 
+import features.AbstractFeature;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
@@ -18,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * @since 05.12.2016
  */
 @RunWith(SerenityRunner.class)
-public class WhenFailedLogin {
+public class WhenFailedLogin extends AbstractFeature{
 
     @Managed
     public WebDriver driver;
